@@ -5,7 +5,6 @@ import GuestLayout from '@/layouts/GuestLayout.vue';
 import carbonaraImage from '../../../images/carbonara.jpg';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { 
     Select, 
     SelectContent, 

@@ -7,13 +7,11 @@ import { Label } from '@/components/ui/label';
 import { 
     Select, 
     SelectContent, 
-    SelectGroup, 
     SelectItem, 
-    SelectLabel, 
     SelectTrigger, 
     SelectValue 
 } from '@/components/ui/select';
-import { Flame, Info, RefreshCcw, User, Activity } from 'lucide-vue-next';
+import { Flame, Info, RefreshCcw, Activity } from 'lucide-vue-next';
 import { triggerLoading } from '@/stores/loading';
 
 const age = ref<number | undefined>(undefined);

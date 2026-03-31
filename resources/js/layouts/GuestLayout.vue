@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
-import { dashboard, login, register, logout } from '@/routes';
+import { login, register, logout } from '@/routes';
 
 import { 
     DropdownMenu, 
