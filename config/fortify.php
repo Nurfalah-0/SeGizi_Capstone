@@ -73,7 +73,7 @@ return [
     |
     */
 
-    'home' => '/',
+    'home' => '/dashboard',
 
     /*
     |--------------------------------------------------------------------------
@@ -84,7 +84,7 @@ return [
     | that it registers with the application. If necessary, you may change
     | subdomain under which all of the Fortify routes will be available.
     |
-    */
+    |*/
 
     'prefix' => '',
 
@@ -146,6 +146,9 @@ return [
     'features' => [
         Features::registration(),
         Features::resetPasswords(),
+        Features::emailVerification(),
+        Features::updateProfileInformation(),
+        Features::updatePasswords(),
         Features::twoFactorAuthentication([
             'confirm' => true,
             'confirmPassword' => true,
