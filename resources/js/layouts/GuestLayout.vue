@@ -95,17 +95,17 @@ const logoutHandle = () => {
                             <DropdownMenuSeparator class="bg-zinc-50 my-2 h-px" />
                             
                             <DropdownMenuGroup class="space-y-1">
-                                <DropdownMenuItem @click="router.visit('/')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-zinc-100 transition-all">
+                                <DropdownMenuItem @click="router.visit('/dashboard')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-zinc-100 transition-all">
                                     <LayoutDashboard class="w-4 h-4 text-black" />
                                     <span class="font-bold text-sm text-black">Dashboard</span>
                                 </DropdownMenuItem>
                                 
-                                <DropdownMenuItem class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-zinc-100 transition-all">
+                                <DropdownMenuItem @click="router.visit('/settings/profile')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-zinc-100 transition-all">
                                     <User class="w-4 h-4 text-black" />
                                     <span class="font-bold text-sm text-black">Profil Saya</span>
                                 </DropdownMenuItem>
                                 
-                                <DropdownMenuItem class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-zinc-100 transition-all">
+                                <DropdownMenuItem @click="router.visit('/settings/profile')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-zinc-100 transition-all">
                                     <Settings class="w-4 h-4 text-black" />
                                     <span class="font-bold text-sm text-black">Pengaturan</span>
                                 </DropdownMenuItem>
@@ -181,7 +181,7 @@ const logoutHandle = () => {
             </div>
             
             <div class="max-w-[1400px] mx-auto pt-8 flex flex-col md:flex-row justify-between items-center text-sm font-medium text-zinc-400 gap-4">
-                <p>&copy; 2024 SeGizi. Semua Hak Dilindungi.</p>
+                <p>&copy; 2026 SeGizi. Semua Hak Dilindungi.</p>
                 <div class="flex gap-8">
                     <a href="#" class="hover:text-zinc-600">Kebijakan Privasi</a>
                     <a href="#" class="hover:text-zinc-600">Syarat & Ketentuan</a>

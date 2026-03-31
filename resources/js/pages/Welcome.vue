@@ -96,7 +96,7 @@ const filteredArticles = computed(() => {
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head title="Beranda - Resep Sehat & Kalkulator Gizi" />
 
     <GuestLayout>
         <!-- Hero Section -->
