@@ -114,7 +114,7 @@ const filteredArticles = computed(() => {
                     sehat hari ini.
                 </p>
                 <div class="flex gap-4 pt-10">
-                    <Link href="/bmi-calculator" class="px-8 py-3.5 text-white bg-[#36d362] rounded-lg font-bold hover:bg-green-500 transition shadow-sm border border-transparent">
+                    <Link href="/calorie-calculator" class="px-8 py-3.5 text-white bg-[#36d362] rounded-lg font-bold hover:bg-green-500 transition shadow-sm border border-transparent">
                         Hitung Kalori
                     </Link>
                     <Link href="/recipes" class="px-8 py-3.5 text-black bg-transparent border border-gray-400 rounded-lg font-bold hover:bg-gray-50 transition">
@@ -186,7 +186,7 @@ const filteredArticles = computed(() => {
                             <p class="text-gray-500 text-[14px] mb-8 leading-relaxed line-clamp-2 text-left">
                                 {{ recipe.description }}
                             </p>
-                            <div class="inline-flex items-center text-[13px] font-bold text-white bg-[#36d362] px-6 py-2.5 rounded-lg hover:bg-green-600 transition">
+                            <div class="inline-flex items-center text-[13px] font-bold white bg-[#36d362] px-6 py-2.5 rounded-lg hover:bg-green-600 transition text-white">
                                 Lihat Resep &rarr;
                             </div>
                         </div>
@@ -243,7 +243,7 @@ const filteredArticles = computed(() => {
                             <img :src="article.image" :alt="article.title" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             <div class="absolute top-4 left-4">
                                 <span class="bg-[#36d362] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">
-                                    {{ article.category.split(' ')[0] }}
+                                    {{ article.category }}
                                 </span>
                             </div>
                         </div>

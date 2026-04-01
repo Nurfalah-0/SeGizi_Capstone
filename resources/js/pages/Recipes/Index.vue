@@ -5,24 +5,28 @@ import GuestLayout from '@/layouts/GuestLayout.vue';
 import carbonaraImage from '../../../images/carbonara.jpg';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { 
-    Select, 
-    SelectContent, 
-    SelectItem, 
-    SelectTrigger, 
-    SelectValue 
-} from '@/components/ui/select';
-import { Search, ChevronRight } from 'lucide-vue-next';
+import { Search, ChevronRight, Flame, Dumbbell, Clock, ArrowUpDown } from 'lucide-vue-next';
 
 const searchQuery = ref('');
 const activeCategory = ref('Semua');
+const activeSort = ref('default');
 
-const categories = [
-    { name: 'Semua', count: 20 },
-    { name: 'Sarapan', count: 5 },
-    { name: 'Makan Siang', count: 12 },
-    { name: 'Makan Malam', count: 8 },
-    { name: 'Cemilan', count: 3 },
+const categories = computed(() => {
+    const list = ['Semua', 'Sarapan', 'Makan Siang', 'Makan Malam', 'Cemilan'];
+    return list.map(name => ({
+        name,
+        count: name === 'Semua' 
+            ? recipes.length 
+            : recipes.filter(r => r.category === name).length
+    }));
+});
+
+const sortOptions = [
+    { key: 'default',       label: 'Terbaru',              icon: ArrowUpDown },
+    { key: 'calorie-asc',   label: 'Kalori Terendah',      icon: Flame },
+    { key: 'calorie-desc',  label: 'Kalori Tertinggi',     icon: Flame },
+    { key: 'protein-desc',  label: 'Protein Tertinggi',    icon: Dumbbell },
+    { key: 'time-asc',      label: 'Masak Tercepat',       icon: Clock },
 ];
 
 const recipes = [
@@ -33,6 +37,8 @@ const recipes = [
         image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&auto=format&fit=crop',
         description: 'Salmon segar yang dipanggang dengan irisan lemon dan rempah pilihan untuk asupan protein maksimal.',
         calories: 450,
+        protein: 35,
+        cookTime: 25,
     },
     {
         id: 2,
@@ -41,6 +47,8 @@ const recipes = [
         image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&auto=format&fit=crop',
         description: 'Perpaduan quinoa, mentimun, dan tomat ceri yang segar, sempurna untuk makan siang ringan Anda.',
         calories: 280,
+        protein: 12,
+        cookTime: 15,
     },
     {
         id: 3,
@@ -49,6 +57,8 @@ const recipes = [
         image: carbonaraImage,
         description: 'Pasta gandum utuh dengan saus carbonara creamy tanpa krim, kaya akan karbohidrat kompleks.',
         calories: 620,
+        protein: 25,
+        cookTime: 20,
     },
     {
         id: 4,
@@ -57,15 +67,38 @@ const recipes = [
         image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop',
         description: 'Pecel sayur khas Madiun dengan bumbu kacang gurih dan sayuran segar pilihan.',
         calories: 320,
-    }
+        protein: 8,
+        cookTime: 30,
+    },
 ];
 
-const filteredRecipes = computed(() => {
-    return recipes.filter(recipe => {
+const processedRecipes = computed(() => {
+    // Step 1: Filter by category and search
+    let result = recipes.filter(recipe => {
         const matchesSearch = recipe.title.toLowerCase().includes(searchQuery.value.toLowerCase());
         const matchesCategory = activeCategory.value === 'Semua' || recipe.category === activeCategory.value;
         return matchesSearch && matchesCategory;
     });
+
+    // Step 2: Sort based on activeSort
+    switch (activeSort.value) {
+        case 'calorie-asc':
+            result = [...result].sort((a, b) => a.calories - b.calories);
+            break;
+        case 'calorie-desc':
+            result = [...result].sort((a, b) => b.calories - a.calories);
+            break;
+        case 'protein-desc':
+            result = [...result].sort((a, b) => b.protein - a.protein);
+            break;
+        case 'time-asc':
+            result = [...result].sort((a, b) => a.cookTime - b.cookTime);
+            break;
+        default:
+            break;
+    }
+
+    return result;
 });
 </script>
 
@@ -86,14 +119,15 @@ const filteredRecipes = computed(() => {
 
             <div class="max-w-[1400px] mx-auto w-full flex flex-col lg:flex-row gap-10">
                 <!-- Sidebar -->
-                <aside class="w-full lg:w-[320px] shrink-0 space-y-6">
+                <aside class="w-full lg:w-[280px] shrink-0 space-y-6">
+                    <!-- Kategori -->
                     <div class="overflow-hidden border border-gray-100 rounded-[20px] shadow-sm">
                         <div class="bg-[#36d362] px-6 py-4">
                             <h2 class="text-white font-bold text-lg">Kategori Menu</h2>
                         </div>
                         <div class="bg-white">
-                            <button 
-                                v-for="cat in categories" 
+                            <button
+                                v-for="cat in categories"
                                 :key="cat.name"
                                 @click="activeCategory = cat.name"
                                 class="w-full flex items-center justify-between px-6 py-4 border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors"
@@ -106,44 +140,82 @@ const filteredRecipes = computed(() => {
                             </button>
                         </div>
                     </div>
+
+                    <!-- Sort Box -->
+                    <div class="overflow-hidden border border-gray-100 rounded-[20px] shadow-sm">
+                        <div class="bg-zinc-900 px-6 py-4 flex items-center gap-2">
+                            <ArrowUpDown class="w-4 h-4 text-white" />
+                            <h2 class="text-white font-bold text-lg">Urutkan</h2>
+                        </div>
+                        <div class="bg-white">
+                            <button
+                                v-for="sort in sortOptions"
+                                :key="sort.key"
+                                @click="activeSort = sort.key"
+                                class="w-full flex items-center gap-3 px-6 py-4 border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors"
+                                :class="{ 'text-[#36d362] font-bold bg-green-50': activeSort === sort.key }"
+                            >
+                                <component
+                                    :is="sort.icon"
+                                    class="w-4 h-4 shrink-0"
+                                    :class="activeSort === sort.key ? 'text-[#36d362]' : 'text-zinc-400'"
+                                />
+                                <span class="text-sm font-medium">{{ sort.label }}</span>
+                                <span
+                                    v-if="activeSort === sort.key"
+                                    class="ml-auto w-2 h-2 rounded-full bg-[#36d362]"
+                                ></span>
+                            </button>
+                        </div>
+                    </div>
                 </aside>
 
                 <!-- Content area -->
                 <div class="flex-1 space-y-8">
-                    <!-- Filters row -->
+                    <!-- Search row -->
                     <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
                         <div class="relative w-full sm:w-[400px]">
                             <Search class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400 font-bold" />
-                            <Input 
-                                v-model="searchQuery" 
-                                placeholder="Cari menu makanan..." 
+                            <Input
+                                v-model="searchQuery"
+                                placeholder="Cari menu makanan..."
                                 class="pl-12 h-10 bg-white border-zinc-200 rounded-lg shadow-sm"
                             />
                         </div>
-                        
-                        <Select>
-                            <SelectTrigger class="w-full sm:w-[150px] h-10 border-zinc-200 rounded-lg text-zinc-500 font-medium">
-                                <SelectValue placeholder="Pilih" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="terbaru">Terbaru</SelectItem>
-                                <SelectItem value="populer">Populer</SelectItem>
-                            </SelectContent>
-                        </Select>
+
+                        <!-- Active sort badge -->
+                        <div v-if="activeSort !== 'default'" class="flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-200 rounded-full text-[13px] font-bold text-[#36d362]">
+                            <component :is="sortOptions.find(s => s.key === activeSort)?.icon" class="w-4 h-4" />
+                            {{ sortOptions.find(s => s.key === activeSort)?.label }}
+                            <button @click="activeSort = 'default'" class="ml-1 text-zinc-400 hover:text-red-500 transition-colors font-black">✕</button>
+                        </div>
+
+                        <span class="text-sm text-zinc-400 font-medium hidden sm:block">
+                            {{ processedRecipes.length }} resep ditemukan
+                        </span>
+                    </div>
+
+                    <!-- Empty state -->
+                    <div v-if="processedRecipes.length === 0" class="flex flex-col items-center justify-center py-24 text-center gap-4">
+                        <div class="w-20 h-20 rounded-full bg-zinc-100 flex items-center justify-center">
+                            <Search class="w-8 h-8 text-zinc-300" />
+                        </div>
+                        <p class="font-bold text-zinc-400">Tidak ada resep yang ditemukan.</p>
+                        <button @click="searchQuery = ''; activeCategory = 'Semua'; activeSort = 'default';" class="text-sm text-[#36d362] font-bold hover:underline">Reset Filter</button>
                     </div>
 
                     <!-- Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <Link 
-                            v-for="recipe in filteredRecipes" 
-                            :key="recipe.id" 
+                    <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <Link
+                            v-for="recipe in processedRecipes"
+                            :key="recipe.id"
                             :href="`/recipes/${recipe.id}`"
                             class="group"
                         >
-                            <Card class="overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-[24px] bg-white">
+                            <Card class="overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-[24px] bg-white h-full">
                                 <div class="relative aspect-[16/11] overflow-hidden">
-                                    <img 
-                                        :src="recipe.image" 
+                                    <img
+                                        :src="recipe.image"
                                         :alt="recipe.title"
                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
@@ -160,9 +232,26 @@ const filteredRecipes = computed(() => {
                                     <p class="text-[13px] text-gray-500 leading-relaxed font-medium line-clamp-2">
                                         {{ recipe.description }}
                                     </p>
+
+                                    <!-- Nutrition badges -->
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="inline-flex items-center gap-1.5 bg-orange-50 text-orange-600 text-[11px] font-bold px-3 py-1 rounded-full">
+                                            <Flame class="w-3 h-3" />
+                                            {{ recipe.calories }} kkal
+                                        </span>
+                                        <span class="inline-flex items-center gap-1.5 bg-blue-50 text-blue-600 text-[11px] font-bold px-3 py-1 rounded-full">
+                                            <Dumbbell class="w-3 h-3" />
+                                            {{ recipe.protein }}g protein
+                                        </span>
+                                        <span class="inline-flex items-center gap-1.5 bg-zinc-100 text-zinc-600 text-[11px] font-bold px-3 py-1 rounded-full">
+                                            <Clock class="w-3 h-3" />
+                                            {{ recipe.cookTime }} menit
+                                        </span>
+                                    </div>
+
                                     <div class="pt-2">
                                         <div class="inline-flex items-center gap-2 bg-[#36d362] text-white px-5 py-2 rounded-lg text-[12px] font-bold hover:bg-green-500 transition-colors">
-                                            Baca Selengkapnya
+                                            Lihat Resep
                                             <ChevronRight class="w-4 h-4" />
                                         </div>
                                     </div>
@@ -175,7 +264,6 @@ const filteredRecipes = computed(() => {
         </div>
     </GuestLayout>
 </template>
-
 
 <style scoped>
 .scrollbar-hide::-webkit-scrollbar {

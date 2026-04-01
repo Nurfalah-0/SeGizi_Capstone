@@ -22,6 +22,9 @@ const articles = [
         title: '7 Kunci Hidrasi untuk Metabolisme',
         excerpt: 'Temukan bagaimana konsumsi air yang cukup dapat mempercepat pembakaran lemak harian Anda.',
         category: 'Gaya Hidup Sehat',
+        author: 'Dr. Sarah Gizi',
+        date: '12 Mar 2026',
+        readTime: '8 min baca',
         image: hidrasiImage,
     },
     {
@@ -29,6 +32,9 @@ const articles = [
         title: 'Mitos Diet Karbohidrat Terbongkar',
         excerpt: 'Benarkah nasi putih adalah musuh utama? Simak penjelasan sains mengenai konsumsi karbohidrat kompleks vs sederhana.',
         category: 'Mitos & Fakta',
+        author: 'Dr. John Doe',
+        date: '14 Mar 2026',
+        readTime: '6 min baca',
         image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&auto=format&fit=crop',
     },
     {
@@ -36,6 +42,9 @@ const articles = [
         title: 'Pentingnya Tidur untuk Pemulihan Otot',
         excerpt: 'Pelajari mengapa istirahat yang cukup sangat penting bagi pemulihan fisik dan mental Anda.',
         category: 'Gaya Hidup Sehat',
+        author: 'Ade Rai-mon',
+        date: '15 Mar 2026',
+        readTime: '10 min baca',
         image: tidurImage,
     },
     {
@@ -43,6 +52,9 @@ const articles = [
         title: 'Nutrisi Penting untuk Kesehatan Tulang',
         excerpt: 'Daftar zat gizi mikro yang sering terabaikan namun krusial bagi kesehatan jangka panjang.',
         category: 'Nutrisi & Gizi',
+        author: 'Prof. Bone',
+        date: '20 Mar 2026',
+        readTime: '5 min baca',
         image: nutrisiImage,
     }
 ];
@@ -116,7 +128,12 @@ const filteredArticles = computed(() => {
                         </div>
                         
                         <CardContent class="p-8 space-y-4">
-                            <h3 class="font-extrabold text-lg text-zinc-900 leading-snug">
+                            <div class="flex items-center gap-3 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+                                <span>{{ article.date }}</span>
+                                <span class="w-1 h-1 rounded-full bg-zinc-200"></span>
+                                <span>{{ article.readTime }}</span>
+                            </div>
+                            <h3 class="font-extrabold text-xl text-zinc-900 leading-snug group-hover:text-[#36d362] transition-colors">
                                 {{ article.title }}
                             </h3>
                             <p class="text-[13px] text-gray-500 leading-relaxed line-clamp-2">
@@ -124,7 +141,7 @@ const filteredArticles = computed(() => {
                             </p>
                             
                             <div class="pt-2">
-                                <div class="inline-flex items-center gap-2 bg-[#36d362] text-white px-5 py-2 rounded-full text-[12px] font-bold hover:bg-green-500 transition-colors">
+                                <div class="inline-flex items-center gap-2 text-[#36d362] text-[13px] font-black group-hover:gap-3 transition-all">
                                     Baca Selengkapnya
                                     <ChevronRight class="w-4 h-4" />
                                 </div>

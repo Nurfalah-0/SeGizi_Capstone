@@ -11,7 +11,15 @@ import {
     DropdownMenuLabel,
     DropdownMenuGroup
 } from '@/components/ui/dropdown-menu';
-import { User, LayoutDashboard, Settings, LogOut, ChevronDown } from 'lucide-vue-next';
+import { 
+    Sheet, 
+    SheetContent, 
+    SheetHeader, 
+    SheetTitle, 
+    SheetTrigger,
+    SheetFooter
+} from '@/components/ui/sheet';
+import { User, LayoutDashboard, Settings, LogOut, ChevronDown, Menu, Home, Utensils, Scale, Newspaper } from 'lucide-vue-next';
 import { router } from '@inertiajs/vue3';
 import { globalLoading } from '@/stores/loading';
 
@@ -35,7 +43,55 @@ const logoutHandle = () => {
         </div>
         <!-- Navbar -->
         <nav class="flex items-center justify-between px-8 md:px-20 py-5 bg-white fixed w-full top-0 z-[9999] shadow-sm">
-            <div class="flex items-center">
+            <div class="flex items-center gap-4">
+                <!-- Mobile Menu (Sheet) -->
+                <div class="md:hidden">
+                    <Sheet>
+                        <SheetTrigger as-child>
+                            <button class="p-2 hover:bg-zinc-50 rounded-lg transition-colors">
+                                <Menu class="w-6 h-6 text-black" />
+                            </button>
+                        </SheetTrigger>
+                        <SheetContent side="left" class="w-[300px] p-0 border-none bg-white">
+                            <div class="p-8 border-b border-zinc-50">
+                                <Link href="/" class="text-2xl font-black tracking-tight">
+                                    <span class="text-[#36d362]">Se</span><span class="text-[#ff9d29]">Gizi</span>
+                                </Link>
+                                <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-2">Nutrisi & Kesehatan</p>
+                            </div>
+                            
+                            <div class="p-4 space-y-2 mt-4">
+                                <Link href="/" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-green-50 hover:text-[#36d362] transition-all group" :class="page.url === '/' ? 'bg-green-50 text-[#36d362]' : 'text-zinc-600'">
+                                    <Home class="w-5 h-5" />
+                                    <span class="font-black text-sm uppercase tracking-wider">Beranda</span>
+                                </Link>
+                                <Link href="/recipes" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-green-50 hover:text-[#36d362] transition-all group" :class="page.url.startsWith('/recipes') ? 'bg-green-50 text-[#36d362]' : 'text-zinc-600'">
+                                    <Utensils class="w-5 h-5" />
+                                    <span class="font-black text-sm uppercase tracking-wider">Menu Makanan</span>
+                                </Link>
+                                <Link href="/bmi-calculator" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-green-50 hover:text-[#36d362] transition-all group" :class="page.url.startsWith('/bmi-calculator') ? 'bg-green-50 text-[#36d362]' : 'text-zinc-600'">
+                                    <Scale class="w-5 h-5" />
+                                    <span class="font-black text-sm uppercase tracking-wider">Kalkulator</span>
+                                </Link>
+                                <Link href="/articles" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-green-50 hover:text-[#36d362] transition-all group" :class="page.url.startsWith('/articles') ? 'bg-green-50 text-[#36d362]' : 'text-zinc-600'">
+                                    <Newspaper class="w-5 h-5" />
+                                    <span class="font-black text-sm uppercase tracking-wider">Artikel</span>
+                                </Link>
+                            </div>
+
+                            <SheetFooter class="absolute bottom-0 left-0 w-full p-8 bg-zinc-50/50">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-[#36d362]/10 flex items-center justify-center text-[#36d362] font-black">S</div>
+                                    <div>
+                                        <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest leading-none">Status Pelayanan</p>
+                                        <p class="text-xs font-black text-zinc-600">Online & Stabil</p>
+                                    </div>
+                                </div>
+                            </SheetFooter>
+                        </SheetContent>
+                    </Sheet>
+                </div>
+
                 <!-- Logo -->
                 <Link href="/" class="text-[28px] font-bold tracking-tight">
                     <span class="text-[#36d362]">Se</span><span class="text-[#ff9d29]">Gizi</span>
