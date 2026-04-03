@@ -25,25 +25,25 @@ const passwordInput = useTemplateRef('passwordInput');
     <div class="space-y-6">
         <Heading
             variant="small"
-            title="Delete account"
-            description="Delete your account and all of its resources"
+            title="Hapus Akun"
+            description="Hapus akun Anda beserta seluruh data dan aktivitas di dalamnya"
         />
         <div
-            class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10"
+            class="space-y-4 rounded-[24px] border border-red-200 bg-red-50 p-6"
         >
-            <div class="relative space-y-0.5 text-red-600 dark:text-red-100">
-                <p class="font-medium">Warning</p>
-                <p class="text-sm">
-                    Please proceed with caution, this cannot be undone.
+            <div class="relative space-y-1">
+                <p class="font-black text-red-900 text-lg">Peringatan Penting!</p>
+                <p class="text-sm text-red-700 font-medium leading-relaxed">
+                    Mohon berhati-hati, tindakan ini tidak dapat dibatalkan. Seluruh data kesehatan dan riwayat Anda akan hilang selamanya.
                 </p>
             </div>
             <Dialog>
                 <DialogTrigger as-child>
-                    <Button variant="destructive" data-test="delete-user-button"
-                        >Delete account</Button
+                    <Button variant="destructive" class="font-bold rounded-xl px-6 py-5 shadow-md shadow-red-100" data-test="delete-user-button"
+                        >Hapus Akun Saya</Button
                     >
                 </DialogTrigger>
-                <DialogContent>
+                <DialogContent class="rounded-[32px] border-none shadow-2xl p-8 bg-white overflow-hidden max-w-[500px]">
                     <Form
                         v-bind="ProfileController.destroy.form()"
                         reset-on-success
@@ -54,38 +54,35 @@ const passwordInput = useTemplateRef('passwordInput');
                         class="space-y-6"
                         v-slot="{ errors, processing, reset, clearErrors }"
                     >
-                        <DialogHeader class="space-y-3">
-                            <DialogTitle
-                                >Are you sure you want to delete your
-                                account?</DialogTitle
+                        <DialogHeader class="space-y-4">
+                            <DialogTitle class="text-2xl font-black text-black leading-tight"
+                                >Apakah Anda yakin ingin menghapus akun?</DialogTitle
                             >
-                            <DialogDescription>
-                                Once your account is deleted, all of its
-                                resources and data will also be permanently
-                                deleted. Please enter your password to confirm
-                                you would like to permanently delete your
-                                account.
+                            <DialogDescription class="text-zinc-500 font-medium leading-relaxed text-sm">
+                                Setelah akun dihapus, semua sumber daya dan data Anda akan hilang secara permanen. Masukkan kata sandi akun Anda untuk mengonfirmasi penghapusan permanen.
                             </DialogDescription>
                         </DialogHeader>
 
-                        <div class="grid gap-2">
-                            <Label for="password" class="sr-only"
-                                >Password</Label
+                        <div class="grid gap-2 pt-2">
+                            <Label for="password" class="font-bold text-black text-sm"
+                                >Konfirmasi Kata Sandi</Label
                             >
                             <Input
                                 id="password"
                                 type="password"
                                 name="password"
                                 ref="passwordInput"
-                                placeholder="Password"
+                                class="bg-zinc-50 border-none rounded-xl px-5 py-6 focus:bg-white transition-all shadow-sm"
+                                placeholder="Masukkan kata sandi Anda"
                             />
                             <InputError :message="errors.password" />
                         </div>
 
-                        <DialogFooter class="gap-2">
+                        <DialogFooter class="flex flex-col sm:flex-row gap-3 pt-6">
                             <DialogClose as-child>
                                 <Button
-                                    variant="secondary"
+                                    variant="ghost"
+                                    class="font-bold rounded-xl text-zinc-400 hover:bg-zinc-50 flex-1 py-6"
                                     @click="
                                         () => {
                                             clearErrors();
@@ -93,17 +90,18 @@ const passwordInput = useTemplateRef('passwordInput');
                                         }
                                     "
                                 >
-                                    Cancel
+                                    Batalkan
                                 </Button>
                             </DialogClose>
 
                             <Button
                                 type="submit"
                                 variant="destructive"
+                                class="font-bold rounded-xl bg-red-600 hover:bg-red-700 flex-1 py-6 shadow-lg shadow-red-100"
                                 :disabled="processing"
                                 data-test="confirm-delete-user-button"
                             >
-                                Delete account
+                                Ya, Hapus Akun
                             </Button>
                         </DialogFooter>
                     </Form>

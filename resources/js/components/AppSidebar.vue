@@ -19,44 +19,33 @@ import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
-        href: dashboard.url(),
+        title: 'Beranda',
+        href: '/',
         icon: LayoutGrid,
     },
     {
-        title: 'BMI Calculator',
+        title: 'Kalkulator BMI',
         href: '/bmi-calculator',
         icon: Scale,
     },
     {
-        title: 'Calorie Calculator',
+        title: 'Kalkulator Kalori',
         href: '/calorie-calculator',
         icon: Flame,
     },
     {
-        title: 'Recipes',
+        title: 'Menu Makanan',
         href: '/recipes',
         icon: Utensils,
     },
     {
-        title: 'Articles',
+        title: 'Artikel',
         href: '/articles',
         icon: Newspaper,
     },
 ];
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: FolderGit2,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
-];
+const footerNavItems: NavItem[] = [];
 </script>
 
 <template>
@@ -65,7 +54,7 @@ const footerNavItems: NavItem[] = [
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
-                        <Link :href="dashboard()">
+                        <Link :href="dashboard.url()">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>

@@ -5,29 +5,29 @@ import { useAppearance } from '@/composables/useAppearance';
 const { appearance, updateAppearance } = useAppearance();
 
 const tabs = [
-    { value: 'light', Icon: Sun, label: 'Light' },
-    { value: 'dark', Icon: Moon, label: 'Dark' },
-    { value: 'system', Icon: Monitor, label: 'System' },
+    { value: 'light', Icon: Sun, label: 'Mode Terang' },
+    { value: 'dark', Icon: Moon, label: 'Mode Gelap' },
+    { value: 'system', Icon: Monitor, label: 'Ikuti Sistem' },
 ] as const;
 </script>
 
 <template>
     <div
-        class="inline-flex gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800"
+        class="inline-flex gap-2 rounded-[20px] bg-zinc-100 p-2 shadow-inner"
     >
         <button
             v-for="{ value, Icon, label } in tabs"
             :key="value"
             @click="updateAppearance(value)"
             :class="[
-                'flex items-center rounded-md px-3.5 py-1.5 transition-colors',
+                'flex items-center rounded-[14px] px-6 py-3 transition-all duration-300 font-bold text-sm',
                 appearance === value
-                    ? 'bg-white shadow-xs dark:bg-neutral-700 dark:text-neutral-100'
-                    : 'text-neutral-500 hover:bg-neutral-200/60 hover:text-black dark:text-neutral-400 dark:hover:bg-neutral-700/60',
+                    ? 'bg-white shadow-lg text-[#36d362]'
+                    : 'text-zinc-500 hover:bg-zinc-200/60 hover:text-zinc-800',
             ]"
         >
-            <component :is="Icon" class="-ml-1 h-4 w-4" />
-            <span class="ml-1.5 text-sm">{{ label }}</span>
+            <component :is="Icon" class="h-4 w-4 mr-2" />
+            <span>{{ label }}</span>
         </button>
     </div>
 </template>

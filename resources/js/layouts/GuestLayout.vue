@@ -1,37 +1,23 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
-import { login, register, logout } from '@/routes';
 
+import { 
+    Sheet, 
+    SheetContent, 
+    SheetTrigger,
+    SheetFooter
+} from '@/components/ui/sheet';
 import { 
     DropdownMenu, 
     DropdownMenuTrigger, 
     DropdownMenuContent, 
-    DropdownMenuItem, 
-    DropdownMenuSeparator,
-    DropdownMenuLabel,
-    DropdownMenuGroup
+    DropdownMenuItem
 } from '@/components/ui/dropdown-menu';
-import { 
-    Sheet, 
-    SheetContent, 
-    SheetHeader, 
-    SheetTitle, 
-    SheetTrigger,
-    SheetFooter
-} from '@/components/ui/sheet';
-import { User, LayoutDashboard, Settings, LogOut, ChevronDown, Menu, Home, Utensils, Scale, Newspaper } from 'lucide-vue-next';
+import { ChevronDown, Menu, Home, Utensils, Scale, Newspaper, Sparkles, Flame } from 'lucide-vue-next';
 import { router } from '@inertiajs/vue3';
 import { globalLoading } from '@/stores/loading';
 
-defineProps<{
-    canRegister?: boolean;
-}>();
-
 const page = usePage();
-
-const logoutHandle = () => {
-    router.post(logout.url());
-};
 </script>
 
 <template>
@@ -42,8 +28,8 @@ const logoutHandle = () => {
              class="global-animate-progress">
         </div>
         <!-- Navbar -->
-        <nav class="flex items-center justify-between px-8 md:px-20 py-5 bg-white fixed w-full top-0 z-[9999] shadow-sm">
-            <div class="flex items-center gap-4">
+        <nav class="flex items-center justify-between px-8 md:px-20 py-4 bg-white/95 backdrop-blur-md fixed w-full top-0 z-[100] border-b border-zinc-100/50">
+            <div class="flex items-center gap-6">
                 <!-- Mobile Menu (Sheet) -->
                 <div class="md:hidden">
                     <Sheet>
@@ -77,6 +63,7 @@ const logoutHandle = () => {
                                     <Newspaper class="w-5 h-5" />
                                     <span class="font-black text-sm uppercase tracking-wider">Artikel</span>
                                 </Link>
+                                
                             </div>
 
                             <SheetFooter class="absolute bottom-0 left-0 w-full p-8 bg-zinc-50/50">
@@ -99,90 +86,54 @@ const logoutHandle = () => {
             </div>
 
             <!-- Center Links -->
-            <div class="hidden md:flex items-center gap-10 text-[15px] font-semibold text-black">
-                <Link href="/" :class="page.url === '/' ? 'text-[#36d362]' : 'hover:text-[#36d362] transition'">Beranda</Link>
-                <Link href="/recipes" :class="page.url.startsWith('/recipes') ? 'text-[#36d362]' : 'hover:text-[#36d362] transition'">Menu Makanan</Link>
-                <Link href="/bmi-calculator" :class="page.url.startsWith('/bmi-calculator') ? 'text-[#36d362]' : 'hover:text-[#36d362] transition'">Kalkulator</Link>
-                <Link href="/articles" :class="page.url.startsWith('/articles') ? 'text-[#36d362]' : 'hover:text-[#36d362] transition'">Artikel</Link>
+            <div class="hidden md:flex items-center gap-10 text-[15px] font-semibold text-zinc-600">
+                <Link href="/" :class="$page.url === '/' ? 'text-[#36d362] font-bold' : 'hover:text-[#36d362] transition'">Beranda</Link>
+                <Link href="/recipes" :class="$page.url.startsWith('/recipes') ? 'text-[#36d362] font-bold' : 'hover:text-[#36d362] transition'">Menu Makanan</Link>
+                <DropdownMenu>
+                    <DropdownMenuTrigger class="outline-none">
+                        <div :class="page.url.includes('-calculator') ? 'text-[#36d362]' : 'text-zinc-600 hover:text-[#36d362] transition'" class="flex items-center gap-1.5 cursor-pointer font-bold py-2">
+                            Kalkulator
+                            <ChevronDown class="w-4 h-4 opacity-50" />
+                        </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent class="w-56 rounded-[24px] shadow-2xl border-none p-3 bg-white animate-in fade-in zoom-in-95 duration-200" align="start" :side-offset="10">
+                        <div class="px-3 py-2">
+                            <p class="text-[10px] font-black text-zinc-400 uppercase tracking-widest leading-none mb-1">Pilih Kalkulator</p>
+                        </div>
+                        <DropdownMenuItem @click="router.visit('/recommendations')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-yellow-50 transition-all">
+                            <div class="p-2 bg-yellow-50 rounded-lg group-hover:bg-yellow-100 transition-colors">
+                                <Sparkles class="w-4 h-4 text-yellow-600" />
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-black text-xs text-zinc-900">Menu Untukmu</span>
+                                <span class="text-[10px] text-zinc-400">Rencana makan personal</span>
+                            </div>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem @click="router.visit('/bmi-calculator')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-green-50 transition-all">
+                            <div class="p-2 bg-green-50 rounded-lg group-hover:bg-green-100 transition-colors">
+                                <Scale class="w-4 h-4 text-[#36d362]" />
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-black text-xs text-zinc-900">Kalkulator BMI</span>
+                                <span class="text-[10px] text-zinc-400">Cek status berat badan</span>
+                            </div>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem @click="router.visit('/calorie-calculator')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-orange-50 transition-all">
+                            <div class="p-2 bg-orange-50 rounded-lg group-hover:bg-orange-100 transition-colors">
+                                <Flame class="w-4 h-4 text-orange-600" />
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-black text-xs text-zinc-900">Target Kalori</span>
+                                <span class="text-[10px] text-zinc-400">Hitung TDEE harian</span>
+                            </div>
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+                <Link href="/articles" :class="$page.url.startsWith('/articles') ? 'text-[#36d362] font-bold' : 'hover:text-[#36d362] transition'">Artikel</Link>
             </div>
 
-            <!-- Auth Links -->
-            <div class="flex items-center gap-6 text-[15px] font-semibold">
-                <template v-if="page.props.auth?.user">
-                    <DropdownMenu>
-                        <DropdownMenuTrigger class="outline-none">
-                            <div class="flex items-center gap-3 group px-3 py-1.5 rounded-2xl hover:bg-zinc-50 transition-all border border-transparent hover:border-zinc-100">
-                                <div class="text-right hidden sm:block">
-                                    <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest leading-none mb-1">Akun Saya</p>
-                                    <p class="text-sm text-black font-black leading-none group-hover:text-[#36d362] transition-colors">
-                                        {{ page.props.auth.user.name }}
-                                    </p>
-                                </div>
-                                <div class="relative">
-                                    <div class="w-10 h-10 rounded-full bg-zinc-100 flex items-center justify-center border-2 border-white group-hover:border-[#36d362] transition-all overflow-hidden shadow-sm">
-                                        <template v-if="page.props.auth.user.profile_photo_url">
-                                            <img :src="page.props.auth.user.profile_photo_url" :alt="page.props.auth.user.name" class="w-full h-full object-cover" />
-                                        </template>
-                                        <template v-else>
-                                            <span class="text-[#36d362] font-black text-sm">
-                                                {{ page.props.auth.user.name.charAt(0).toUpperCase() }}
-                                            </span>
-                                        </template>
-                                    </div>
-                                    <div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5 border border-zinc-100 shadow-sm text-zinc-400 group-hover:text-[#36d362] transition-colors">
-                                        <ChevronDown class="w-3 h-3" />
-                                    </div>
-                                </div>
-                            </div>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent class="w-64 mt-2 rounded-[24px] shadow-2xl border-none p-3 bg-white animate-in fade-in zoom-in duration-200" align="end">
-                            <DropdownMenuLabel class="px-3 py-3">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-[#36d362] font-bold">
-                                        {{ page.props.auth.user.name.charAt(0).toUpperCase() }}
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <p class="text-sm font-black text-zinc-900 leading-none mb-1">{{ page.props.auth.user.name }}</p>
-                                        <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-tight">{{ page.props.auth.user.email }}</p>
-                                    </div>
-                                </div>
-                            </DropdownMenuLabel>
-                            
-                            <DropdownMenuSeparator class="bg-zinc-50 my-2 h-px" />
-                            
-                            <DropdownMenuGroup class="space-y-1">
-                                <DropdownMenuItem @click="router.visit('/dashboard')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-zinc-100 transition-all">
-                                    <LayoutDashboard class="w-4 h-4 text-black" />
-                                    <span class="font-bold text-sm text-black">Dashboard</span>
-                                </DropdownMenuItem>
-                                
-                                <DropdownMenuItem @click="router.visit('/settings/profile')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-zinc-100 transition-all">
-                                    <User class="w-4 h-4 text-black" />
-                                    <span class="font-bold text-sm text-black">Profil Saya</span>
-                                </DropdownMenuItem>
-                                
-                                <DropdownMenuItem @click="router.visit('/settings/profile')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-zinc-100 transition-all">
-                                    <Settings class="w-4 h-4 text-black" />
-                                    <span class="font-bold text-sm text-black">Pengaturan</span>
-                                </DropdownMenuItem>
-                            </DropdownMenuGroup>
-                            
-                            <DropdownMenuSeparator class="bg-zinc-50 my-2 h-px" />
-                            
-                            <DropdownMenuItem @click="logoutHandle" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-red-500 focus:text-white text-red-500 transition-all font-bold">
-                                <LogOut class="w-4 h-4" />
-                                <span class="text-sm">Keluar</span>
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                </template>
-                <template v-else>
-                    <Link :href="login.url()" class="text-black hover:text-[#36d362] transition font-bold">Masuk</Link>
-                    <Link :href="register.url()" class="px-7 py-3 text-white bg-[#36d362] rounded-full hover:bg-green-600 hover:shadow-lg hover:shadow-green-100 transition-all font-bold">
-                        Daftar
-                    </Link>
-                </template>
-            </div>
+            <!-- Empty space to keep center links truly centered -->
+            <div class="hidden md:block w-[120px]"></div>
         </nav>
 
         <!-- Page Content -->

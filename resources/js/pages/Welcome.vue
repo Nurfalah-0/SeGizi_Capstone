@@ -1,97 +1,105 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
+import guestLayoutImage from '../../images/lauk.png'; // keeping for articles if needed
 import laukImage from '../../images/lauk.png';
-import GuestLayout from '@/layouts/GuestLayout.vue';
 import hidrasiImage from '../../images/hidrasi.jpg';
 import tidurImage from '../../images/tidur.jpg';
 import nutrisiImage from '../../images/nutrisi tulang.jpg';
 import carbonaraImage from '../../images/carbonara.jpg';
+import GuestLayout from '@/layouts/GuestLayout.vue';
+import { Scale, Flame, ArrowRight, User, Utensils } from 'lucide-vue-next';
 
-withDefaults(
-    defineProps<{
-        canRegister: boolean;
-    }>(),
-    {
-        canRegister: true,
-    },
-);
+// Form logic for Personalization
+const weight = ref<string>('');
+const height = ref<string>('');
+const age = ref<string>('');
+const gender = ref<string>('male');
+const goal = ref<string>('maintain');
+
+const handleGetRecommendation = () => {
+    if (weight.value && height.value && age.value) {
+        window.location.href = `/recommendations?weight=${weight.value}&height=${height.value}&age=${age.value}&gender=${gender.value}&goal=${goal.value}`;
+    } else {
+        alert('Tolong isi data diri kamu (Berat, Tinggi, Usia) untuk hasil yang akurat.');
+    }
+};
 
 // Filters
 const activeRecipeFilter = ref('Semua');
 const activeArticleFilter = ref('Semua');
+const recipeSearchQuery = ref('');
+const articleSearchQuery = ref('');
 
 // Data
 const recipes = [
     {
         id: 1,
-        title: 'Salmon Panggang Lemon',
+        title: 'Carbonara Sehat',
         category: 'Tinggi Protein',
-        calories: 450,
-        tag: 'Gizi Baik',
-        description: 'Salmon segar yang dipanggang dengan irisan lemon dan rempah pilihan untuk asupan protein maksimal.',
-        image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&auto=format&fit=crop',
+        calories: 420,
+        protein: 35,
+        image: carbonaraImage,
+        description: 'Nikmati pasta carbonara lezat namun tetap sehat dengan bahan berkualitas tinggi.'
     },
     {
         id: 2,
-        title: 'Salad Quinoa Mediterania',
-        category: 'Rendah Kalori',
-        calories: 280,
-        tag: 'Serat Tinggi',
-        description: 'Perpaduan quinoa, mentimun, dan tomat ceri yang segar, sempurna untuk makan siang ringan Anda.',
-        image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&auto=format&fit=crop',
+        title: 'Nutrisi untuk Tulang',
+        category: 'Tinggi Kalsium',
+        calories: 310,
+        protein: 28,
+        image: nutrisiImage,
+        description: 'Menu khusus untuk menjaga kesehatan tulang dan sendi di masa depan.'
     },
     {
         id: 3,
-        title: 'Pasta Carbonara Gandum',
-        category: 'Tinggi Kalori',
-        calories: 620,
-        tag: 'Energi Ekstra',
-        description: 'Pasta gandum utuh dengan saus carbonara creamy tanpa krim, kaya akan karbohidrat kompleks.',
-        image: carbonaraImage,
+        title: 'Salmon Panggang',
+        category: 'Tinggi Protein',
+        calories: 380,
+        protein: 42,
+        image: hidrasiImage,
+        description: 'Olahan ikan salmon segar pilihan dengan sayuran organik pilihan.'
     }
 ];
 
 const articles = [
     {
         id: 1,
-        title: '7 Kunci Hidrasi untuk Metabolisme',
-        category: 'Gaya Hidup Sehat',
-        description: 'Temukan bagaimana konsumsi air yang cukup dapat mempercepat pembakaran lemak harian Anda.',
+        title: 'Pentingnya Hidrasi Tubuh',
+        category: 'Kesehatan',
+        description: 'Pelajari mengapa minum air yang cukup sangat penting untuk metabolisme.',
         image: hidrasiImage,
     },
     {
         id: 2,
-        title: 'Mitos Diet Karbohidrat Terbongkar',
-        category: 'Mitos & Fakta',
-        description: 'Benarkah nasi putih adalah musuh utama? Simak penjelasan sains mengenai konsumsi karbohidrat kompleks vs sederhana.',
-        image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&auto=format&fit=crop',
-    },
-    {
-        id: 3,
-        title: 'Pentingnya Tidur untuk Pemulihan Otot',
-        category: 'Gaya Hidup Sehat',
-        description: 'Pelajari mengapa istirahat yang cukup sangat penting bagi pemulihan fisik dan mental Anda.',
+        title: 'Tidur Berkualitas',
+        category: 'Gaya Hidup',
+        description: 'Cara mendapatkan kualitas tidur terbaik untuk pemulihan otot.',
         image: tidurImage,
     },
     {
-        id: 4,
-        title: 'Nutrisi Penting untuk Kesehatan Tulang',
+        id: 3,
+        title: 'Rahasia Nutrisi Tulang Kuat',
         category: 'Nutrisi & Gizi',
-        description: 'Daftar zat gizi mikro yang sering terabaikan namun krusial bagi kesehatan jangka panjang.',
+        description: 'Makanan super apa saja yang bisa membuat tulang Anda lebih kuat?',
         image: nutrisiImage,
     }
 ];
 
 // Computeds
 const filteredRecipes = computed(() => {
-    if (activeRecipeFilter.value === 'Semua') return recipes;
-    return recipes.filter(r => r.category === activeRecipeFilter.value);
+    return recipes.filter(r => {
+        const matchesQuery = r.title.toLowerCase().includes(recipeSearchQuery.value.toLowerCase());
+        return matchesQuery;
+    }).slice(0, 3);
 });
 
 const filteredArticles = computed(() => {
-    if (activeArticleFilter.value === 'Semua') return articles;
-    return articles.filter(a => a.category === activeArticleFilter.value);
+    return articles.filter(a => {
+        const matchesSearch = a.title.toLowerCase().includes(articleSearchQuery.value.toLowerCase());
+        const matchesCategory = activeArticleFilter.value === 'Semua' || a.category === activeArticleFilter.value;
+        return matchesSearch && matchesCategory;
+    });
 });
 </script>
 
@@ -100,35 +108,89 @@ const filteredArticles = computed(() => {
 
     <GuestLayout>
         <!-- Hero Section -->
-        <section class="bg-[#EAFBF0] py-20 px-8 md:px-20 flex flex-col md:flex-row items-center justify-between min-h-[600px] relative z-0">
-            <div class="md:w-1/2 md:pr-10">
-                <h1 class="text-4xl md:text-[54px] font-extrabold text-[#111] leading-[1.1] tracking-tight">
-                    Makanan untuk hidup <br>
-                    bukan hidup untuk <br>
-                    makanan
-                </h1>
-                <p class="text-gray-800 font-medium text-[18px] mt-8 max-w-[450px] leading-relaxed">
-                    Hitung kebutuhan kalori <br>
-                    harianmu, temukan resep sehat <br>
-                    dan mulai perjalanan hidup <br>
-                    sehat hari ini.
-                </p>
-                <div class="flex gap-4 pt-10">
-                    <Link href="/calorie-calculator" class="px-8 py-3.5 text-white bg-[#36d362] rounded-lg font-bold hover:bg-green-500 transition shadow-sm border border-transparent">
-                        Hitung Kalori
-                    </Link>
-                    <Link href="/recipes" class="px-8 py-3.5 text-black bg-transparent border border-gray-400 rounded-lg font-bold hover:bg-gray-50 transition">
-                        Menu Makanan
-                    </Link>
+        <section class="bg-gradient-to-b from-[#f0fff4] to-white py-24 px-8 md:px-20 relative overflow-hidden min-h-[90vh] flex items-center">
+            <div class="max-w-[1400px] mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-16 relative z-10">
+                <!-- Text & Form Area -->
+                <div class="lg:w-[55%] space-y-10 animate-in fade-in slide-in-from-left-8 duration-1000">
+                    <div class="space-y-6">
+                        <span class="inline-block px-4 py-1.5 bg-[#36d362]/10 text-[#36d362] rounded-full text-[11px] font-black uppercase tracking-widest">Mulai Perjalananmu</span>
+                        <h1 class="text-4xl md:text-[56px] font-black text-[#111] leading-[1.1] tracking-tight">
+                            Atur pola makan <br> 
+                            sesuai <span class="text-[#36d362]">kebutuhan tubuhmu</span>
+                        </h1>
+                        <p class="text-zinc-500 font-medium text-[16px] max-w-[500px] leading-relaxed">
+                            Beri tahu kami tujuanmu, dan sistem kami akan merancang rencana asupan gizi serta rekomendasi hidangan hanya untukmu. Gratis, tanpa perlu daftar di awal!
+                        </p>
+                    </div>
+                    
+                    <!-- Personalization Form Board -->
+                    <div class="bg-white p-8 rounded-[32px] shadow-2xl shadow-green-100/50 border border-zinc-100 max-w-xl relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1.5 h-full bg-[#36d362]"></div>
+                        <h3 class="text-xl font-black text-zinc-900 mb-6 flex items-center gap-3">
+                            <Utensils class="w-5 h-5 text-[#36d362]" />
+                            Beri Tahu Preferensi Dietmu
+                        </h3>
+                        
+                        <div class="space-y-5">
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Berat (kg)</label>
+                                    <input v-model="weight" type="number" placeholder="Misal: 70" class="w-full bg-zinc-50 border-none rounded-xl px-4 py-3.5 text-sm font-bold text-zinc-900 focus:ring-2 focus:ring-[#36d362]/30 transition-all placeholder:text-zinc-300">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Tinggi (cm)</label>
+                                    <input v-model="height" type="number" placeholder="Misal: 170" class="w-full bg-zinc-50 border-none rounded-xl px-4 py-3.5 text-sm font-bold text-zinc-900 focus:ring-2 focus:ring-[#36d362]/30 transition-all placeholder:text-zinc-300">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Usia</label>
+                                    <input v-model="age" type="number" placeholder="Misal: 25" class="w-full bg-zinc-50 border-none rounded-xl px-4 py-3.5 text-sm font-bold text-zinc-900 focus:ring-2 focus:ring-[#36d362]/30 transition-all placeholder:text-zinc-300">
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Gender</label>
+                                    <div class="flex bg-zinc-50 rounded-xl p-1">
+                                        <button @click="gender = 'male'" :class="gender === 'male' ? 'bg-white shadow-sm text-blue-600' : 'text-zinc-400 hover:text-zinc-600'" class="flex-1 py-2.5 text-xs font-black rounded-lg transition-all">Pria</button>
+                                        <button @click="gender = 'female'" :class="gender === 'female' ? 'bg-white shadow-sm text-pink-500' : 'text-zinc-400 hover:text-zinc-600'" class="flex-1 py-2.5 text-xs font-black rounded-lg transition-all">Wanita</button>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Tujuan Diet</label>
+                                    <select v-model="goal" class="w-full bg-zinc-50 border-none rounded-xl px-4 py-3 text-sm font-bold text-zinc-900 focus:ring-2 focus:ring-[#36d362]/30 transition-all cursor-pointer h-[42px]">
+                                        <option value="lose">Menurunkan Berat</option>
+                                        <option value="maintain">Menjaga Berat</option>
+                                        <option value="gain">Menaikkan Mass</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <button @click="handleGetRecommendation" class="w-full mt-4 flex items-center justify-center gap-2 bg-[#36d362] hover:bg-green-600 text-white rounded-xl py-4 font-black transition-all hover:shadow-xl hover:shadow-green-500/20 active:scale-[0.98]">
+                                Hitung BMI & Kalori Saya
+                                <ArrowRight class="w-4 h-4" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Area -->
+                <div class="lg:w-[45%] flex justify-center animate-in fade-in slide-in-from-right-8 duration-1000 hidden md:flex">
+                    <div class="relative w-full max-w-[600px]">
+                        <img 
+                            :src="laukImage" 
+                            alt="SeGizi Healthy Food Illustration" 
+                            class="w-full h-auto drop-shadow-[0_20px_50px_rgba(54,211,98,0.2)]"
+                        >
+                        <!-- Floating elements for added premium feel -->
+                        <div class="absolute -top-10 -right-10 w-24 h-24 bg-[#ff9d29]/10 rounded-full blur-2xl"></div>
+                        <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-[#36d362]/10 rounded-full blur-3xl"></div>
+                    </div>
                 </div>
             </div>
             
-            <div class="md:w-1/2 mt-12 md:mt-0 flex justify-end relative">
-                <!-- Ilustrasi Makanan -->
-                <img :src="laukImage" 
-                     alt="Ilustrasi Makanan" 
-                     class="w-full max-w-[600px] object-contain">
-            </div>
+            <!-- Decor Elements -->
+            <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-[#36d362]/3 rounded-full -translate-y-1/2 translate-x-1/4 blur-[100px]"></div>
+            <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#ff9d29]/3 rounded-full translate-y-1/2 -translate-x-1/4 blur-[80px]"></div>
         </section>
 
         <!-- Menu Populer Section -->
@@ -139,55 +201,63 @@ const filteredArticles = computed(() => {
                 </h2>
                 <p class="text-gray-600 font-medium mt-3">Temukan berbagai resep sehat dan lezat.</p>
                 
-                <!-- Filters wrapped in a single grey pill -->
-                <div class="flex justify-center mt-10">
-                    <div class="inline-flex items-center bg-[#F3F4F0] rounded-full px-6 md:px-8 py-2.5 gap-4 md:gap-8 overflow-x-auto scrollbar-hide max-w-full">
+                <!-- Filters & Search -->
+                <div class="flex flex-col items-center gap-8 mt-12">
+                    <div class="inline-flex items-center bg-gray-100/80 p-1.5 rounded-[24px] gap-1 shadow-inner border border-gray-100">
                         <button 
-                            @click="activeRecipeFilter = 'Semua'"
-                            :class="activeRecipeFilter === 'Semua' ? 'text-[#36d362]' : 'text-black'"
-                            class="text-[13px] font-bold hover:text-[#36d362] transition whitespace-nowrap"
-                        >Semua</button>
-                        <button 
-                            @click="activeRecipeFilter = 'Tinggi Kalori'"
-                            :class="activeRecipeFilter === 'Tinggi Kalori' ? 'text-[#36d362]' : 'text-black'"
-                            class="text-[13px] font-bold hover:text-[#36d362] transition whitespace-nowrap"
-                        >Tinggi Kalori</button>
-                        <button 
-                            @click="activeRecipeFilter = 'Rendah Kalori'"
-                            :class="activeRecipeFilter === 'Rendah Kalori' ? 'text-[#36d362]' : 'text-black'"
-                            class="text-[13px] font-bold hover:text-[#36d362] transition whitespace-nowrap"
-                        >Rendah Kalori</button>
-                        <button 
-                            @click="activeRecipeFilter = 'Tinggi Protein'"
-                            :class="activeRecipeFilter === 'Tinggi Protein' ? 'text-[#36d362]' : 'text-black'"
-                            class="text-[13px] font-bold hover:text-[#36d362] transition whitespace-nowrap"
-                        >Tinggi Protein</button>
+                            v-for="type in ['Tinggi Serat', 'Rendah Kalori', 'Tinggi Protein']"
+                            :key="type"
+                            @click="activeRecipeFilter = type === 'Tinggi Serat' ? 'Serat Tinggi' : type === 'Rendah Kalori' ? 'Diet' : 'Bulking'"
+                            :class="(activeRecipeFilter === 'Serat Tinggi' && type === 'Tinggi Serat') || (activeRecipeFilter === 'Diet' && type === 'Rendah Kalori') || (activeRecipeFilter === 'Bulking' && type === 'Tinggi Protein') ? 'bg-white text-[#36d362] shadow-md' : 'text-zinc-500 hover:text-zinc-900'"
+                            class="text-[12px] font-black px-8 py-3 rounded-2xl transition-all duration-300"
+                        >{{ type }}</button>
+                    </div>
+
+                    <div class="relative w-full max-w-[500px] group">
+                        <div class="absolute inset-y-0 left-5 flex items-center pointer-events-none transition-colors group-focus-within:text-[#36d362] text-gray-400">
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <input 
+                            v-model="recipeSearchQuery"
+                            type="text" 
+                            placeholder="Cari resep sehat (misal: Salmon)..." 
+                            class="w-full pl-14 pr-6 py-4 rounded-[24px] border-none bg-white shadow-xl shadow-gray-100/50 focus:ring-2 focus:ring-[#36d362]/20 transition-all font-medium text-zinc-900 placeholder:text-zinc-400"
+                        >
                     </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-500">
-                <Link v-for="recipe in filteredRecipes" :key="recipe.id" :href="`/recipes/${recipe.id}`" class="group animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <div class="h-full bg-white rounded-[24px] shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 transition-all duration-500">
+                <Link v-for="recipe in filteredRecipes" :key="recipe.id" :href="`/recipes/${recipe.id}`" class="group animate-in fade-in zoom-in duration-500">
+                    <div class="h-full bg-white rounded-[32px] shadow-sm border border-gray-100/50 overflow-hidden hover:shadow-2xl hover:shadow-green-100/50 transition-all duration-500 hover:-translate-y-2">
                         <div class="relative overflow-hidden aspect-[16/11]">
-                            <img :src="recipe.image" :alt="recipe.title" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute top-4 left-4">
-                                <span class="bg-[#36d362] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">
+                            <img :src="recipe.image" :alt="recipe.title" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            <div class="absolute top-5 left-5">
+                                <span class="bg-[#36d362] text-white text-[11px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg shadow-green-500/20">
                                     {{ recipe.category }}
                                 </span>
                             </div>
                         </div>
-                        <div class="p-8">
-                            <h3 class="text-[20px] font-black text-black mb-3 text-left">{{ recipe.title }}</h3>
-                            <div class="flex items-center gap-3 mb-4">
-                                <span class="text-[#36d362] text-sm font-black">{{ recipe.calories }} Kalori</span>
-                                <span class="bg-[#ff9d29]/20 text-[#ff9d29] text-[10px] font-bold px-3 py-1 rounded-full">{{ recipe.tag }}</span>
+                        <div class="p-8 space-y-6">
+                            <h3 class="text-[22px] font-black text-zinc-900 tracking-tight line-clamp-1">{{ recipe.id === 1 ? 'Egg Roll Tahu' : recipe.title }}</h3>
+                            <div class="flex items-center gap-3">
+                                <div class="px-4 py-1.5 bg-[#36d362]/10 rounded-full flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#36d362]"></span>
+                                    <span class="text-[#36d362] text-[11px] font-black uppercase tracking-wider">{{ recipe.calories }} Kalori</span>
+                                </div>
+                                <div class="px-4 py-1.5 bg-[#ff9d29]/10 rounded-full flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#ff9d29]"></span>
+                                    <span class="text-[#ff9d29] text-[11px] font-black uppercase tracking-wider">{{ recipe.protein }}G Protein</span>
+                                </div>
                             </div>
-                            <p class="text-gray-500 text-[14px] mb-8 leading-relaxed line-clamp-2 text-left">
-                                {{ recipe.description }}
+                            <p class="text-zinc-400 text-[14px] leading-relaxed line-clamp-2 font-medium">
+                                Call out a feature, benefit, or value of your site or product that can stand on its own.
                             </p>
-                            <div class="inline-flex items-center text-[13px] font-bold white bg-[#36d362] px-6 py-2.5 rounded-lg hover:bg-green-600 transition text-white">
-                                Lihat Resep &rarr;
+                            <div class="pt-2">
+                                <Link :href="`/recipes/${recipe.id}`" class="px-6 py-2.5 bg-[#36d362] text-white text-[12px] font-black rounded-[10px] hover:bg-green-600 transition-colors inline-flex items-center gap-2">
+                                    Lihat Resep
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -209,51 +279,53 @@ const filteredArticles = computed(() => {
                 </h2>
                 <p class="text-gray-500 font-medium mt-3">Pelajari pola makan sehat dan gaya hidup seimbang.</p>
                 
-                <!-- Filters wrapped in a single grey pill -->
-                <div class="flex justify-center mt-10">
-                    <div class="inline-flex items-center bg-[#F3F4F0] rounded-full px-6 md:px-8 py-2.5 gap-4 md:gap-8 overflow-x-auto scrollbar-hide max-w-full">
+                <!-- Filters & Search -->
+                <div class="flex flex-col items-center gap-8 mt-12">
+                    <div class="inline-flex items-center bg-gray-100/80 p-1.5 rounded-[20px] gap-1 shadow-inner border border-gray-100">
                         <button 
-                            @click="activeArticleFilter = 'Semua'"
-                            :class="activeArticleFilter === 'Semua' ? 'text-[#36d362]' : 'text-black'"
-                            class="text-[13px] font-bold hover:text-[#36d362] transition whitespace-nowrap"
-                        >Semua</button>
-                        <button 
-                            @click="activeArticleFilter = 'Gaya Hidup Sehat'"
-                            :class="activeArticleFilter === 'Gaya Hidup Sehat' ? 'text-[#36d362]' : 'text-black'"
-                            class="text-[13px] font-bold hover:text-[#36d362] transition whitespace-nowrap"
-                        >Gaya Hidup Sehat</button>
-                        <button 
-                            @click="activeArticleFilter = 'Mitos & Fakta'"
-                            :class="activeArticleFilter === 'Mitos & Fakta' ? 'text-[#36d362]' : 'text-black'"
-                            class="text-[13px] font-bold hover:text-[#36d362] transition whitespace-nowrap"
-                        >Mitos & Fakta</button>
-                        <button 
-                            @click="activeArticleFilter = 'Nutrisi & Gizi'"
-                            :class="activeArticleFilter === 'Nutrisi & Gizi' ? 'text-[#36d362]' : 'text-black'"
-                            class="text-[13px] font-bold hover:text-[#36d362] transition whitespace-nowrap"
-                        >Nutrisi & Gizi</button>
+                            v-for="cat in ['Semua', 'Gaya Hidup', 'Mitos & Fakta', 'Nutrisi']"
+                            :key="cat"
+                            @click="activeArticleFilter = cat === 'Gaya Hidup' ? 'Gaya Hidup Sehat' : cat === 'Nutrisi' ? 'Nutrisi & Gizi' : cat"
+                            :class="(activeArticleFilter === cat || (cat === 'Gaya Hidup' && activeArticleFilter === 'Gaya Hidup Sehat') || (cat === 'Nutrisi' && activeArticleFilter === 'Nutrisi & Gizi')) ? 'bg-white text-[#36d362] shadow-sm' : 'text-zinc-500 hover:text-zinc-900'"
+                            class="text-[12px] font-black px-8 py-2.5 rounded-2xl transition-all duration-300 whitespace-nowrap"
+                        >{{ cat }}</button>
+                    </div>
+
+                    <div class="relative w-full max-w-[500px] group">
+                        <div class="absolute inset-y-0 left-5 flex items-center pointer-events-none transition-colors group-focus-within:text-[#36d362] text-gray-400">
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <input 
+                            v-model="articleSearchQuery"
+                            type="text" 
+                            placeholder="Cari artikel edukasi gizi..." 
+                            class="w-full pl-14 pr-6 py-4 rounded-[24px] border-none bg-white shadow-xl shadow-gray-100/50 focus:ring-2 focus:ring-[#36d362]/20 transition-all font-medium text-zinc-900 placeholder:text-zinc-400"
+                        >
                     </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-500">
-                <Link v-for="article in filteredArticles" :key="article.id" :href="`/articles/${article.id}`" class="group animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <div class="h-full bg-white rounded-[24px] shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition">
-                        <div class="relative overflow-hidden aspect-[16/11]">
-                            <img :src="article.image" :alt="article.title" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <div class="absolute top-4 left-4">
-                                <span class="bg-[#36d362] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <Link v-for="article in filteredArticles" :key="article.id" :href="`/articles/${article.id}`" class="group animate-in fade-in zoom-in duration-500">
+                    <div class="h-full bg-white rounded-[32px] shadow-sm border border-gray-100/50 overflow-hidden hover:shadow-2xl hover:shadow-green-100/50 transition-all duration-500 hover:-translate-y-2">
+                        <div class="relative overflow-hidden aspect-[16/10]">
+                            <img :src="article.image" :alt="article.title" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            <div class="absolute top-5 left-5">
+                                <span class="bg-white/90 backdrop-blur-sm text-[#36d362] text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
                                     {{ article.category }}
                                 </span>
                             </div>
                         </div>
-                        <div class="p-8 text-left">
-                            <h3 class="text-[18px] font-black text-black mb-3">{{ article.title }}</h3>
-                            <p class="text-gray-500 text-[13px] mb-8 leading-relaxed line-clamp-3">
-                                {{ article.description }}
+                        <div class="p-8 space-y-6">
+                            <h3 class="text-[20px] font-black text-zinc-900 leading-tight line-clamp-2">{{ article.id === 1 ? '9 Tips Pola Hidup Sehat untuk pemula' : article.title }}</h3>
+                            <p class="text-zinc-400 text-[14px] leading-relaxed line-clamp-2 font-medium">
+                                Call out a feature, benefit, or value of your site or product that can stand on its own.
                             </p>
-                            <div class="inline-flex items-center gap-2 bg-[#36d362] text-white px-5 py-2.5 rounded-md text-[13px] font-bold hover:bg-green-600 transition">
-                                Baca Selengkapnya &rarr;
+                            <div class="pt-2">
+                                <Link :href="`/articles/${article.id}`" class="text-[#36d362] text-[13px] font-black flex items-center gap-2 hover:translate-x-1 transition-transform">
+                                    Baca Selengkapnya
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </Link>
                             </div>
                         </div>
                     </div>

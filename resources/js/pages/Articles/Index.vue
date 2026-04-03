@@ -14,7 +14,7 @@ import nutrisiImage from '../../../images/nutrisi tulang.jpg';
 const searchQuery = ref('');
 const activeCategory = ref('Semua');
 
-const categories = ['Semua', 'Gaya Hidup Sehat', 'Mitos & Fakta', 'Nutrisi & Gizi'];
+const categories = ['Semua', 'Gaya Hidup Sehat', 'Mitos & Fakta', 'Nutrisi & Gizi', 'Tips & Trik'];
 
 const articles = [
     {
@@ -56,12 +56,34 @@ const articles = [
         date: '20 Mar 2026',
         readTime: '5 min baca',
         image: nutrisiImage,
+    },
+    {
+        id: 5,
+        title: 'Tips Mengatur Meal Prep Seminggu',
+        excerpt: 'Cara efisien menyiapkan makanan sehat dalam 2 jam untuk konsumsi selama seminggu penuh.',
+        category: 'Tips & Trik',
+        author: 'Chef Healthy',
+        date: '22 Mar 2026',
+        readTime: '12 min baca',
+        image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&auto=format&fit=crop',
+    },
+    {
+        id: 6,
+        title: 'Superfood Lokal: Tempe vs Tahu',
+        excerpt: 'Mana yang lebih unggul untuk kebutuhan protein nabati Anda? Simak perbandingan nutrisinya.',
+        category: 'Nutrisi & Gizi',
+        author: 'Dr. Sarah Gizi',
+        date: '25 Mar 2026',
+        readTime: '7 min baca',
+        image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop',
     }
 ];
 
 const filteredArticles = computed(() => {
     return articles.filter(article => {
-        const matchesSearch = article.title.toLowerCase().includes(searchQuery.value.toLowerCase());
+        const query = searchQuery.value.toLowerCase();
+        const matchesSearch = article.title.toLowerCase().includes(query) || 
+                             article.excerpt.toLowerCase().includes(query);
         const matchesCategory = activeCategory.value === 'Semua' || article.category === activeCategory.value;
         return matchesSearch && matchesCategory;
     });
@@ -95,7 +117,7 @@ const filteredArticles = computed(() => {
                             :key="cat"
                             :variant="activeCategory === cat ? 'default' : 'secondary'"
                             class="rounded-full px-6 h-9 text-xs font-bold"
-                            :class="activeCategory === cat ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-100 hover:bg-gray-200 text-zinc-700'"
+                            :class="activeCategory === cat ? 'bg-[#36d362] hover:bg-green-600 text-white' : 'bg-gray-100 hover:bg-gray-200 text-zinc-700'"
                             @click="activeCategory = cat"
                         >
                             {{ cat }}

@@ -31,6 +31,9 @@ class FortifyServiceProvider extends ServiceProvider
         $this->configureActions();
         $this->configureViews();
         $this->configureRateLimiting();
+
+        // Explicitly redirect to homepage after auth actions
+        config(['fortify.home' => '/']);
     }
 
     /**

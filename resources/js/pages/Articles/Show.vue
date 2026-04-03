@@ -24,9 +24,9 @@ const allArticles = [
         readTime: '8 min baca',
         image: hidrasiImage,
         content: [
-            { type: 'p', text: 'Berpuasa bukan berarti kita mengesampingkan asupan nutrisi bagi tubuh. Sebaliknya, saat berpuasa, tubuh membutuhkan perhatian ekstra untuk tetap terhidrasi dan berenergi sepanjang hari.' },
-            { type: 'h2', text: 'Pentingnya Hidrasi' },
             { type: 'p', text: 'Air adalah komponen kunci bagi metabolisme tubuh yang sehat. Tanpanya, tubuh tidak dapat memproses nutrisi secara maksimal.' },
+            { type: 'h2', text: 'Mengapa Hidrasi Penting?' },
+            { type: 'p', text: 'Saat Anda terhidrasi dengan baik, darah mengalir lebih mudah, membawa oksigen dan nutrisi ke sel-sel tubuh dengan efisien.' },
             { type: 'quote', text: 'Hidrasi bukan sekadar menghilangkan haus, tapi menyeimbangkan sistem internal tubuh Anda.' }
         ]
     },
@@ -39,9 +39,9 @@ const allArticles = [
         readTime: '6 min baca',
         image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1200&auto=format&fit=crop',
         content: [
-            { type: 'p', text: 'Benarkah nasi putih adalah musuh utama? Simak penjelasan sains mengenai konsumsi karbohidrat kompleks vs sederhana.' },
-            { type: 'h2', text: 'Pentingnya Karbohidrat' },
-            { type: 'p', text: 'Karbohidrat adalah sumber energi utama tubuh. Menghindari karbohidrat sepenuhnya justru dapat menurunkan metabolisme dan fungsi otak.' },
+            { type: 'p', text: 'Banyak orang takut pada karbohidrat, menganggapnya sebagai satu-satunya penyebab kenaikan berat badan.' },
+            { type: 'h2', text: 'Kompleks vs Sederhana' },
+            { type: 'p', text: 'Karbohidrat kompleks seperti gandum utuh dan ubi memberikan energi yang stabil, berbeda dengan karbohidrat sederhana yang cepat menaikkan gula darah.' },
             { type: 'quote', text: 'Kuncinya adalah jenis dan porsinya, bukan menghindarinya sama sekali.' }
         ]
     },
@@ -54,9 +54,9 @@ const allArticles = [
         readTime: '10 min baca',
         image: tidurImage,
         content: [
-            { type: 'p', text: 'Banyak orang mengira pembentukan otot terjadi saat latihan. Kenyataannya, otot Anda tumbuh dan pulih saat Anda sedang beristirahat, terutama saat tidur nyenyak.' },
+            { type: 'p', text: 'Banyak orang mengira pembentukan otot terjadi saat latihan. Kenyataannya, otot Anda tumbuh dan pulih saat Anda sedang beristirahat.' },
             { type: 'h2', text: 'Siklus Tidur yang Baik' },
-            { type: 'p', text: 'Tidur 7-8 jam per malam memastikan hormon pertumbuhan dilepaskan secara optimal untuk memperbaiki jaringan tubuh yang rusak.' },
+            { type: 'p', text: 'Tidur 7-8 jam per malam memastikan hormon pertumbuhan dilepaskan secara optimal.' },
             { type: 'quote', text: 'Tidur adalah bentuk latihan pasif yang paling efektif untuk kemajuan fisik Anda.' }
         ]
     },
@@ -69,9 +69,37 @@ const allArticles = [
         readTime: '5 min baca',
         image: nutrisiImage,
         content: [
-            { type: 'p', text: 'Kesehatan tulang melampaui sekadar kalsium. Vitamin D, magnesium, dan vitamin K2 adalah orkestra mineral yang bekerja bersama melindungi densitas tulang Anda.' },
-            { type: 'h2', text: 'Sumber Nutrisi Tulang' },
-            { type: 'p', text: 'Ikan salmon, sayuran hijau, dan sinar matahari pagi adalah kombinasi terbaik untuk menjaga kerangka tubuh Anda tetap kuat hingga hari tua.' }
+            { type: 'p', text: 'Kesehatan tulang melampaui sekadar kalsium. Vitamin D dan Magnesium juga sangat krusial.' },
+            { type: 'h2', text: 'Sumber Nutrisi' },
+            { type: 'p', text: 'Sinar matahari pagi adalah sumber vitamin D terbaik untuk membantu penyerapan kalsium ke tulang.' }
+        ]
+    },
+    {
+        id: 5,
+        title: 'Tips Mengatur Meal Prep Seminggu',
+        category: 'Tips & Trik',
+        author: 'Chef Healthy',
+        date: '22 Mar 2026',
+        readTime: '12 min baca',
+        image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=1200&auto=format&fit=crop',
+        content: [
+            { type: 'p', text: 'Meal prep adalah cara terbaik untuk tetap disiplin pada program diet Anda sekaligus menghemat waktu.' },
+            { type: 'h2', text: 'Langkah Awal Meal Prep' },
+            { type: 'p', text: 'Pilihlah satu hari dalam seminggu, biasanya Minggu, untuk mencuci, memotong, dan memasak bahan dasar makanan.' }
+        ]
+    },
+    {
+        id: 6,
+        title: 'Superfood Lokal: Tempe vs Tahu',
+        category: 'Nutrisi & Gizi',
+        author: 'Dr. Sarah Gizi',
+        date: '25 Mar 2026',
+        readTime: '7 min baca',
+        image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&auto=format&fit=crop',
+        content: [
+            { type: 'p', text: 'Tempe dan tahu adalah protein nabati yang sangat baik, namun proses fermentasi tempe memberikan nilai tambah.' },
+            { type: 'h2', text: 'Kandungan Protein' },
+            { type: 'p', text: 'Tempe biasanya memiliki kandungan protein yang lebih padat dibandingkan tahu karena proses padat kacang kedelainya.' }
         ]
     }
 ];

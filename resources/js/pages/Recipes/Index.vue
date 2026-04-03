@@ -9,6 +9,7 @@ import { Search, ChevronRight, Flame, Dumbbell, Clock, ArrowUpDown } from 'lucid
 
 const searchQuery = ref('');
 const activeCategory = ref('Semua');
+const activeGoal = ref('Semua');
 const activeSort = ref('default');
 
 const categories = computed(() => {
@@ -18,6 +19,16 @@ const categories = computed(() => {
         count: name === 'Semua' 
             ? recipes.length 
             : recipes.filter(r => r.category === name).length
+    }));
+});
+
+const goals = computed(() => {
+    const list = ['Semua', 'Diet', 'Bulking'];
+    return list.map(name => ({
+        name,
+        count: name === 'Semua'
+            ? recipes.length
+            : recipes.filter(r => r.goal === name).length
     }));
 });
 
@@ -34,8 +45,9 @@ const recipes = [
         id: 1,
         title: 'Salmon Panggang Lemon',
         category: 'Makan Malam',
+        goal: 'Diet',
         image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&auto=format&fit=crop',
-        description: 'Salmon segar yang dipanggang dengan irisan lemon dan rempah pilihan untuk asupan protein maksimal.',
+        description: 'Salmon segar yang dipanggang dengan irisan lemon dan rempah pilihan untuk asupan protein maksimal dengan kalori terkontrol.',
         calories: 450,
         protein: 35,
         cookTime: 25,
@@ -44,8 +56,9 @@ const recipes = [
         id: 2,
         title: 'Salad Quinoa Mediterania',
         category: 'Sarapan',
+        goal: 'Diet',
         image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&auto=format&fit=crop',
-        description: 'Perpaduan quinoa, mentimun, dan tomat ceri yang segar, sempurna untuk makan siang ringan Anda.',
+        description: 'Perpaduan quinoa, mentimun, dan tomat ceri yang segar, sempurna sebagai menu diet kaya serat.',
         calories: 280,
         protein: 12,
         cookTime: 15,
@@ -54,30 +67,55 @@ const recipes = [
         id: 3,
         title: 'Pasta Carbonara Gandum',
         category: 'Makan Malam',
+        goal: 'Bulking',
         image: carbonaraImage,
-        description: 'Pasta gandum utuh dengan saus carbonara creamy tanpa krim, kaya akan karbohidrat kompleks.',
-        calories: 620,
-        protein: 25,
+        description: 'Pasta gandum utuh dengan saus carbonara creamy kaya energi untuk mendukung program bulking Anda.',
+        calories: 720,
+        protein: 30,
         cookTime: 20,
     },
     {
         id: 4,
         title: 'Pecel Sayur Madiun',
         category: 'Makan Siang',
+        goal: 'Diet',
         image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop',
-        description: 'Pecel sayur khas Madiun dengan bumbu kacang gurih dan sayuran segar pilihan.',
+        description: 'Pecel sayur khas Madiun dengan bumbu kacang gurih dan sayuran segar pilihan, rendah kalori namun mengenyangkan.',
         calories: 320,
         protein: 8,
         cookTime: 30,
     },
+    {
+        id: 5,
+        title: 'Dada Ayam Bakar Madu',
+        category: 'Makan Siang',
+        goal: 'Bulking',
+        image: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800&auto=format&fit=crop',
+        description: 'Dada ayam empuk dengan olesan madu dan rempah, tinggi protein untuk pertumbuhan otot maksimal.',
+        calories: 680,
+        protein: 45,
+        cookTime: 35,
+    },
+    {
+        id: 6,
+        title: 'Smoothie Bowl Berry',
+        category: 'Cemilan',
+        goal: 'Diet',
+        image: 'https://images.unsplash.com/photo-1494390248081-4e521a5940db?w=800&auto=format&fit=crop',
+        description: 'Cemilan segar kaya antioksidan dengan topping granola dan buah beri segar.',
+        calories: 250,
+        protein: 10,
+        cookTime: 10,
+    },
 ];
 
 const processedRecipes = computed(() => {
-    // Step 1: Filter by category and search
+    // Step 1: Filter by category, goal, and search
     let result = recipes.filter(recipe => {
         const matchesSearch = recipe.title.toLowerCase().includes(searchQuery.value.toLowerCase());
         const matchesCategory = activeCategory.value === 'Semua' || recipe.category === activeCategory.value;
-        return matchesSearch && matchesCategory;
+        const matchesGoal = activeGoal.value === 'Semua' || recipe.goal === activeGoal.value;
+        return matchesSearch && matchesCategory && matchesGoal;
     });
 
     // Step 2: Sort based on activeSort
@@ -136,6 +174,27 @@ const processedRecipes = computed(() => {
                                 <span class="text-sm font-medium">{{ cat.name }}</span>
                                 <span class="flex items-center justify-center min-w-[24px] h-6 px-2 text-[10px] bg-white border border-gray-200 rounded-full text-zinc-500 shadow-sm">
                                     {{ cat.count }}
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tujuan Nutrisi -->
+                    <div class="overflow-hidden border border-gray-100 rounded-[20px] shadow-sm">
+                        <div class="bg-[#36d362] px-6 py-4">
+                            <h2 class="text-white font-bold text-lg">Tujuan Nutrisi</h2>
+                        </div>
+                        <div class="bg-white">
+                            <button
+                                v-for="goal in goals"
+                                :key="goal.name"
+                                @click="activeGoal = goal.name"
+                                class="w-full flex items-center justify-between px-6 py-4 border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors"
+                                :class="{ 'text-[#36d362] font-bold': activeGoal === goal.name }"
+                            >
+                                <span class="text-sm font-medium">{{ goal.name }}</span>
+                                <span class="flex items-center justify-center min-w-[24px] h-6 px-2 text-[10px] bg-white border border-gray-200 rounded-full text-zinc-500 shadow-sm">
+                                    {{ goal.count }}
                                 </span>
                             </button>
                         </div>
@@ -201,7 +260,7 @@ const processedRecipes = computed(() => {
                             <Search class="w-8 h-8 text-zinc-300" />
                         </div>
                         <p class="font-bold text-zinc-400">Tidak ada resep yang ditemukan.</p>
-                        <button @click="searchQuery = ''; activeCategory = 'Semua'; activeSort = 'default';" class="text-sm text-[#36d362] font-bold hover:underline">Reset Filter</button>
+                        <button @click="searchQuery = ''; activeCategory = 'Semua'; activeGoal = 'Semua'; activeSort = 'default';" class="text-sm text-[#36d362] font-bold hover:underline">Reset Filter</button>
                     </div>
 
                     <!-- Grid -->
