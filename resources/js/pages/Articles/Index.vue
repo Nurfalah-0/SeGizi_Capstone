@@ -19,9 +19,9 @@ const categories = ['Semua', 'Gaya Hidup Sehat', 'Mitos & Fakta', 'Nutrisi & Giz
 const articles = [
     {
         id: 1,
-        title: '7 Kunci Hidrasi untuk Metabolisme',
-        excerpt: 'Temukan bagaimana konsumsi air yang cukup dapat mempercepat pembakaran lemak harian Anda.',
-        category: 'Gaya Hidup Sehat',
+        title: '9 Tips Pola Hidup Sehat untuk Pemula',
+        excerpt: 'Mulai perjalanan sehatmu dari hal-hal kecil seperti manajemen pola tidur dan hidrasi yang cukup setiap harinya.',
+        category: 'Gaya Hidup',
         author: 'Dr. Sarah Gizi',
         date: '12 Mar 2026',
         readTime: '8 min baca',
@@ -29,28 +29,18 @@ const articles = [
     },
     {
         id: 2,
-        title: 'Mitos Diet Karbohidrat Terbongkar',
-        excerpt: 'Benarkah nasi putih adalah musuh utama? Simak penjelasan sains mengenai konsumsi karbohidrat kompleks vs sederhana.',
+        title: 'Tidur Berkualitas',
+        excerpt: 'Mengungkap misteri tentang berapa lama waktu ideal yang diperlukan untuk pemulihan otot dan sel tubuh.',
         category: 'Mitos & Fakta',
         author: 'Dr. John Doe',
         date: '14 Mar 2026',
         readTime: '6 min baca',
-        image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&auto=format&fit=crop',
-    },
-    {
-        id: 3,
-        title: 'Pentingnya Tidur untuk Pemulihan Otot',
-        excerpt: 'Pelajari mengapa istirahat yang cukup sangat penting bagi pemulihan fisik dan mental Anda.',
-        category: 'Gaya Hidup Sehat',
-        author: 'Ade Rai-mon',
-        date: '15 Mar 2026',
-        readTime: '10 min baca',
         image: tidurImage,
     },
     {
-        id: 4,
-        title: 'Nutrisi Penting untuk Kesehatan Tulang',
-        excerpt: 'Daftar zat gizi mikro yang sering terabaikan namun krusial bagi kesehatan jangka panjang.',
+        id: 3,
+        title: 'Rahasia Nutrisi Tulang Kuat',
+        excerpt: 'Makanan super apa saja yang wajib kamu konsumsi agar tulangmu kuat dan bebas osteoporosis di masa tua?',
         category: 'Nutrisi & Gizi',
         author: 'Prof. Bone',
         date: '20 Mar 2026',
@@ -134,7 +124,7 @@ const filteredArticles = computed(() => {
                     :href="`/articles/${article.id}`"
                     class="group"
                 >
-                    <Card class="h-full overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-[24px] bg-white">
+                    <Card class="h-full overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-[24px] bg-white text-zinc-900">
                         <div class="relative aspect-[16/11] overflow-hidden">
                             <img 
                                 :src="article.image" 

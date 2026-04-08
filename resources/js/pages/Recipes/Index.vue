@@ -3,6 +3,8 @@ import { ref, computed } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import carbonaraImage from '../../../images/carbonara.jpg';
+import laukImage from '../../../images/lauk.png';
+import hidrasiImage from '../../../images/hidrasi.jpg';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Search, ChevronRight, Flame, Dumbbell, Clock, ArrowUpDown } from 'lucide-vue-next';
@@ -43,36 +45,36 @@ const sortOptions = [
 const recipes = [
     {
         id: 1,
-        title: 'Salmon Panggang Lemon',
-        category: 'Makan Malam',
+        title: 'Pasta Carbonara Sehat',
+        category: 'Tinggi Protein',
         goal: 'Diet',
-        image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&auto=format&fit=crop',
-        description: 'Salmon segar yang dipanggang dengan irisan lemon dan rempah pilihan untuk asupan protein maksimal dengan kalori terkontrol.',
-        calories: 450,
+        image: carbonaraImage,
+        description: 'Nikmati pasta lezat yang telah dimodifikasi agar kaya protein dan lebih sehat untuk diet Anda.',
+        calories: 420,
         protein: 35,
-        cookTime: 25,
+        cookTime: 20,
     },
     {
         id: 2,
-        title: 'Salad Quinoa Mediterania',
-        category: 'Sarapan',
+        title: 'Nasi Campur Sayur',
+        category: 'Rendah Kalori',
         goal: 'Diet',
-        image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&auto=format&fit=crop',
-        description: 'Perpaduan quinoa, mentimun, dan tomat ceri yang segar, sempurna sebagai menu diet kaya serat.',
-        calories: 280,
-        protein: 12,
+        image: laukImage,
+        description: 'Kombinasi nasi dan beraneka lauk pauk bergizi seimbang untuk hidangan keluarga.',
+        calories: 310,
+        protein: 28,
         cookTime: 15,
     },
     {
         id: 3,
-        title: 'Pasta Carbonara Gandum',
-        category: 'Makan Malam',
-        goal: 'Bulking',
-        image: carbonaraImage,
-        description: 'Pasta gandum utuh dengan saus carbonara creamy kaya energi untuk mendukung program bulking Anda.',
-        calories: 720,
-        protein: 30,
-        cookTime: 20,
+        title: 'Jus Detoks Hidrasi',
+        category: 'Tinggi Serat',
+        goal: 'Diet',
+        image: hidrasiImage,
+        description: 'Minuman pelepas dahaga yang kaya serat dan baik untuk melancarkan pencernaan harian.',
+        calories: 120,
+        protein: 2,
+        cookTime: 5,
     },
     {
         id: 4,
@@ -271,7 +273,7 @@ const processedRecipes = computed(() => {
                             :href="`/recipes/${recipe.id}`"
                             class="group"
                         >
-                            <Card class="overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-[24px] bg-white h-full">
+                            <Card class="overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-[24px] bg-white text-zinc-900 h-full">
                                 <div class="relative aspect-[16/11] overflow-hidden">
                                     <img
                                         :src="recipe.image"

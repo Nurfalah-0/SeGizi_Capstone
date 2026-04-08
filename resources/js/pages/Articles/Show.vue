@@ -17,47 +17,46 @@ const props = defineProps<{
 const allArticles = [
     {
         id: 1,
-        title: '7 Kunci Hidrasi untuk Metabolisme',
+        title: '9 Tips Pola Hidup Sehat untuk Pemula',
         author: 'Dr. Sarah Gizi',
-        category: 'Gaya Hidup Sehat',
+        category: 'Gaya Hidup',
         date: '12 Mar 2026',
         readTime: '8 min baca',
         image: hidrasiImage,
         content: [
-            { type: 'p', text: 'Air adalah komponen kunci bagi metabolisme tubuh yang sehat. Tanpanya, tubuh tidak dapat memproses nutrisi secara maksimal.' },
-            { type: 'h2', text: 'Mengapa Hidrasi Penting?' },
+            { type: 'p', text: 'Mulai perjalanan sehatmu dari hal-hal kecil seperti manajemen pola tidur dan hidrasi yang cukup setiap harinya. Tanpanya, tubuh tidak dapat memproses nutrisi secara maksimal.' },
+            { type: 'h2', text: 'Mengapa Hidrasi Sangat Penting Bagi Pemula?' },
             { type: 'p', text: 'Saat Anda terhidrasi dengan baik, darah mengalir lebih mudah, membawa oksigen dan nutrisi ke sel-sel tubuh dengan efisien.' },
-            { type: 'quote', text: 'Hidrasi bukan sekadar menghilangkan haus, tapi menyeimbangkan sistem internal tubuh Anda.' }
+            { type: 'quote', text: 'Hidrasi bukan sekadar menghilangkan haus, tapi menyeimbangkan sistem fundamental dari seluruh organ tubuh Anda.' }
         ]
     },
     {
         id: 2,
-        title: 'Mitos Diet Karbohidrat Terbongkar',
+        title: 'Tidur Berkualitas',
         author: 'Dr. John Doe',
         category: 'Mitos & Fakta',
         date: '14 Mar 2026',
         readTime: '6 min baca',
-        image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1200&auto=format&fit=crop',
+        image: tidurImage,
         content: [
-            { type: 'p', text: 'Banyak orang takut pada karbohidrat, menganggapnya sebagai satu-satunya penyebab kenaikan berat badan.' },
-            { type: 'h2', text: 'Kompleks vs Sederhana' },
-            { type: 'p', text: 'Karbohidrat kompleks seperti gandum utuh dan ubi memberikan energi yang stabil, berbeda dengan karbohidrat sederhana yang cepat menaikkan gula darah.' },
-            { type: 'quote', text: 'Kuncinya adalah jenis dan porsinya, bukan menghindarinya sama sekali.' }
+            { type: 'p', text: 'Mengungkap misteri tentang berapa lama waktu ideal yang diperlukan untuk pemulihan otot dan sel tubuh. Banyak orang mengira pembentukan otot terjadi saat latihan fisik sedang berjalan, namun kenyataannya terjadi saat Anda istirahat total.' },
+            { type: 'h2', text: 'Siklus Tidur yang Baik' },
+            { type: 'p', text: 'Tidur 7-8 jam per malam memastikan hormon pertumbuhan dilepaskan secara optimal ke seluruh serabut otot yang pecah saat latihan.' },
+            { type: 'quote', text: 'Tidur adalah bentuk latihan pasif yang paling efektif untuk kemajuan fisik Anda.' }
         ]
     },
     {
         id: 3,
-        title: 'Pentingnya Tidur untuk Pemulihan Otot',
-        author: 'Ade Rai-mon',
-        category: 'Gaya Hidup Sehat',
-        date: '15 Mar 2026',
-        readTime: '10 min baca',
-        image: tidurImage,
+        title: 'Rahasia Nutrisi Tulang Kuat',
+        author: 'Prof. Bone',
+        category: 'Nutrisi & Gizi',
+        date: '20 Mar 2026',
+        readTime: '5 min baca',
+        image: nutrisiImage,
         content: [
-            { type: 'p', text: 'Banyak orang mengira pembentukan otot terjadi saat latihan. Kenyataannya, otot Anda tumbuh dan pulih saat Anda sedang beristirahat.' },
-            { type: 'h2', text: 'Siklus Tidur yang Baik' },
-            { type: 'p', text: 'Tidur 7-8 jam per malam memastikan hormon pertumbuhan dilepaskan secara optimal.' },
-            { type: 'quote', text: 'Tidur adalah bentuk latihan pasif yang paling efektif untuk kemajuan fisik Anda.' }
+            { type: 'p', text: 'Makanan super apa saja yang wajib kamu konsumsi agar tulangmu kuat dan bebas osteoporosis di masa tua? Kesehatan tulang melampaui sekadar kalsium, melainkan juga sinergi antara makronutrisi.' },
+            { type: 'h2', text: 'Sumber Nutrisi' },
+            { type: 'p', text: 'Sinar matahari pagi adalah sumber vitamin D terbaik untuk membantu penyerapan kalsium ke tulang dengan bantuan lemak sehat.' }
         ]
     },
     {

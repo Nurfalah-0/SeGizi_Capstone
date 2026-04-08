@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
-import guestLayoutImage from '../../images/lauk.png'; // keeping for articles if needed
 import laukImage from '../../images/lauk.png';
 import hidrasiImage from '../../images/hidrasi.jpg';
 import tidurImage from '../../images/tidur.jpg';
@@ -35,53 +34,53 @@ const articleSearchQuery = ref('');
 const recipes = [
     {
         id: 1,
-        title: 'Carbonara Sehat',
+        title: 'Pasta Carbonara Sehat',
         category: 'Tinggi Protein',
         calories: 420,
         protein: 35,
         image: carbonaraImage,
-        description: 'Nikmati pasta carbonara lezat namun tetap sehat dengan bahan berkualitas tinggi.'
+        description: 'Nikmati pasta lezat yang telah dimodifikasi agar kaya protein dan lebih sehat untuk diet Anda.'
     },
     {
         id: 2,
-        title: 'Nutrisi untuk Tulang',
-        category: 'Tinggi Kalsium',
+        title: 'Nasi Campur Sayur',
+        category: 'Rendah Kalori',
         calories: 310,
         protein: 28,
-        image: nutrisiImage,
-        description: 'Menu khusus untuk menjaga kesehatan tulang dan sendi di masa depan.'
+        image: laukImage,
+        description: 'Kombinasi nasi dan beraneka lauk pauk bergizi seimbang untuk hidangan keluarga.'
     },
     {
         id: 3,
-        title: 'Salmon Panggang',
-        category: 'Tinggi Protein',
-        calories: 380,
-        protein: 42,
+        title: 'Jus Detoks Hidrasi',
+        category: 'Tinggi Serat',
+        calories: 120,
+        protein: 2,
         image: hidrasiImage,
-        description: 'Olahan ikan salmon segar pilihan dengan sayuran organik pilihan.'
+        description: 'Minuman pelepas dahaga yang kaya serat dan baik untuk melancarkan pencernaan harian.'
     }
 ];
 
 const articles = [
     {
         id: 1,
-        title: 'Pentingnya Hidrasi Tubuh',
-        category: 'Kesehatan',
-        description: 'Pelajari mengapa minum air yang cukup sangat penting untuk metabolisme.',
+        title: '9 Tips Pola Hidup Sehat untuk Pemula',
+        category: 'Gaya Hidup',
+        description: 'Mulai perjalanan sehatmu dari hal-hal kecil seperti manajemen pola tidur dan hidrasi yang cukup setiap harinya.',
         image: hidrasiImage,
     },
     {
         id: 2,
         title: 'Tidur Berkualitas',
-        category: 'Gaya Hidup',
-        description: 'Cara mendapatkan kualitas tidur terbaik untuk pemulihan otot.',
+        category: 'Mitos & Fakta',
+        description: 'Mengungkap misteri tentang berapa lama waktu ideal yang diperlukan untuk pemulihan otot dan sel tubuh.',
         image: tidurImage,
     },
     {
         id: 3,
         title: 'Rahasia Nutrisi Tulang Kuat',
         category: 'Nutrisi & Gizi',
-        description: 'Makanan super apa saja yang bisa membuat tulang Anda lebih kuat?',
+        description: 'Makanan super apa saja yang wajib kamu konsumsi agar tulangmu kuat dan bebas osteoporosis di masa tua?',
         image: nutrisiImage,
     }
 ];
@@ -124,7 +123,7 @@ const filteredArticles = computed(() => {
                     </div>
                     
                     <!-- Personalization Form Board -->
-                    <div class="bg-white p-8 rounded-[32px] shadow-2xl shadow-green-100/50 border border-zinc-100 max-w-xl relative overflow-hidden">
+                    <div class="bg-white p-8 rounded-[32px] shadow-2xl shadow-green-100/50 max-w-xl relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-1.5 h-full bg-[#36d362]"></div>
                         <h3 class="text-xl font-black text-zinc-900 mb-6 flex items-center gap-3">
                             <Utensils class="w-5 h-5 text-[#36d362]" />
@@ -203,7 +202,7 @@ const filteredArticles = computed(() => {
                 
                 <!-- Filters & Search -->
                 <div class="flex flex-col items-center gap-8 mt-12">
-                    <div class="inline-flex items-center bg-gray-100/80 p-1.5 rounded-[24px] gap-1 shadow-inner border border-gray-100">
+                    <div class="inline-flex items-center bg-[#f4f4f5]/80 p-1.5 rounded-[24px] gap-1 shadow-inner border-transparent">
                         <button 
                             v-for="type in ['Tinggi Serat', 'Rendah Kalori', 'Tinggi Protein']"
                             :key="type"
@@ -228,8 +227,8 @@ const filteredArticles = computed(() => {
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 transition-all duration-500">
-                <Link v-for="recipe in filteredRecipes" :key="recipe.id" :href="`/recipes/${recipe.id}`" class="group animate-in fade-in zoom-in duration-500">
-                    <div class="h-full bg-white rounded-[32px] shadow-sm border border-gray-100/50 overflow-hidden hover:shadow-2xl hover:shadow-green-100/50 transition-all duration-500 hover:-translate-y-2">
+                <Link v-for="recipe in filteredRecipes" :key="recipe.id" :href="`/recipes/${recipe.id}`" class="group animate-in fade-in zoom-in duration-500 block">
+                    <div class="h-full bg-white rounded-[32px] shadow-sm border-transparent overflow-hidden hover:shadow-2xl hover:shadow-green-100/50 transition-all duration-500 hover:-translate-y-2">
                         <div class="relative overflow-hidden aspect-[16/11]">
                             <img :src="recipe.image" :alt="recipe.title" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                             <div class="absolute top-5 left-5">
@@ -239,7 +238,7 @@ const filteredArticles = computed(() => {
                             </div>
                         </div>
                         <div class="p-8 space-y-6">
-                            <h3 class="text-[22px] font-black text-zinc-900 tracking-tight line-clamp-1">{{ recipe.id === 1 ? 'Egg Roll Tahu' : recipe.title }}</h3>
+                            <h3 class="text-[22px] font-black text-zinc-900 tracking-tight line-clamp-1">{{ recipe.title }}</h3>
                             <div class="flex items-center gap-3">
                                 <div class="px-4 py-1.5 bg-[#36d362]/10 rounded-full flex items-center gap-2">
                                     <span class="w-1.5 h-1.5 rounded-full bg-[#36d362]"></span>
@@ -251,13 +250,13 @@ const filteredArticles = computed(() => {
                                 </div>
                             </div>
                             <p class="text-zinc-400 text-[14px] leading-relaxed line-clamp-2 font-medium">
-                                Call out a feature, benefit, or value of your site or product that can stand on its own.
+                                {{ recipe.description }}
                             </p>
                             <div class="pt-2">
-                                <Link :href="`/recipes/${recipe.id}`" class="px-6 py-2.5 bg-[#36d362] text-white text-[12px] font-black rounded-[10px] hover:bg-green-600 transition-colors inline-flex items-center gap-2">
+                                <span class="px-6 py-2.5 bg-[#36d362] text-white text-[12px] font-black rounded-[10px] group-hover:bg-green-600 transition-colors inline-flex items-center gap-2 cursor-pointer">
                                     Lihat Resep
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                </Link>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -279,9 +278,8 @@ const filteredArticles = computed(() => {
                 </h2>
                 <p class="text-gray-500 font-medium mt-3">Pelajari pola makan sehat dan gaya hidup seimbang.</p>
                 
-                <!-- Filters & Search -->
                 <div class="flex flex-col items-center gap-8 mt-12">
-                    <div class="inline-flex items-center bg-gray-100/80 p-1.5 rounded-[20px] gap-1 shadow-inner border border-gray-100">
+                    <div class="inline-flex items-center bg-[#f4f4f5]/80 p-1.5 rounded-[20px] gap-1 shadow-inner border-transparent">
                         <button 
                             v-for="cat in ['Semua', 'Gaya Hidup', 'Mitos & Fakta', 'Nutrisi']"
                             :key="cat"
@@ -306,8 +304,8 @@ const filteredArticles = computed(() => {
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <Link v-for="article in filteredArticles" :key="article.id" :href="`/articles/${article.id}`" class="group animate-in fade-in zoom-in duration-500">
-                    <div class="h-full bg-white rounded-[32px] shadow-sm border border-gray-100/50 overflow-hidden hover:shadow-2xl hover:shadow-green-100/50 transition-all duration-500 hover:-translate-y-2">
+                <Link v-for="article in filteredArticles" :key="article.id" :href="`/articles/${article.id}`" class="group animate-in fade-in zoom-in duration-500 block">
+                    <div class="h-full bg-white rounded-[32px] shadow-sm border-transparent overflow-hidden hover:shadow-2xl hover:shadow-green-100/50 transition-all duration-500 hover:-translate-y-2">
                         <div class="relative overflow-hidden aspect-[16/10]">
                             <img :src="article.image" :alt="article.title" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                             <div class="absolute top-5 left-5">
@@ -317,15 +315,15 @@ const filteredArticles = computed(() => {
                             </div>
                         </div>
                         <div class="p-8 space-y-6">
-                            <h3 class="text-[20px] font-black text-zinc-900 leading-tight line-clamp-2">{{ article.id === 1 ? '9 Tips Pola Hidup Sehat untuk pemula' : article.title }}</h3>
+                            <h3 class="text-[20px] font-black text-zinc-900 leading-tight line-clamp-2">{{ article.title }}</h3>
                             <p class="text-zinc-400 text-[14px] leading-relaxed line-clamp-2 font-medium">
-                                Call out a feature, benefit, or value of your site or product that can stand on its own.
+                                {{ article.description }}
                             </p>
                             <div class="pt-2">
-                                <Link :href="`/articles/${article.id}`" class="text-[#36d362] text-[13px] font-black flex items-center gap-2 hover:translate-x-1 transition-transform">
+                                <span class="text-[#36d362] text-[13px] font-black flex items-center gap-2 group-hover:translate-x-1 transition-transform cursor-pointer">
                                     Baca Selengkapnya
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                </Link>
+                                </span>
                             </div>
                         </div>
                     </div>

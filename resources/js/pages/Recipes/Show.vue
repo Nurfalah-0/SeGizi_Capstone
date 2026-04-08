@@ -2,6 +2,8 @@
 import { Head, Link } from '@inertiajs/vue3';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import carbonaraImage from '../../../images/carbonara.jpg';
+import laukImage from '../../../images/lauk.png';
+import hidrasiImage from '../../../images/hidrasi.jpg';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -15,51 +17,51 @@ const props = defineProps<{
 const allRecipes = [
     {
         id: 1,
-        title: 'Salmon Panggang Lemon',
-        category: 'Makan Malam',
+        title: 'Pasta Carbonara Sehat',
+        category: 'Tinggi Protein',
         goal: 'Diet',
-        calories: 450,
+        calories: 420,
         protein: 35,
-        cookTime: 25,
-        time: '25 min',
-        servings: '1 porsi',
-        description: 'Salmon segar yang dipanggang dengan irisan lemon dan rempah pilihan untuk asupan protein maksimal dengan kalori terkontrol.',
-        image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1200&auto=format&fit=crop',
-        ingredients: ['1 Potong Salmon', '1 Buah Lemon', '1 sdm Minyak Zaitun', 'Garam & Lada Hitam', 'Bawang Putih'],
-        instructions: ['Panaskan oven hingga 200°C.', 'Bumbui salmon dengan garam, lada, dan bawang putih cincang.', 'Letakkan irisan lemon di atas salmon.', 'Panggang selama 15-20 menit hingga matang sempurna.'],
-        nutrition: { protein: '35g', carbs: '2g', fat: '15g', fiber: '0g' }
-    },
-    {
-        id: 2,
-        title: 'Salad Quinoa Mediterania',
-        category: 'Sarapan',
-        goal: 'Diet',
-        calories: 280,
-        protein: 12,
-        cookTime: 15,
-        time: '15 min',
-        servings: '2 porsi',
-        description: 'Perpaduan quinoa, mentimun, dan tomat ceri yang segar, sempurna sebagai menu diet kaya serat.',
-        image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1200&auto=format&fit=crop',
-        ingredients: ['1 cup Quinoa matang', '1 buah Mentimun', '10 buah Tomat ceri', 'Feta cheese optional', 'Perasan Jeruk Lemon'],
-        instructions: ['Potong dadu mentimun dan tomat ceri.', 'Campurkan quinoa matang dengan potongan sayuran.', 'Tambahkan perasan lemon dan minyak zaitun.', 'Aduk rata dan sajikan dingin.'],
-        nutrition: { protein: '12g', carbs: '45g', fat: '8g', fiber: '10g' }
-    },
-    {
-        id: 3,
-        title: 'Pasta Carbonara Gandum',
-        category: 'Makan Malam',
-        goal: 'Bulking',
-        calories: 720,
-        protein: 30,
         cookTime: 20,
         time: '20 min',
         servings: '1 porsi',
-        description: 'Pasta gandum utuh dengan saus carbonara creamy kaya energi untuk mendukung program bulking Anda.',
+        description: 'Nikmati pasta lezat yang telah dimodifikasi agar kaya protein dan lebih sehat untuk diet Anda.',
         image: carbonaraImage,
-        ingredients: ['100g Pasta Gandum', '2 butir Telur', '50g Keju Parmesan', '50g Daging asap / Beef bacon', 'Lada hitam'],
-        instructions: ['Rebus pasta gandum hingga al dente.', 'Kocok telur dengan keju parmesan parut.', 'Tumis daging asap hingga renyah.', 'Campurkan pasta panas dengan tumisan daging, lalu tuangkan campuran telur di luar api agar creamy.'],
-        nutrition: { protein: '30g', carbs: '65g', fat: '32g', fiber: '5g' }
+        ingredients: ['100g Pasta Gandum', '2 butir Telur', '50g Keju Parmesan', '50g Daging asap rendah lemak / Beef bacon', 'Lada hitam'],
+        instructions: ['Rebus pasta gandum hingga al dente.', 'Kocok telur dengan keju parmesan parut.', 'Tumis daging asap hingga wangi tanpa tambahan minyak.', 'Campurkan pasta panas dengan tumisan daging, lalu tuangkan campuran telur di luar api agar teksturnya creamy.'],
+        nutrition: { protein: '35g', carbs: '45g', fat: '12g', fiber: '5g' }
+    },
+    {
+        id: 2,
+        title: 'Nasi Campur Sayur',
+        category: 'Rendah Kalori',
+        goal: 'Diet',
+        calories: 310,
+        protein: 28,
+        cookTime: 15,
+        time: '15 min',
+        servings: '1 porsi',
+        description: 'Kombinasi nasi dan beraneka lauk pauk bergizi seimbang untuk hidangan keluarga.',
+        image: laukImage,
+        ingredients: ['1 Porsi Nasi Merah', '100g Sayur Bayam Rebus', '1 Porsi Dada Ayam Bakar/Rebus', 'Sambal Tomat', 'Lalapan segar'],
+        instructions: ['Siapkan nasi merah hangat di atas piring.', 'Letakkan sayuran rebus dan lalapan di sekeliling piring.', 'Tambahkan sumber protein seperti dada ayam rebus di tengahnya.', 'Sajikan dengan sambal tomat rendah kalori sesuai selera.'],
+        nutrition: { protein: '28g', carbs: '35g', fat: '8g', fiber: '10g' }
+    },
+    {
+        id: 3,
+        title: 'Jus Detoks Hidrasi',
+        category: 'Tinggi Serat',
+        goal: 'Diet',
+        calories: 120,
+        protein: 2,
+        cookTime: 5,
+        time: '5 min',
+        servings: '1 sajian',
+        description: 'Minuman pelepas dahaga yang kaya serat dan baik untuk melancarkan pencernaan harian.',
+        image: hidrasiImage,
+        ingredients: ['1 Buah Apel Hijau', '1/2 Buah Mentimun', 'Perasan air perasan lemon', '1 sdm Madu', 'Daun mint segar'],
+        instructions: ['Cuci dan potong semua buah/sayuran.', 'Masukkan semua bahan ke dalam blender dengan sedikit air dingin.', 'Blender hingga memiliki tekstur halus yang konsisten.', 'Tuangkan ke gelas dan nikmati segera di pagi hari.'],
+        nutrition: { protein: '2g', carbs: '25g', fat: '0g', fiber: '8g' }
     },
     {
         id: 4,
@@ -217,7 +219,7 @@ const recipeData = allRecipes.find(r => r.id.toString() === recipeId) || allReci
                 <!-- Right Column: Components/Nutrition -->
                 <div class="xl:col-span-1 space-y-8">
                     <!-- Ingredients Card -->
-                    <Card class="border border-zinc-200 shadow-xl bg-white rounded-[32px] overflow-hidden">
+                    <Card class="border border-zinc-200 shadow-xl bg-white text-zinc-900 rounded-[32px] overflow-hidden">
                         <div class="p-8 space-y-6">
                             <div class="flex items-center gap-3">
                                 <div class="p-2 bg-orange-100 rounded-lg">
@@ -241,7 +243,7 @@ const recipeData = allRecipes.find(r => r.id.toString() === recipeId) || allReci
                     </Card>
 
                     <!-- Nutrition Facts Label Style -->
-                    <Card class="border border-zinc-200 shadow-xl bg-white rounded-[32px] overflow-hidden border-l-8 border-l-orange-500">
+                    <Card class="border border-zinc-200 shadow-xl bg-white text-zinc-900 rounded-[32px] overflow-hidden border-l-8 border-l-orange-500">
                         <div class="p-8 space-y-6">
                             <div class="space-y-1">
                                 <h2 class="text-3xl font-black tracking-tighter uppercase italic">Nutrition Facts</h2>

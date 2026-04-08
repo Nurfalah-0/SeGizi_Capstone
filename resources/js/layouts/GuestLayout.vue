@@ -21,14 +21,14 @@ const page = usePage();
 </script>
 
 <template>
-    <div class="min-h-screen bg-white font-sans text-gray-900">
+    <div class="min-h-screen bg-white font-sans text-gray-900 flex flex-col">
         <!-- Global Loading Bar -->
         <div v-if="globalLoading" 
              style="position: fixed; top: 0; left: 0; height: 8px; width: 0; background: #36d362; z-index: 10000000; box-shadow: 0 0 20px rgba(54, 211, 98, 1);"
              class="global-animate-progress">
         </div>
         <!-- Navbar -->
-        <nav class="flex items-center justify-between px-8 md:px-20 py-4 bg-white/95 backdrop-blur-md fixed w-full top-0 z-[100] border-b border-zinc-100/50">
+        <nav class="flex items-center justify-between px-8 md:px-20 py-4 bg-white/95 backdrop-blur-md fixed w-full top-0 z-[100] shadow-sm">
             <div class="flex items-center gap-6">
                 <!-- Mobile Menu (Sheet) -->
                 <div class="md:hidden">
@@ -39,7 +39,7 @@ const page = usePage();
                             </button>
                         </SheetTrigger>
                         <SheetContent side="left" class="w-[300px] p-0 border-none bg-white">
-                            <div class="p-8 border-b border-zinc-50">
+                            <div class="p-8 border-b-0 shadow-sm">
                                 <Link href="/" class="text-2xl font-black tracking-tight">
                                     <span class="text-[#36d362]">Se</span><span class="text-[#ff9d29]">Gizi</span>
                                 </Link>
@@ -137,13 +137,13 @@ const page = usePage();
         </nav>
 
         <!-- Page Content -->
-        <main class="mt-[80px]">
+        <main class="pt-[80px]">
             <slot />
         </main>
 
         <!-- Footer -->
         <footer class="bg-[#f0fff4] pt-20 pb-10 px-8 md:px-20 mt-16 font-sans">
-            <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-green-100 pb-20">
+            <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 pb-20">
                 <div class="space-y-6">
                     <h2 class="text-3xl font-black text-[#36d362]">SeGizi</h2>
                     <p class="text-gray-600 text-sm leading-relaxed font-medium">
