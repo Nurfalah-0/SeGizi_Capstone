@@ -27,8 +27,6 @@ const handleGetRecommendation = () => {
 // Filters
 const activeRecipeFilter = ref('Semua');
 const activeArticleFilter = ref('Semua');
-const recipeSearchQuery = ref('');
-const articleSearchQuery = ref('');
 
 // Data
 const recipes = [
@@ -88,16 +86,19 @@ const articles = [
 // Computeds
 const filteredRecipes = computed(() => {
     return recipes.filter(r => {
-        const matchesQuery = r.title.toLowerCase().includes(recipeSearchQuery.value.toLowerCase());
-        return matchesQuery;
+        if (activeRecipeFilter.value === 'Semua') return true;
+        return r.category === activeRecipeFilter.value;
     }).slice(0, 3);
 });
 
 const filteredArticles = computed(() => {
     return articles.filter(a => {
-        const matchesSearch = a.title.toLowerCase().includes(articleSearchQuery.value.toLowerCase());
-        const matchesCategory = activeArticleFilter.value === 'Semua' || a.category === activeArticleFilter.value;
-        return matchesSearch && matchesCategory;
+        if (activeArticleFilter.value === 'Semua') return true;
+        
+        let filterCat = activeArticleFilter.value;
+        if (filterCat === 'Nutrisi') filterCat = 'Nutrisi & Gizi';
+        
+        return a.category === filterCat;
     });
 });
 </script>
@@ -177,7 +178,7 @@ const filteredArticles = computed(() => {
                     <div class="relative w-full max-w-[600px]">
                         <img 
                             :src="laukImage" 
-                            alt="SeGizi Healthy Food Illustration" 
+                            alt="NutriFlow Healthy Food Illustration" 
                             class="w-full h-auto drop-shadow-[0_20px_50px_rgba(54,211,98,0.2)]"
                         >
                         <!-- Floating elements for added premium feel -->
@@ -206,22 +207,10 @@ const filteredArticles = computed(() => {
                         <button 
                             v-for="type in ['Tinggi Serat', 'Rendah Kalori', 'Tinggi Protein']"
                             :key="type"
-                            @click="activeRecipeFilter = type === 'Tinggi Serat' ? 'Serat Tinggi' : type === 'Rendah Kalori' ? 'Diet' : 'Bulking'"
-                            :class="(activeRecipeFilter === 'Serat Tinggi' && type === 'Tinggi Serat') || (activeRecipeFilter === 'Diet' && type === 'Rendah Kalori') || (activeRecipeFilter === 'Bulking' && type === 'Tinggi Protein') ? 'bg-white text-[#36d362] shadow-md' : 'text-zinc-500 hover:text-zinc-900'"
+                            @click="activeRecipeFilter = activeRecipeFilter === type ? 'Semua' : type"
+                            :class="activeRecipeFilter === type ? 'bg-white text-[#36d362] shadow-md' : 'text-zinc-500 hover:text-zinc-900'"
                             class="text-[12px] font-black px-8 py-3 rounded-2xl transition-all duration-300"
                         >{{ type }}</button>
-                    </div>
-
-                    <div class="relative w-full max-w-[500px] group">
-                        <div class="absolute inset-y-0 left-5 flex items-center pointer-events-none transition-colors group-focus-within:text-[#36d362] text-gray-400">
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        </div>
-                        <input 
-                            v-model="recipeSearchQuery"
-                            type="text" 
-                            placeholder="Cari resep sehat (misal: Salmon)..." 
-                            class="w-full pl-14 pr-6 py-4 rounded-[24px] border-none bg-white shadow-xl shadow-gray-100/50 focus:ring-2 focus:ring-[#36d362]/20 transition-all font-medium text-zinc-900 placeholder:text-zinc-400"
-                        >
                     </div>
                 </div>
             </div>
@@ -283,22 +272,10 @@ const filteredArticles = computed(() => {
                         <button 
                             v-for="cat in ['Semua', 'Gaya Hidup', 'Mitos & Fakta', 'Nutrisi']"
                             :key="cat"
-                            @click="activeArticleFilter = cat === 'Gaya Hidup' ? 'Gaya Hidup Sehat' : cat === 'Nutrisi' ? 'Nutrisi & Gizi' : cat"
-                            :class="(activeArticleFilter === cat || (cat === 'Gaya Hidup' && activeArticleFilter === 'Gaya Hidup Sehat') || (cat === 'Nutrisi' && activeArticleFilter === 'Nutrisi & Gizi')) ? 'bg-white text-[#36d362] shadow-sm' : 'text-zinc-500 hover:text-zinc-900'"
+                            @click="activeArticleFilter = cat"
+                            :class="activeArticleFilter === cat ? 'bg-white text-[#36d362] shadow-sm' : 'text-zinc-500 hover:text-zinc-900'"
                             class="text-[12px] font-black px-8 py-2.5 rounded-2xl transition-all duration-300 whitespace-nowrap"
                         >{{ cat }}</button>
-                    </div>
-
-                    <div class="relative w-full max-w-[500px] group">
-                        <div class="absolute inset-y-0 left-5 flex items-center pointer-events-none transition-colors group-focus-within:text-[#36d362] text-gray-400">
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        </div>
-                        <input 
-                            v-model="articleSearchQuery"
-                            type="text" 
-                            placeholder="Cari artikel edukasi gizi..." 
-                            class="w-full pl-14 pr-6 py-4 rounded-[24px] border-none bg-white shadow-xl shadow-gray-100/50 focus:ring-2 focus:ring-[#36d362]/20 transition-all font-medium text-zinc-900 placeholder:text-zinc-400"
-                        >
                     </div>
                 </div>
             </div>

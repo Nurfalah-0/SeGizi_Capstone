@@ -14,7 +14,7 @@ import SettingsLayout from '@/layouts/settings/Layout.vue';
         <div class="bg-[#EAFBF0] py-16 px-8 md:px-20">
             <div class="max-w-4xl mx-auto">
                 <h1 class="text-4xl font-black text-zinc-900 tracking-tight">Tampilan Aplikasi</h1>
-                <p class="text-zinc-600 font-medium mt-3">Sesuaikan tema dan warna antarmuka SeGizi sesuai selera Anda.</p>
+                <p class="text-zinc-600 font-medium mt-3">Sesuaikan tema dan warna antarmuka NutriFlow sesuai selera Anda.</p>
             </div>
         </div>
 

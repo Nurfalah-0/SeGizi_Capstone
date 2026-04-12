@@ -89,7 +89,14 @@ const bmiCategory = computed(() => {
 });
 
 const mealPlan = computed(() => {
-    const days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+    const allDays = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const todayIndex = new Date().getDay();
+    
+    const days = Array.from({ length: 7 }).map((_, i) => {
+        const dayIndex = (todayIndex + i) % 7;
+        return i === 0 ? `${allDays[dayIndex]} (Hari Ini)` : allDays[dayIndex];
+    });
+
     const goals = {
         lose: {
             breakfast: 'Oatmeal dengan Buah Beri',
@@ -158,7 +165,7 @@ const handleSave = () => {
 </script>
 
 <template>
-    <Head title="Rekomendasi Personal SeGizi" />
+    <Head title="Rekomendasi Personal NutriFlow" />
 
     <GuestLayout>
         <div class="max-w-[1400px] mx-auto px-8 md:px-20 py-12 space-y-12">
@@ -254,31 +261,54 @@ const handleSave = () => {
                 </div>
 
                 <!-- Horizontal Tabs for Days -->
+                <!-- Horizontal Tabs for Days -->
                 <div class="grid grid-cols-1 md:grid-cols-7 gap-4">
-                    <div v-for="day in mealPlan" :key="day.day" class="p-6 rounded-[28px] bg-white border border-zinc-100 hover:border-[#36d362] hover:shadow-2xl hover:shadow-green-100/50 transition-all group">
-                        <p class="text-[14px] font-black text-zinc-900 mb-6 pb-4 border-b border-zinc-50 group-hover:text-[#36d362] transition-colors">{{ day.day }}</p>
-                        <div class="space-y-6">
+                    <div v-for="(day, index) in mealPlan" :key="day.day" :class="[
+                        'p-6 rounded-[28px] transition-all group relative bg-white',
+                        index === 0 ? 'border-2 border-[#36d362] shadow-xl shadow-[#36d362]/20 z-10' : 'border border-zinc-100 hover:border-[#36d362] hover:shadow-2xl hover:shadow-green-100/50'
+                    ]">
+                        <!-- Subtle background glow for today, barely visible -->
+                        <div v-if="index === 0" class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#36d362]/5 to-transparent opacity-50 pointer-events-none"></div>
+
+                        <div :class="['mb-6 pb-4 border-b transition-colors relative z-10 flex items-center justify-between', index === 0 ? 'border-[#36d362]/20' : 'border-zinc-50']">
+                            <div class="flex items-center gap-2">
+                                <p :class="[
+                                    'text-[14px] font-black',
+                                    index === 0 ? 'text-[#36d362]' : 'text-zinc-900 group-hover:text-[#36d362]'
+                                ]">{{ day.day }}</p>
+                                
+                                <!-- Live indicator -->
+                                <div v-if="index === 0" class="flex items-center">
+                                    <span class="relative flex h-2 w-2">
+                                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#36d362] opacity-75"></span>
+                                      <span class="relative inline-flex rounded-full h-2 w-2 bg-[#36d362]"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-6 relative z-10">
                             <div class="space-y-1">
-                                <p class="text-[9px] font-black text-zinc-400 uppercase tracking-wider">08:00 - Pagi</p>
-                                <p class="text-[13px] font-bold text-zinc-800 leading-tight">{{ day.breakfast }}</p>
+                                <p :class="['text-[9px] font-black uppercase tracking-wider', index === 0 ? 'text-[#36d362]' : 'text-zinc-400']">08:00 - Pagi</p>
+                                <p class="text-[13px] font-bold leading-tight text-zinc-800">{{ day.breakfast }}</p>
                             </div>
                             <div class="space-y-1">
-                                <p class="text-[9px] font-black text-zinc-400 uppercase tracking-wider">13:00 - Siang</p>
-                                <p class="text-[13px] font-bold text-zinc-800 leading-tight">{{ day.lunch }}</p>
+                                <p :class="['text-[9px] font-black uppercase tracking-wider', index === 0 ? 'text-[#36d362]' : 'text-zinc-400']">13:00 - Siang</p>
+                                <p class="text-[13px] font-bold leading-tight text-zinc-800">{{ day.lunch }}</p>
                             </div>
                             <div class="space-y-1">
-                                <p class="text-[9px] font-black text-zinc-400 uppercase tracking-wider">16:00 - Snack</p>
-                                <p class="text-[13px] font-bold text-zinc-800 leading-tight">{{ day.snack }}</p>
+                                <p :class="['text-[9px] font-black uppercase tracking-wider', index === 0 ? 'text-[#36d362]' : 'text-zinc-400']">16:00 - Snack</p>
+                                <p class="text-[13px] font-bold leading-tight text-zinc-800">{{ day.snack }}</p>
                             </div>
                             <div class="space-y-1">
-                                <p class="text-[9px] font-black text-zinc-400 uppercase tracking-wider">19:00 - Malam</p>
-                                <p class="text-[13px] font-bold text-zinc-800 leading-tight">{{ day.dinner }}</p>
+                                <p :class="['text-[9px] font-black uppercase tracking-wider', index === 0 ? 'text-[#36d362]' : 'text-zinc-400']">19:00 - Malam</p>
+                                <p class="text-[13px] font-bold leading-tight text-zinc-800">{{ day.dinner }}</p>
                             </div>
                         </div>
                         
                         <!-- Affiliate Link Placeholder -->
-                        <div class="mt-8 pt-4 border-t border-zinc-50">
-                            <a href="#" class="flex items-center justify-between text-[11px] font-black text-[#36d362] hover:underline uppercase tracking-tighter">
+                        <div :class="['mt-8 pt-4 border-t relative z-10', index === 0 ? 'border-[#36d362]/20' : 'border-zinc-50']">
+                            <a href="#" class="flex items-center justify-between text-[11px] font-black hover:underline uppercase tracking-tighter text-[#36d362]">
                                 Order di GoFood
                                 <ShoppingBag class="w-3 h-3" />
                             </a>

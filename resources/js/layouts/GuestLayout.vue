@@ -7,15 +7,11 @@ import {
     SheetTrigger,
     SheetFooter
 } from '@/components/ui/sheet';
-import { 
-    DropdownMenu, 
-    DropdownMenuTrigger, 
-    DropdownMenuContent, 
-    DropdownMenuItem
-} from '@/components/ui/dropdown-menu';
-import { ChevronDown, Menu, Home, Utensils, Scale, Newspaper, Sparkles, Flame } from 'lucide-vue-next';
+
+import { ChevronDown, Menu, Home, Utensils, Scale, Newspaper, Sparkles, Flame, Instagram, Facebook, Twitter } from 'lucide-vue-next';
 import { router } from '@inertiajs/vue3';
 import { globalLoading } from '@/stores/loading';
+import AppLogoIcon from '@/components/AppLogoIcon.vue';
 
 const page = usePage();
 </script>
@@ -40,8 +36,9 @@ const page = usePage();
                         </SheetTrigger>
                         <SheetContent side="left" class="w-[300px] p-0 border-none bg-white">
                             <div class="p-8 border-b-0 shadow-sm">
-                                <Link href="/" class="text-2xl font-black tracking-tight">
-                                    <span class="text-[#36d362]">Se</span><span class="text-[#ff9d29]">Gizi</span>
+                                <Link href="/" class="flex items-center gap-3 text-2xl font-black tracking-tight">
+                                    <AppLogoIcon class="h-10 w-auto object-contain" />
+                                    <span><span class="text-[#36d362]">Nutri</span><span class="text-[#ff9d29]">Flow</span></span>
                                 </Link>
                                 <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-2">Nutrisi & Kesehatan</p>
                             </div>
@@ -55,9 +52,9 @@ const page = usePage();
                                     <Utensils class="w-5 h-5" />
                                     <span class="font-black text-sm uppercase tracking-wider">Menu Makanan</span>
                                 </Link>
-                                <Link href="/bmi-calculator" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-green-50 hover:text-[#36d362] transition-all group" :class="page.url.startsWith('/bmi-calculator') ? 'bg-green-50 text-[#36d362]' : 'text-zinc-600'">
-                                    <Scale class="w-5 h-5" />
-                                    <span class="font-black text-sm uppercase tracking-wider">Kalkulator</span>
+                                <Link href="/recommendations" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-green-50 hover:text-[#36d362] transition-all group" :class="page.url.startsWith('/recommendations') ? 'bg-green-50 text-[#36d362]' : 'text-zinc-600'">
+                                    <Sparkles class="w-5 h-5" />
+                                    <span class="font-black text-sm uppercase tracking-wider">Menu Untukmu</span>
                                 </Link>
                                 <Link href="/articles" class="flex items-center gap-4 px-6 py-4 rounded-2xl hover:bg-green-50 hover:text-[#36d362] transition-all group" :class="page.url.startsWith('/articles') ? 'bg-green-50 text-[#36d362]' : 'text-zinc-600'">
                                     <Newspaper class="w-5 h-5" />
@@ -80,8 +77,9 @@ const page = usePage();
                 </div>
 
                 <!-- Logo -->
-                <Link href="/" class="text-[28px] font-bold tracking-tight">
-                    <span class="text-[#36d362]">Se</span><span class="text-[#ff9d29]">Gizi</span>
+                <Link href="/" class="flex items-center gap-3 text-[28px] font-bold tracking-tight">
+                    <AppLogoIcon class="h-10 md:h-12 w-auto object-contain" />
+                    <span><span class="text-[#36d362]">Nutri</span><span class="text-[#ff9d29]">Flow</span></span>
                 </Link>
             </div>
 
@@ -89,46 +87,7 @@ const page = usePage();
             <div class="hidden md:flex items-center gap-10 text-[15px] font-semibold text-zinc-600">
                 <Link href="/" :class="$page.url === '/' ? 'text-[#36d362] font-bold' : 'hover:text-[#36d362] transition'">Beranda</Link>
                 <Link href="/recipes" :class="$page.url.startsWith('/recipes') ? 'text-[#36d362] font-bold' : 'hover:text-[#36d362] transition'">Menu Makanan</Link>
-                <DropdownMenu>
-                    <DropdownMenuTrigger class="outline-none">
-                        <div :class="page.url.includes('-calculator') ? 'text-[#36d362]' : 'text-zinc-600 hover:text-[#36d362] transition'" class="flex items-center gap-1.5 cursor-pointer font-bold py-2">
-                            Kalkulator
-                            <ChevronDown class="w-4 h-4 opacity-50" />
-                        </div>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent class="w-56 rounded-[24px] shadow-2xl border-none p-3 bg-white animate-in fade-in zoom-in-95 duration-200" align="start" :side-offset="10">
-                        <div class="px-3 py-2">
-                            <p class="text-[10px] font-black text-zinc-400 uppercase tracking-widest leading-none mb-1">Pilih Kalkulator</p>
-                        </div>
-                        <DropdownMenuItem @click="router.visit('/recommendations')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-yellow-50 transition-all">
-                            <div class="p-2 bg-yellow-50 rounded-lg group-hover:bg-yellow-100 transition-colors">
-                                <Sparkles class="w-4 h-4 text-yellow-600" />
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="font-black text-xs text-zinc-900">Menu Untukmu</span>
-                                <span class="text-[10px] text-zinc-400">Rencana makan personal</span>
-                            </div>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem @click="router.visit('/bmi-calculator')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-green-50 transition-all">
-                            <div class="p-2 bg-green-50 rounded-lg group-hover:bg-green-100 transition-colors">
-                                <Scale class="w-4 h-4 text-[#36d362]" />
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="font-black text-xs text-zinc-900">Kalkulator BMI</span>
-                                <span class="text-[10px] text-zinc-400">Cek status berat badan</span>
-                            </div>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem @click="router.visit('/calorie-calculator')" class="rounded-xl px-4 py-3 gap-3 cursor-pointer group focus:bg-orange-50 transition-all">
-                            <div class="p-2 bg-orange-50 rounded-lg group-hover:bg-orange-100 transition-colors">
-                                <Flame class="w-4 h-4 text-orange-600" />
-                            </div>
-                            <div class="flex flex-col">
-                                <span class="font-black text-xs text-zinc-900">Target Kalori</span>
-                                <span class="text-[10px] text-zinc-400">Hitung TDEE harian</span>
-                            </div>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <Link href="/recommendations" :class="$page.url.startsWith('/recommendations') ? 'text-[#36d362] font-bold' : 'hover:text-[#36d362] transition'">Menu Untukmu</Link>
                 <Link href="/articles" :class="$page.url.startsWith('/articles') ? 'text-[#36d362] font-bold' : 'hover:text-[#36d362] transition'">Artikel</Link>
             </div>
 
@@ -142,56 +101,69 @@ const page = usePage();
         </main>
 
         <!-- Footer -->
-        <footer class="bg-[#f0fff4] pt-20 pb-10 px-8 md:px-20 mt-16 font-sans">
-            <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 pb-20">
+        <footer class="bg-zinc-950 text-white pt-24 pb-12 px-8 md:px-20 mt-16 font-sans relative overflow-hidden">
+            <!-- Decorative blur background -->
+            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-[#36d362]/10 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
+            
+            <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 pb-20 relative z-10 border-b border-zinc-800">
                 <div class="space-y-6">
-                    <h2 class="text-3xl font-black text-[#36d362]">SeGizi</h2>
-                    <p class="text-gray-600 text-sm leading-relaxed font-medium">
-                        Makanan untuk hidup, <br> bukan hidup untuk makanan
+                    <Link href="/" class="inline-flex items-center gap-4 text-4xl font-black tracking-tight">
+                        <AppLogoIcon class="h-12 md:h-16 w-auto object-contain" />
+                        <span><span class="text-[#36d362]">Nutri</span><span class="text-[#ff9d29]">Flow</span></span>
+                    </Link>
+                    <p class="text-zinc-400 text-sm leading-relaxed font-medium max-w-[250px]">
+                        Makanan untuk hidup, bukan hidup untuk makanan. Solusi gaya hidup sehat masa depan.
                     </p>
-                    <div class="flex gap-4">
-                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#36d362] hover:bg-green-50 transition shadow-sm font-bold text-xs uppercase">IG</a>
-                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#36d362] hover:bg-green-50 transition shadow-sm font-bold text-xs uppercase">FB</a>
-                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-lg text-[#36d362] hover:bg-green-50 transition shadow-sm font-bold text-xs uppercase">X</a>
+                    <div class="flex gap-4 pt-2">
+                        <a href="https://instagram.com" target="_blank" class="w-12 h-12 flex items-center justify-center bg-zinc-900 border border-zinc-800 rounded-2xl text-zinc-400 hover:text-white hover:bg-[#36d362] hover:border-[#36d362] transition-all group shadow-xl">
+                            <Instagram class="w-5 h-5 group-hover:scale-110 transition-transform" />
+                        </a>
+                        <a href="https://facebook.com" target="_blank" class="w-12 h-12 flex items-center justify-center bg-zinc-900 border border-zinc-800 rounded-2xl text-zinc-400 hover:text-white hover:bg-[#36d362] hover:border-[#36d362] transition-all group shadow-xl">
+                            <Facebook class="w-5 h-5 group-hover:scale-110 transition-transform" />
+                        </a>
+                        <a href="https://twitter.com" target="_blank" class="w-12 h-12 flex items-center justify-center bg-zinc-900 border border-zinc-800 rounded-2xl text-zinc-400 hover:text-white hover:bg-[#1da1f2] hover:border-[#1da1f2] transition-all group shadow-xl">
+                            <Twitter class="w-5 h-5 group-hover:scale-110 transition-transform" />
+                        </a>
                     </div>
                 </div>
 
-                <!-- Links -->
+                <!-- Functional Links -->
                 <div>
-                    <h4 class="font-bold text-zinc-900 mb-6 text-sm uppercase tracking-widest">Navigasi</h4>
-                    <ul class="space-y-4 text-[15px] text-zinc-500 font-medium">
-                        <li><Link href="/" class="hover:text-[#36d362] transition-colors">Beranda</Link></li>
-                        <li><Link href="/recipes" class="hover:text-[#36d362] transition-colors">Menu Makanan</Link></li>
-                        <li><Link href="/bmi-calculator" class="hover:text-[#36d362] transition-colors">Kalkulator</Link></li>
-                        <li><Link href="/articles" class="hover:text-[#36d362] transition-colors">Artikel</Link></li>
+                    <h4 class="font-semibold text-zinc-100 mb-6 text-[16px]">Navigasi Utama</h4>
+                    <ul class="space-y-4 text-[15px] text-zinc-400 font-medium">
+                        <li><Link href="/" class="hover:text-white transition-colors">Kalkulator BMI</Link></li>
+                        <li><Link href="/recommendations" class="hover:text-white transition-colors">Cek Rencana Makan</Link></li>
+                        <li><Link href="/recipes" class="hover:text-white transition-colors">Eksplor Resep</Link></li>
+                        <li><Link href="/articles" class="hover:text-white transition-colors">Artikel Kesehatan</Link></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="font-bold text-zinc-900 mb-6 text-sm uppercase tracking-widest">Kategori</h4>
-                    <ul class="space-y-4 text-[15px] text-zinc-500 font-medium">
-                        <li><a href="#" class="hover:text-[#36d362] transition-colors">Diet</a></li>
-                        <li><a href="#" class="hover:text-[#36d362] transition-colors">Protein Tinggi</a></li>
-                        <li><a href="#" class="hover:text-[#36d362] transition-colors">Kalori Rendah</a></li>
-                        <li><a href="#" class="hover:text-[#36d362] transition-colors">Gizi Edu</a></li>
+                    <h4 class="font-semibold text-zinc-100 mb-6 text-[16px]">Kategori Populer</h4>
+                    <ul class="space-y-4 text-[15px] text-zinc-400 font-medium">
+                        <li><Link href="/recipes" class="hover:text-white transition-colors">Diet Sehat</Link></li>
+                        <li><Link href="/recipes" class="hover:text-white transition-colors">Tinggi Protein</Link></li>
+                        <li><Link href="/articles" class="hover:text-white transition-colors">Edukasi Gizi</Link></li>
+                        <li><Link href="/articles" class="hover:text-white transition-colors">Gaya Hidup Medis</Link></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="font-bold text-zinc-900 mb-6 text-sm uppercase tracking-widest">Support</h4>
-                    <ul class="space-y-4 text-[15px] text-zinc-500 font-medium">
-                        <li><a href="#" class="hover:text-[#36d362] transition-colors">Kontak</a></li>
-                        <li><a href="#" class="hover:text-[#36d362] transition-colors">Legal</a></li>
-                        <li><a href="#" class="hover:text-[#36d362] transition-colors">Tentang</a></li>
+                    <h4 class="font-semibold text-zinc-100 mb-6 text-[16px]">Bantuan</h4>
+                    <ul class="space-y-4 text-[15px] text-zinc-400 font-medium">
+                        <li><Link href="/contact" class="hover:text-white transition-colors">Hubungi Kami</Link></li>
+                        <li><Link href="/about" class="hover:text-white transition-colors">Tentang Platform</Link></li>
+                        <li><Link href="/report-bug" class="hover:text-white transition-colors">Laporkan Bug</Link></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="max-w-[1400px] mx-auto pt-8 flex flex-col md:flex-row justify-between items-center text-sm font-medium text-zinc-400 gap-4">
-                <p>&copy; 2026 SeGizi. Semua Hak Dilindungi.</p>
+            <div class="max-w-[1400px] mx-auto pt-8 flex flex-col md:flex-row justify-between items-center text-[13px] font-medium text-zinc-500 gap-6 relative z-10">
+                <!-- Fallback to simple © since vue compilation handles pure string better -->
+                <p>&copy; 2026 NutriFlow Platform. Seluruh Hak Cipta Dilindungi.</p>
                 <div class="flex gap-8">
-                    <a href="#" class="hover:text-zinc-600">Kebijakan Privasi</a>
-                    <a href="#" class="hover:text-zinc-600">Syarat & Ketentuan</a>
+                    <Link href="/privacy" class="hover:text-white transition-colors">Kebijakan Privasi</Link>
+                    <Link href="/terms" class="hover:text-white transition-colors">Syarat & Ketentuan</Link>
                 </div>
             </div>
         </footer>

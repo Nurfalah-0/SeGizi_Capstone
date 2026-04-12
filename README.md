@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/-%F0%9F%A5%97%20SeGizi-2d6a4f?style=for-the-badge&logoColor=white" alt="SeGizi" height="40"/>
+<img src="https://img.shields.io/badge/-%F0%9F%A5%97%20NutriFlow-2d6a4f?style=for-the-badge&logoColor=white" alt="NutriFlow" height="40"/>
 
-#SeGizi
+#NutriFlow
 
 **Aplikasi Healthy Lives & Well-Being**
 
@@ -65,8 +65,8 @@ Pastikan sudah terinstall di sistem kamu:
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/bruryansah/CC26-SEGIZI-PROJECT.git
-cd cc26-segizi-project
+git clone https://github.com/bruryansah/CC26-NUTRIFLOW-PROJECT.git
+cd cc26-nutriflow-project
 ```
 
 ### 2️⃣ Install Backend Dependencies
@@ -99,7 +99,7 @@ Edit file `.env` sesuai konfigurasi database lokal kamu:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=segizi
+DB_DATABASE=nutriflow
 DB_USERNAME=root
 DB_PASSWORD=
 ```

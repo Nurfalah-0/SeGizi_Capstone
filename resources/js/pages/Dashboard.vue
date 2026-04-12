@@ -24,7 +24,7 @@ const stats = [
 </script>
 
 <template>
-    <Head title="Dashboard - SeGizi" />
+    <Head title="Dashboard - NutriFlow" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex flex-1 flex-col gap-8 p-8 bg-zinc-50/50 min-h-screen">

@@ -11,6 +11,12 @@ Route::inertia('/', 'Welcome', [
 ])->name('home');
 
 // Public routes - accessible without login
+Route::inertia('about', 'Static/About')->name('about');
+Route::inertia('contact', 'Static/Contact')->name('contact');
+Route::inertia('report-bug', 'Static/ReportBug')->name('report-bug');
+Route::inertia('privacy', 'Static/Privacy')->name('privacy');
+Route::inertia('terms', 'Static/Terms')->name('terms');
+
 Route::inertia('recipes', 'Recipes/Index')->name('recipes.index');
 Route::get('recipes/{recipe}', function ($recipe) {
     return inertia('Recipes/Show', ['recipe' => $recipe]);
