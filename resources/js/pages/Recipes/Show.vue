@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
+import { ArrowLeft, Clock, Flame, Users, ChefHat, CheckCircle2, ShoppingBasket } from 'lucide-vue-next';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import carbonaraImage from '../../../images/carbonara.jpg';
-import laukImage from '../../../images/lauk.png';
 import hidrasiImage from '../../../images/hidrasi.jpg';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { ArrowLeft, Clock, Flame, Users, ChefHat, CheckCircle2, ShoppingBasket } from 'lucide-vue-next';
+import laukImage from '../../../images/lauk.png';
 
 const props = defineProps<{
     recipe: string | number;

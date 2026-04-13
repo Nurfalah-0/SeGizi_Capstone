@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
-import GuestLayout from '@/layouts/GuestLayout.vue';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Search, ChevronRight } from 'lucide-vue-next';
+import { ref, computed } from 'vue';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 
 import hidrasiImage from '../../../images/hidrasi.jpg';
-import tidurImage from '../../../images/tidur.jpg';
 import nutrisiImage from '../../../images/nutrisi tulang.jpg';
+import tidurImage from '../../../images/tidur.jpg';
 
 const searchQuery = ref('');
 const activeCategory = ref('Semua');

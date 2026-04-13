@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
-import laukImage from '../../images/lauk.png';
-import hidrasiImage from '../../images/hidrasi.jpg';
-import tidurImage from '../../images/tidur.jpg';
-import nutrisiImage from '../../images/nutrisi tulang.jpg';
-import carbonaraImage from '../../images/carbonara.jpg';
+import { ArrowRight, Utensils } from 'lucide-vue-next';
+import { ref, computed } from 'vue';
 import GuestLayout from '@/layouts/GuestLayout.vue';
-import { Scale, Flame, ArrowRight, User, Utensils } from 'lucide-vue-next';
+import carbonaraImage from '../../images/carbonara.jpg';
+import hidrasiImage from '../../images/hidrasi.jpg';
+import laukImage from '../../images/lauk.png';
+import nutrisiImage from '../../images/nutrisi tulang.jpg';
+import tidurImage from '../../images/tidur.jpg';
 
 // Form logic for Personalization
 const weight = ref<string>('');

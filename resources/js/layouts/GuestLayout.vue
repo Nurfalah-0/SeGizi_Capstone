@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
-
+import { Menu, Home, Utensils, Newspaper, Sparkles, Instagram, Facebook, Twitter } from 'lucide-vue-next';
+import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import { 
     Sheet, 
     SheetContent, 
@@ -8,10 +9,7 @@ import {
     SheetFooter
 } from '@/components/ui/sheet';
 
-import { ChevronDown, Menu, Home, Utensils, Scale, Newspaper, Sparkles, Flame, Instagram, Facebook, Twitter } from 'lucide-vue-next';
-import { router } from '@inertiajs/vue3';
 import { globalLoading } from '@/stores/loading';
-import AppLogoIcon from '@/components/AppLogoIcon.vue';
 
 const page = usePage();
 </script>

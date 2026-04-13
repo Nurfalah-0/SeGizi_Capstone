@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import { Head, Link } from '@inertiajs/vue3';
-import GuestLayout from '@/layouts/GuestLayout.vue';
-import carbonaraImage from '../../../images/carbonara.jpg';
-import laukImage from '../../../images/lauk.png';
-import hidrasiImage from '../../../images/hidrasi.jpg';
+import { Search, ChevronRight, Flame, Dumbbell, Clock, ArrowUpDown } from 'lucide-vue-next';
+import { ref, computed } from 'vue';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Search, ChevronRight, Flame, Dumbbell, Clock, ArrowUpDown } from 'lucide-vue-next';
+import GuestLayout from '@/layouts/GuestLayout.vue';
+import carbonaraImage from '../../../images/carbonara.jpg';
+import hidrasiImage from '../../../images/hidrasi.jpg';
+import laukImage from '../../../images/lauk.png';
 
 const searchQuery = ref('');
 const activeCategory = ref('Semua');

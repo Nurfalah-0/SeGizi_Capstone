@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import GuestLayout from '@/layouts/GuestLayout.vue';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, Calendar, Clock, Share2, Facebook, Twitter, Link as LinkIcon, Quote } from 'lucide-vue-next';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 
 import hidrasiImage from '../../../images/hidrasi.jpg';
-import tidurImage from '../../../images/tidur.jpg';
 import nutrisiImage from '../../../images/nutrisi tulang.jpg';
+import tidurImage from '../../../images/tidur.jpg';
 
 const props = defineProps<{
     article: string | number;

@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
-import { Head, Link, usePage, router } from '@inertiajs/vue3';
-import GuestLayout from '@/layouts/GuestLayout.vue';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Head, Link, usePage } from '@inertiajs/vue3';
 import { Scale, Flame, Utensils, Newspaper, ChevronRight, Save, Info, CheckCircle2, ShoppingBag, X, LogIn, UserPlus } from 'lucide-vue-next';
+import { ref, onMounted, computed } from 'vue';
+import { Badge } from '@/components/ui/badge';
+import GuestLayout from '@/layouts/GuestLayout.vue';
 import { triggerLoading } from '@/stores/loading';
 
 const page = usePage();

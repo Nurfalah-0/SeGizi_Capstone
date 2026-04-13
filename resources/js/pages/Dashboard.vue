@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { Head, usePage } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
+import { Scale, Flame, Activity, TrendingUp, Calendar, ChevronRight } from 'lucide-vue-next';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { dashboard } from '@/routes';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Scale, Flame, Activity, PieChart, TrendingUp, Calendar, ChevronRight } from 'lucide-vue-next';
 import type { BreadcrumbItem } from '@/types';
 
-import { router } from '@inertiajs/vue3';
 
 const page = usePage();
 const breadcrumbs: BreadcrumbItem[] = [
