@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
-import { Head, Link, usePage } from '@inertiajs/vue3';
+import { Head, Link, usePage, router } from '@inertiajs/vue3';
 import GuestLayout from '@/layouts/GuestLayout.vue';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Scale, Flame, Utensils, Newspaper, ChevronRight, Save, Info, CheckCircle2, ShoppingBag } from 'lucide-vue-next';
+import { Scale, Flame, Utensils, Newspaper, ChevronRight, Save, Info, CheckCircle2, ShoppingBag, X, LogIn, UserPlus } from 'lucide-vue-next';
 import { triggerLoading } from '@/stores/loading';
 
 const page = usePage();
@@ -68,11 +68,12 @@ onMounted(() => {
             calculateResults();
             localStorage.removeItem('pending_save_recommendation');
             
-            // If user is now logged in, auto-save or notify
+            // If user is now logged in, auto-save success notification
             if (page.props.auth?.user) {
                 setTimeout(() => {
-                    alert('Rencana makan kamu telah dipulihkan dan siap disimpan!');
-                }, 1000);
+                    saveSuccess.value = true;
+                    setTimeout(() => { saveSuccess.value = false; }, 5000);
+                }, 500);
             }
         } else {
             calculateResults();
@@ -150,17 +151,30 @@ const filteredRelatedArticles = computed(() => {
     return articlesByGoal[currentGoal];
 });
 
+// Modal auth state
+const showAuthModal = ref(false);
+const saveSuccess = ref(false);
+
 const handleSave = () => {
     if (!page.props.auth?.user) {
-        // Save to local storage then redirect to login
+        // Store data locally, show auth modal
         localStorage.setItem('pending_save_recommendation', JSON.stringify(userData.value));
-        window.location.href = '/login';
+        showAuthModal.value = true;
     } else {
-        triggerLoading(1500);
+        triggerLoading(800);
         setTimeout(() => {
-            alert('Rencana berhasil disimpan ke akun Anda! Kamu bisa melihatnya di Dashboard.');
-        }, 1500);
+            saveSuccess.value = true;
+            setTimeout(() => { saveSuccess.value = false; }, 4000);
+        }, 800);
     }
+};
+
+const goToLogin = () => {
+    window.location.href = '/login';
+};
+
+const goToRegister = () => {
+    window.location.href = '/register';
 };
 </script>
 
@@ -168,6 +182,47 @@ const handleSave = () => {
     <Head title="Rekomendasi Personal NutriFlow" />
 
     <GuestLayout>
+        <!-- Auth Modal Overlay -->
+        <Transition name="fade">
+            <div v-if="showAuthModal" class="fixed inset-0 z-[9999] flex items-center justify-center px-4" @click.self="showAuthModal = false">
+                <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+                <div class="relative bg-white rounded-[32px] p-10 max-w-md w-full shadow-2xl z-10">
+                    <button @click="showAuthModal = false" class="absolute top-5 right-5 p-2 rounded-full hover:bg-zinc-100 transition">
+                        <X class="w-5 h-5 text-zinc-400" />
+                    </button>
+                    <div class="text-center space-y-3 mb-8">
+                        <div class="w-16 h-16 bg-[#36d362]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <Save class="w-8 h-8 text-[#36d362]" />
+                        </div>
+                        <h2 class="text-2xl font-black text-zinc-900">Simpan Rencana Gizimu</h2>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Buat akun gratis untuk menyimpan rencana makan personalmu dan akses kembali kapan saja.</p>
+                    </div>
+                    <div class="space-y-3">
+                        <button @click="goToRegister" class="w-full flex items-center justify-center gap-3 py-4 bg-[#36d362] hover:bg-green-600 text-white rounded-2xl font-black transition-all hover:-translate-y-0.5 shadow-lg shadow-green-200">
+                            <UserPlus class="w-5 h-5" />
+                            Daftar Gratis Sekarang
+                        </button>
+                        <button @click="goToLogin" class="w-full flex items-center justify-center gap-3 py-4 bg-zinc-900 hover:bg-black text-white rounded-2xl font-black transition-all">
+                            <LogIn class="w-5 h-5" />
+                            Sudah Punya Akun? Masuk
+                        </button>
+                    </div>
+                    <p class="text-center text-zinc-400 text-xs mt-6">Gratis selamanya · Tidak perlu kartu kredit</p>
+                </div>
+            </div>
+        </Transition>
+
+        <!-- Save Success Toast -->
+        <Transition name="slide-up">
+            <div v-if="saveSuccess" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[9998] flex items-center gap-4 bg-zinc-900 text-white px-8 py-4 rounded-2xl shadow-2xl shadow-black/20">
+                <CheckCircle2 class="w-6 h-6 text-[#36d362] shrink-0" />
+                <div>
+                    <p class="font-black text-sm">Rencana berhasil disimpan!</p>
+                    <p class="text-zinc-400 text-xs">Lihat di Dashboard akun kamu.</p>
+                </div>
+            </div>
+        </Transition>
+
         <div class="max-w-[1400px] mx-auto px-8 md:px-20 py-12 space-y-12">
             <!-- Header Result -->
             <div class="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-zinc-100 pb-12">
@@ -378,5 +433,9 @@ const handleSave = () => {
 </template>
 
 <style scoped>
-/* Any custom styles here */
+.fade-enter-active, .fade-leave-active { transition: opacity 0.25s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
+
+.slide-up-enter-active, .slide-up-leave-active { transition: all 0.35s cubic-bezier(.4,0,.2,1); }
+.slide-up-enter-from, .slide-up-leave-to { opacity: 0; transform: translateX(-50%) translateY(20px); }
 </style>

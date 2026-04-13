@@ -96,9 +96,12 @@ const rightNavItems: NavItem[] = [
                                 >Navigation menu</SheetTitle
                             >
                             <SheetHeader class="flex justify-start text-left">
-                                <AppLogoIcon
-                                    class="size-6 fill-current text-black dark:text-white"
-                                />
+                                <Link href="/dashboard" class="flex items-center gap-3">
+                                    <AppLogoIcon
+                                        class="size-12 fill-current text-black dark:text-white object-contain scale-[1.5]"
+                                    />
+                                    <span class="text-2xl font-black uppercase tracking-tighter"><span class="text-[#36d362]">Nutri</span><span class="text-[#ff9d29]">Flow</span></span>
+                                </Link>
                             </SheetHeader>
                             <div
                                 class="flex h-full flex-1 flex-col justify-between space-y-4 py-6"
@@ -238,7 +241,7 @@ const rightNavItems: NavItem[] = [
                         </div>
                     </div>
 
-                    <DropdownMenu>
+                    <DropdownMenu v-if="auth.user">
                         <DropdownMenuTrigger :as-child="true">
                             <Button
                                 variant="ghost"
@@ -249,9 +252,9 @@ const rightNavItems: NavItem[] = [
                                     class="size-8 overflow-hidden rounded-full"
                                 >
                                     <AvatarImage
-                                        v-if="auth.user.avatar"
-                                        :src="auth.user.avatar"
-                                        :alt="auth.user.name"
+                                        v-if="auth.user?.avatar"
+                                        :src="auth.user?.avatar"
+                                        :alt="auth.user?.name"
                                     />
                                     <AvatarFallback
                                         class="rounded-lg bg-neutral-200 font-semibold text-black dark:bg-neutral-700 dark:text-white"
@@ -262,7 +265,7 @@ const rightNavItems: NavItem[] = [
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" class="w-56">
-                            <UserMenuContent :user="auth.user" />
+                            <UserMenuContent :user="auth.user!" />
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </div>

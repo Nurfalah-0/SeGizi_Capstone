@@ -13,7 +13,7 @@ class PasswordController extends Controller
     /**
      * Show the user's password settings page.
      */
-    public function edit(): Response
+    public function settingsEdit(): Response
     {
         return Inertia::render('settings/Password');
     }
@@ -21,7 +21,7 @@ class PasswordController extends Controller
     /**
      * Update the user's password.
      */
-    public function update(PasswordUpdateRequest $request): RedirectResponse
+    public function settingsUpdate(PasswordUpdateRequest $request): RedirectResponse
     {
         $request->user()->update([
             'password' => $request->password,

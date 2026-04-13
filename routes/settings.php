@@ -15,11 +15,11 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('settings/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('settings/password', [PasswordController::class, 'edit'])->name('user-password.edit');
+    Route::get('settings/password', [PasswordController::class, 'settingsEdit'])->name('settings.password.edit');
 
-    Route::put('settings/password', [PasswordController::class, 'update'])
+    Route::put('settings/password', [PasswordController::class, 'settingsUpdate'])
         ->middleware('throttle:6,1')
-        ->name('user-password.update');
+        ->name('settings.password.update');
 
     Route::inertia('settings/appearance', 'settings/Appearance')->name('appearance.edit');
 

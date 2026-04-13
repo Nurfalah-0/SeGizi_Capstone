@@ -24,9 +24,36 @@ const page = usePage();
              class="global-animate-progress">
         </div>
         <!-- Navbar -->
-        <nav class="flex items-center justify-between px-8 md:px-20 py-4 bg-white/95 backdrop-blur-md fixed w-full top-0 z-[100] shadow-sm">
-            <div class="flex items-center gap-6">
-                <!-- Mobile Menu (Sheet) -->
+        <nav class="flex items-center justify-between px-8 md:px-20 h-[80px] bg-white/95 backdrop-blur-md fixed w-full top-0 z-[100] shadow-sm">
+            <!-- Left: Logo -->
+            <Link href="/" class="flex items-center gap-1 shrink-0">
+                <AppLogoIcon class="h-16 w-auto" />
+                <span class="text-[22px] font-black tracking-tight leading-none"><span class="text-[#36d362]">Nutri</span><span class="text-[#ff9d29]">Flow</span></span>
+            </Link>
+
+            <!-- Center: Nav Links (desktop) -->
+            <div class="hidden md:flex items-center gap-8 text-[15px] font-semibold text-zinc-500 absolute left-1/2 -translate-x-1/2">
+                <Link href="/" class="relative py-1 transition-colors" :class="$page.url === '/' ? 'text-[#36d362] font-bold' : 'hover:text-zinc-900'">
+                    Beranda
+                    <span v-if="$page.url === '/'" class="absolute bottom-0 left-0 w-full h-0.5 bg-[#36d362] rounded-full"></span>
+                </Link>
+                <Link href="/recipes" class="relative py-1 transition-colors" :class="$page.url.startsWith('/recipes') ? 'text-[#36d362] font-bold' : 'hover:text-zinc-900'">
+                    Menu Makanan
+                    <span v-if="$page.url.startsWith('/recipes')" class="absolute bottom-0 left-0 w-full h-0.5 bg-[#36d362] rounded-full"></span>
+                </Link>
+                <Link href="/recommendations" class="relative py-1 transition-colors" :class="$page.url.startsWith('/recommendations') ? 'text-[#36d362] font-bold' : 'hover:text-zinc-900'">
+                    Menu Untukmu
+                    <span v-if="$page.url.startsWith('/recommendations')" class="absolute bottom-0 left-0 w-full h-0.5 bg-[#36d362] rounded-full"></span>
+                </Link>
+                <Link href="/articles" class="relative py-1 transition-colors" :class="$page.url.startsWith('/articles') ? 'text-[#36d362] font-bold' : 'hover:text-zinc-900'">
+                    Artikel
+                    <span v-if="$page.url.startsWith('/articles')" class="absolute bottom-0 left-0 w-full h-0.5 bg-[#36d362] rounded-full"></span>
+                </Link>
+            </div>
+
+            <!-- Right: Mobile Menu only -->
+            <div class="flex items-center gap-3 shrink-0">
+                <!-- Mobile Menu -->
                 <div class="md:hidden">
                     <Sheet>
                         <SheetTrigger as-child>
@@ -75,24 +102,7 @@ const page = usePage();
                         </SheetContent>
                     </Sheet>
                 </div>
-
-                <!-- Logo -->
-                <Link href="/" class="flex items-center gap-3 text-[28px] font-bold tracking-tight">
-                    <AppLogoIcon class="h-10 md:h-12 w-auto object-contain" />
-                    <span><span class="text-[#36d362]">Nutri</span><span class="text-[#ff9d29]">Flow</span></span>
-                </Link>
             </div>
-
-            <!-- Center Links -->
-            <div class="hidden md:flex items-center gap-10 text-[15px] font-semibold text-zinc-600">
-                <Link href="/" :class="$page.url === '/' ? 'text-[#36d362] font-bold' : 'hover:text-[#36d362] transition'">Beranda</Link>
-                <Link href="/recipes" :class="$page.url.startsWith('/recipes') ? 'text-[#36d362] font-bold' : 'hover:text-[#36d362] transition'">Menu Makanan</Link>
-                <Link href="/recommendations" :class="$page.url.startsWith('/recommendations') ? 'text-[#36d362] font-bold' : 'hover:text-[#36d362] transition'">Menu Untukmu</Link>
-                <Link href="/articles" :class="$page.url.startsWith('/articles') ? 'text-[#36d362] font-bold' : 'hover:text-[#36d362] transition'">Artikel</Link>
-            </div>
-
-            <!-- Empty space to keep center links truly centered -->
-            <div class="hidden md:block w-[120px]"></div>
         </nav>
 
         <!-- Page Content -->
@@ -107,8 +117,11 @@ const page = usePage();
             
             <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 pb-20 relative z-10 border-b border-zinc-800">
                 <div class="space-y-6">
-                    <Link href="/" class="inline-flex items-center gap-4 text-4xl font-black tracking-tight">
-                        <AppLogoIcon class="h-12 md:h-16 w-auto object-contain" />
+                    <Link href="/" class="inline-flex items-center gap-3 text-3xl font-black tracking-tight">
+                        <!-- White rounded badge makes PNG white-bg look intentional on dark footer -->
+                        <div class="bg-white rounded-2xl p-2 flex-shrink-0">
+                            <AppLogoIcon class="h-12 w-auto" />
+                        </div>
                         <span><span class="text-[#36d362]">Nutri</span><span class="text-[#ff9d29]">Flow</span></span>
                     </Link>
                     <p class="text-zinc-400 text-sm leading-relaxed font-medium max-w-[250px]">

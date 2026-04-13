@@ -1,0 +1,1 @@
+@keyframes global-progress{0%{width:0}to{width:100%}}.global-animate-progress{animation:global-progress 1s ease-in-out forwards}

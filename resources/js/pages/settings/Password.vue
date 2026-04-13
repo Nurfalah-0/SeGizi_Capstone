@@ -32,7 +32,7 @@ import SettingsLayout from '@/layouts/settings/Layout.vue';
                     />
 
                     <Form
-                        v-bind="PasswordController.update.form()"
+                        v-bind="PasswordController.settingsUpdate.form()"
                         :options="{
                             preserveScroll: true,
                         }"
