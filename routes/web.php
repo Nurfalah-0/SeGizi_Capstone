@@ -26,8 +26,7 @@ Route::inertia('articles', 'Articles/Index')->name('articles.index');
 Route::get('articles/{article}', function ($article) {
     return inertia('Articles/Show', ['article' => $article]);
 })->name('articles.show');
-Route::inertia('bmi-calculator', 'Calculator/Bmi')->name('bmi.calculator');
-Route::inertia('calorie-calculator', 'Calculator/Calorie')->name('calorie.calculator');
+
 Route::get('recommendations', function () {
     return inertia('Calculator/Result');
 })->name('recommendations');

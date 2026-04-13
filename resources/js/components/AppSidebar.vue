@@ -24,14 +24,9 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Kalkulator BMI',
-        href: '/bmi-calculator',
+        title: 'Kalkulator Gizi',
+        href: '/recommendations',
         icon: Scale,
-    },
-    {
-        title: 'Kalkulator Kalori',
-        href: '/calorie-calculator',
-        icon: Flame,
     },
     {
         title: 'Menu Makanan',
