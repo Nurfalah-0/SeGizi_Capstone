@@ -3,7 +3,7 @@
     "outputDirectory": "public",
     "functions": {
         "api/**/*.php": {
-            "runtime": "vercel-php@0.7.4"
+            "runtime": "vercel-php@0.8.0"
         }
     },
     "routes": [
@@ -23,6 +23,8 @@
         "SESSION_DRIVER": "cookie",
         "CACHE_STORE": "array",
         "APP_KEY": "base64:H1k3Z2D1J2F9A8M5N2B7V6C3Z4X8Q1V4R5T9Y7U1I2O=",
-        "VIEW_COMPILED_PATH": "/tmp"
+        "VIEW_COMPILED_PATH": "/tmp",
+        "DB_CONNECTION": "sqlite",
+        "DB_DATABASE": ":memory:"
     }
 }
