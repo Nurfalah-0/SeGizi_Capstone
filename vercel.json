@@ -12,7 +12,7 @@
             "dest": "/build/$1"
         },
         {
-            "src": "/(favicon.ico|favicon.png|favicon.svg|apple-touch-icon.png|robots.txt|logo-NutriFlow.png|favicon-nutriflow.png)",
+            "src": "/(favicon.ico|favicon.png|favicon.svg|apple-touch-icon.png|robots.txt|logo-NutriFlow.png|favicon-nutriflow.png|logo-nutriflow-favicon.png)",
             "dest": "/$1"
         },
         {
