@@ -10,6 +10,6 @@ function listFiles($dir, $indent = "") {
         }
     }
 }
-listFiles(dirname(__DIR__));
+listFiles(dirname(__DIR__) . "/public/build");
 echo "</pre>";
 die();
