@@ -22,6 +22,7 @@ export default defineConfig({
         }),
         wayfinder({
             formVariants: true,
+            command: process.env.VERCEL ? 'true' : undefined,
         }),
     ],
 });
