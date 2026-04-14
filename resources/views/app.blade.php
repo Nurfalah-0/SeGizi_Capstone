@@ -43,7 +43,6 @@
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
-        <!-- DEBUG: Laravel is Rendering -->
         @inertia
     </body>
 </html>
