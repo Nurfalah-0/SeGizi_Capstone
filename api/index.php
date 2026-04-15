@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Artisan;
 // Handle the request
 $request = Request::capture();
 
-// Boot the application and run migrations on-the-fly for serverless in-memory DB
-$app->make(\Illuminate\Contracts\Console\Kernel::class)->call('migrate', ['--force' => true]);
+// Boot the application and run migrations + seeds on-the-fly for serverless in-memory DB
+$app->make(\Illuminate\Contracts\Console\Kernel::class)->call('migrate', ['--force' => true, '--seed' => true]);
 
 $app->handleRequest($request);
