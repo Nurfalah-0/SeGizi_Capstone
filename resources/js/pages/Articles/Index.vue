@@ -11,66 +11,17 @@ import hidrasiImage from '../../../images/hidrasi.jpg';
 import nutrisiImage from '../../../images/nutrisi tulang.jpg';
 import tidurImage from '../../../images/tidur.jpg';
 
+const props = defineProps<{
+    articles: Array<any>;
+}>();
+
 const searchQuery = ref('');
 const activeCategory = ref('Semua');
 
 const categories = ['Semua', 'Gaya Hidup Sehat', 'Mitos & Fakta', 'Nutrisi & Gizi', 'Tips & Trik'];
 
-const articles = [
-    {
-        id: 1,
-        title: '9 Tips Pola Hidup Sehat untuk Pemula',
-        excerpt: 'Mulai perjalanan sehatmu dari hal-hal kecil seperti manajemen pola tidur dan hidrasi yang cukup setiap harinya.',
-        category: 'Gaya Hidup',
-        author: 'Dr. Sarah Gizi',
-        date: '12 Mar 2026',
-        readTime: '8 min baca',
-        image: hidrasiImage,
-    },
-    {
-        id: 2,
-        title: 'Tidur Berkualitas',
-        excerpt: 'Mengungkap misteri tentang berapa lama waktu ideal yang diperlukan untuk pemulihan otot dan sel tubuh.',
-        category: 'Mitos & Fakta',
-        author: 'Dr. John Doe',
-        date: '14 Mar 2026',
-        readTime: '6 min baca',
-        image: tidurImage,
-    },
-    {
-        id: 3,
-        title: 'Rahasia Nutrisi Tulang Kuat',
-        excerpt: 'Makanan super apa saja yang wajib kamu konsumsi agar tulangmu kuat dan bebas osteoporosis di masa tua?',
-        category: 'Nutrisi & Gizi',
-        author: 'Prof. Bone',
-        date: '20 Mar 2026',
-        readTime: '5 min baca',
-        image: nutrisiImage,
-    },
-    {
-        id: 5,
-        title: 'Tips Mengatur Meal Prep Seminggu',
-        excerpt: 'Cara efisien menyiapkan makanan sehat dalam 2 jam untuk konsumsi selama seminggu penuh.',
-        category: 'Tips & Trik',
-        author: 'Chef Healthy',
-        date: '22 Mar 2026',
-        readTime: '12 min baca',
-        image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&auto=format&fit=crop',
-    },
-    {
-        id: 6,
-        title: 'Superfood Lokal: Tempe vs Tahu',
-        excerpt: 'Mana yang lebih unggul untuk kebutuhan protein nabati Anda? Simak perbandingan nutrisinya.',
-        category: 'Nutrisi & Gizi',
-        author: 'Dr. Sarah Gizi',
-        date: '25 Mar 2026',
-        readTime: '7 min baca',
-        image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop',
-    }
-];
-
 const filteredArticles = computed(() => {
-    return articles.filter(article => {
+    return props.articles.filter(article => {
         const query = searchQuery.value.toLowerCase();
         const matchesSearch = article.title.toLowerCase().includes(query) || 
                              article.excerpt.toLowerCase().includes(query);
@@ -141,9 +92,9 @@ const filteredArticles = computed(() => {
                         
                         <CardContent class="p-8 space-y-4">
                             <div class="flex items-center gap-3 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                                <span>{{ article.date }}</span>
+                                <span>{{ new Date(article.created_at).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) }}</span>
                                 <span class="w-1 h-1 rounded-full bg-zinc-200"></span>
-                                <span>{{ article.readTime }}</span>
+                                <span>{{ article.read_time }}</span>
                             </div>
                             <h3 class="font-extrabold text-xl text-zinc-900 leading-snug group-hover:text-[#36d362] transition-colors">
                                 {{ article.title }}

@@ -24,75 +24,25 @@ const handleGetRecommendation = () => {
     }
 };
 
+const props = defineProps<{
+    popularArticles: Array<any>;
+    popularRecipes: Array<any>;
+}>();
+
 // Filters
 const activeRecipeFilter = ref('Semua');
 const activeArticleFilter = ref('Semua');
 
-// Data
-const recipes = [
-    {
-        id: 1,
-        title: 'Pasta Carbonara Sehat',
-        category: 'Tinggi Protein',
-        calories: 420,
-        protein: 35,
-        image: carbonaraImage,
-        description: 'Nikmati pasta lezat yang telah dimodifikasi agar kaya protein dan lebih sehat untuk diet Anda.'
-    },
-    {
-        id: 2,
-        title: 'Nasi Campur Sayur',
-        category: 'Rendah Kalori',
-        calories: 310,
-        protein: 28,
-        image: laukImage,
-        description: 'Kombinasi nasi dan beraneka lauk pauk bergizi seimbang untuk hidangan keluarga.'
-    },
-    {
-        id: 3,
-        title: 'Jus Detoks Hidrasi',
-        category: 'Tinggi Serat',
-        calories: 120,
-        protein: 2,
-        image: hidrasiImage,
-        description: 'Minuman pelepas dahaga yang kaya serat dan baik untuk melancarkan pencernaan harian.'
-    }
-];
-
-const articles = [
-    {
-        id: 1,
-        title: '9 Tips Pola Hidup Sehat untuk Pemula',
-        category: 'Gaya Hidup',
-        description: 'Mulai perjalanan sehatmu dari hal-hal kecil seperti manajemen pola tidur dan hidrasi yang cukup setiap harinya.',
-        image: hidrasiImage,
-    },
-    {
-        id: 2,
-        title: 'Tidur Berkualitas',
-        category: 'Mitos & Fakta',
-        description: 'Mengungkap misteri tentang berapa lama waktu ideal yang diperlukan untuk pemulihan otot dan sel tubuh.',
-        image: tidurImage,
-    },
-    {
-        id: 3,
-        title: 'Rahasia Nutrisi Tulang Kuat',
-        category: 'Nutrisi & Gizi',
-        description: 'Makanan super apa saja yang wajib kamu konsumsi agar tulangmu kuat dan bebas osteoporosis di masa tua?',
-        image: nutrisiImage,
-    }
-];
-
 // Computeds
 const filteredRecipes = computed(() => {
-    return recipes.filter(r => {
+    return props.popularRecipes.filter(r => {
         if (activeRecipeFilter.value === 'Semua') return true;
         return r.category === activeRecipeFilter.value;
     }).slice(0, 3);
 });
 
 const filteredArticles = computed(() => {
-    return articles.filter(a => {
+    return props.popularArticles.filter(a => {
         if (activeArticleFilter.value === 'Semua') return true;
         
         let filterCat = activeArticleFilter.value;
@@ -294,7 +244,7 @@ const filteredArticles = computed(() => {
                         <div class="p-8 space-y-6">
                             <h3 class="text-[20px] font-black text-zinc-900 leading-tight line-clamp-2">{{ article.title }}</h3>
                             <p class="text-zinc-400 text-[14px] leading-relaxed line-clamp-2 font-medium">
-                                {{ article.description }}
+                                {{ article.excerpt }}
                             </p>
                             <div class="pt-2">
                                 <span class="text-[#36d362] text-[13px] font-black flex items-center gap-2 group-hover:translate-x-1 transition-transform cursor-pointer">

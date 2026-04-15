@@ -9,18 +9,22 @@ import carbonaraImage from '../../../images/carbonara.jpg';
 import hidrasiImage from '../../../images/hidrasi.jpg';
 import laukImage from '../../../images/lauk.png';
 
+const props = defineProps<{
+    recipes: Array<any>;
+}>();
+
 const searchQuery = ref('');
 const activeCategory = ref('Semua');
 const activeGoal = ref('Semua');
 const activeSort = ref('default');
 
 const categories = computed(() => {
-    const list = ['Semua', 'Sarapan', 'Makan Siang', 'Makan Malam', 'Cemilan'];
+    const list = ['Semua', 'Sarapan', 'Makan Siang', 'Makan Malam', 'Cemilan', 'Tinggi Protein', 'Rendah Kalori', 'Tinggi Serat'];
     return list.map(name => ({
         name,
         count: name === 'Semua' 
-            ? recipes.length 
-            : recipes.filter(r => r.category === name).length
+            ? props.recipes.length 
+            : props.recipes.filter(r => r.category === name).length
     }));
 });
 
@@ -29,8 +33,8 @@ const goals = computed(() => {
     return list.map(name => ({
         name,
         count: name === 'Semua'
-            ? recipes.length
-            : recipes.filter(r => r.goal === name).length
+            ? props.recipes.length
+            : props.recipes.filter(r => r.goal === name).length
     }));
 });
 
@@ -42,78 +46,9 @@ const sortOptions = [
     { key: 'time-asc',      label: 'Masak Tercepat',       icon: Clock },
 ];
 
-const recipes = [
-    {
-        id: 1,
-        title: 'Pasta Carbonara Sehat',
-        category: 'Tinggi Protein',
-        goal: 'Diet',
-        image: carbonaraImage,
-        description: 'Nikmati pasta lezat yang telah dimodifikasi agar kaya protein dan lebih sehat untuk diet Anda.',
-        calories: 420,
-        protein: 35,
-        cookTime: 20,
-    },
-    {
-        id: 2,
-        title: 'Nasi Campur Sayur',
-        category: 'Rendah Kalori',
-        goal: 'Diet',
-        image: laukImage,
-        description: 'Kombinasi nasi dan beraneka lauk pauk bergizi seimbang untuk hidangan keluarga.',
-        calories: 310,
-        protein: 28,
-        cookTime: 15,
-    },
-    {
-        id: 3,
-        title: 'Jus Detoks Hidrasi',
-        category: 'Tinggi Serat',
-        goal: 'Diet',
-        image: hidrasiImage,
-        description: 'Minuman pelepas dahaga yang kaya serat dan baik untuk melancarkan pencernaan harian.',
-        calories: 120,
-        protein: 2,
-        cookTime: 5,
-    },
-    {
-        id: 4,
-        title: 'Pecel Sayur Madiun',
-        category: 'Makan Siang',
-        goal: 'Diet',
-        image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&auto=format&fit=crop',
-        description: 'Pecel sayur khas Madiun dengan bumbu kacang gurih dan sayuran segar pilihan, rendah kalori namun mengenyangkan.',
-        calories: 320,
-        protein: 8,
-        cookTime: 30,
-    },
-    {
-        id: 5,
-        title: 'Dada Ayam Bakar Madu',
-        category: 'Makan Siang',
-        goal: 'Bulking',
-        image: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=800&auto=format&fit=crop',
-        description: 'Dada ayam empuk dengan olesan madu dan rempah, tinggi protein untuk pertumbuhan otot maksimal.',
-        calories: 680,
-        protein: 45,
-        cookTime: 35,
-    },
-    {
-        id: 6,
-        title: 'Smoothie Bowl Berry',
-        category: 'Cemilan',
-        goal: 'Diet',
-        image: 'https://images.unsplash.com/photo-1494390248081-4e521a5940db?w=800&auto=format&fit=crop',
-        description: 'Cemilan segar kaya antioksidan dengan topping granola dan buah beri segar.',
-        calories: 250,
-        protein: 10,
-        cookTime: 10,
-    },
-];
-
 const processedRecipes = computed(() => {
     // Step 1: Filter by category, goal, and search
-    let result = recipes.filter(recipe => {
+    let result = props.recipes.filter(recipe => {
         const matchesSearch = recipe.title.toLowerCase().includes(searchQuery.value.toLowerCase());
         const matchesCategory = activeCategory.value === 'Semua' || recipe.category === activeCategory.value;
         const matchesGoal = activeGoal.value === 'Semua' || recipe.goal === activeGoal.value;
@@ -132,7 +67,7 @@ const processedRecipes = computed(() => {
             result = [...result].sort((a, b) => b.protein - a.protein);
             break;
         case 'time-asc':
-            result = [...result].sort((a, b) => a.cookTime - b.cookTime);
+            result = [...result].sort((a, b) => a.cook_time - b.cook_time);
             break;
         default:
             break;
@@ -306,7 +241,7 @@ const processedRecipes = computed(() => {
                                         </span>
                                         <span class="inline-flex items-center gap-1.5 bg-zinc-100 text-zinc-600 text-[11px] font-bold px-3 py-1 rounded-full">
                                             <Clock class="w-3 h-3" />
-                                            {{ recipe.cookTime }} menit
+                                            {{ recipe.cook_time }} menit
                                         </span>
                                     </div>
 
