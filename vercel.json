@@ -22,7 +22,7 @@
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "false",
+        "APP_DEBUG": "true",
         "APP_URL": "https://segizi.vercel.app",
         "APP_KEY": "base64:rklAMNpZcEbp4o88ib1qzqQFDA4WGWNewNbiiw1+p/Y=",
         "LOG_CHANNEL": "stderr",
