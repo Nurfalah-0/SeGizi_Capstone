@@ -17,7 +17,7 @@ class AdminUserSeeder extends Seeder
             ['email' => 'NutriFlow@gmail.com'],
             [
                 'name' => 'NutriFlow Master Admin',
-                'password' => Hash::make('Admin 123321'),
+                'password' => Hash::make('admin123'),
                 'role' => 'admin',
                 'email_verified_at' => now(),
             ]

@@ -9,12 +9,8 @@ use Illuminate\Support\Facades\Artisan;
 // Handle the request
 $request = Request::capture();
 
-// Ensure the SQLite database exists in /tmp
-$dbPath = '/tmp/database.sqlite';
-if (!file_exists($dbPath)) {
-    touch($dbPath);
-    $kernel = $app->make(\Illuminate\Contracts\Console\Kernel::class);
-    $kernel->call('migrate', ['--force' => true, '--seed' => true]);
-}
+// Run migrations and seeds on-the-fly for serverless in-memory DB
+$kernel = $app->make(\Illuminate\Contracts\Console\Kernel::class);
+$kernel->call('migrate', ['--force' => true, '--seed' => true]);
 
 $app->handleRequest($request);
