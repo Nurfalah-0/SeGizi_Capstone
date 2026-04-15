@@ -48,10 +48,20 @@ Route::middleware(['auth'])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
 
     // Admin routes
-    Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
-        Route::get('/dashboard', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])->name('dashboard');
-        Route::patch('/articles/{article}/toggle-popular', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'toggleArticlePopular'])->name('articles.toggle-popular');
-        Route::patch('/recipes/{recipe}/toggle-popular', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'toggleRecipePopular'])->name('recipes.toggle-popular');
+    Route::middleware(['admin'])->group(function () {
+        Route::get('dashboardadmin', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])->name('admin.dashboard');
+        
+        // CRUD Articles
+        Route::post('admin/articles', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'storeArticle'])->name('admin.articles.store');
+        Route::post('admin/articles/{article}', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'updateArticle'])->name('admin.articles.update');
+        Route::delete('admin/articles/{article}', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'destroyArticle'])->name('admin.articles.destroy');
+        Route::patch('admin/articles/{article}/toggle-popular', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'toggleArticlePopular'])->name('admin.articles.toggle-popular');
+
+        // CRUD Recipes
+        Route::post('admin/recipes', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'storeRecipe'])->name('admin.recipes.store');
+        Route::post('admin/recipes/{recipe}', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'updateRecipe'])->name('admin.recipes.update');
+        Route::delete('admin/recipes/{recipe}', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'destroyRecipe'])->name('admin.recipes.destroy');
+        Route::patch('admin/recipes/{recipe}/toggle-popular', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'toggleRecipePopular'])->name('admin.recipes.toggle-popular');
     });
 });
 

@@ -31,23 +31,23 @@ defineProps<Props>();
     </DropdownMenuLabel>
     <DropdownMenuSeparator />
     <DropdownMenuGroup>
-        <DropdownMenuItem :as-child="true">
-            <Link class="block w-full cursor-pointer" :href="edit()" prefetch>
-                <Settings class="mr-2 h-4 w-4" />
+        <DropdownMenuItem :as-child="true" class="p-3 focus:bg-zinc-50 rounded-xl transition-colors">
+            <Link class="flex items-center w-full cursor-pointer text-zinc-900 font-bold" :href="edit()" prefetch>
+                <Settings class="mr-3 h-4 w-4 text-zinc-400 group-hover:text-zinc-900" />
                 Settings
             </Link>
         </DropdownMenuItem>
     </DropdownMenuGroup>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem :as-child="true">
+    <DropdownMenuSeparator class="bg-zinc-50" />
+    <DropdownMenuItem :as-child="true" class="p-3 focus:bg-red-50 rounded-xl transition-colors">
         <Link
-            class="block w-full cursor-pointer"
+            class="flex items-center w-full cursor-pointer text-red-500 font-bold"
             :href="logout()"
             @click="handleLogout"
             as="button"
             data-test="logout-button"
         >
-            <LogOut class="mr-2 h-4 w-4" />
+            <LogOut class="mr-3 h-4 w-4" />
             Log out
         </Link>
     </DropdownMenuItem>

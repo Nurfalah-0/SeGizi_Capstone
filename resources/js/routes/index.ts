@@ -211,8 +211,7 @@ register.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     register.form = registerForm
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:9
  * @route '/'
  */
 export const home = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -226,8 +225,7 @@ home.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:9
  * @route '/'
  */
 home.url = (options?: RouteQueryOptions) => {
@@ -235,8 +233,7 @@ home.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:9
  * @route '/'
  */
 home.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -244,8 +241,7 @@ home.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:9
  * @route '/'
  */
 home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -254,8 +250,7 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:9
  * @route '/'
  */
     const homeForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -264,8 +259,7 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:9
  * @route '/'
  */
         homeForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -273,8 +267,7 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:9
  * @route '/'
  */
         homeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -679,7 +672,7 @@ terms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     terms.form = termsForm
 /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:42
  * @route '/recommendations'
  */
 export const recommendations = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -693,7 +686,7 @@ recommendations.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:42
  * @route '/recommendations'
  */
 recommendations.url = (options?: RouteQueryOptions) => {
@@ -701,7 +694,7 @@ recommendations.url = (options?: RouteQueryOptions) => {
 }
 
 /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:42
  * @route '/recommendations'
  */
 recommendations.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -709,7 +702,7 @@ recommendations.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => (
     method: 'get',
 })
 /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:42
  * @route '/recommendations'
  */
 recommendations.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -718,7 +711,7 @@ recommendations.head = (options?: RouteQueryOptions): RouteDefinition<'head'> =>
 })
 
     /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:42
  * @route '/recommendations'
  */
     const recommendationsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -727,7 +720,7 @@ recommendations.head = (options?: RouteQueryOptions): RouteDefinition<'head'> =>
     })
 
             /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:42
  * @route '/recommendations'
  */
         recommendationsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -735,7 +728,7 @@ recommendations.head = (options?: RouteQueryOptions): RouteDefinition<'head'> =>
             method: 'get',
         })
             /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:42
  * @route '/recommendations'
  */
         recommendationsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

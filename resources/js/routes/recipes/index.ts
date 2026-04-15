@@ -1,7 +1,6 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:24
  * @route '/recipes'
  */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -15,8 +14,7 @@ index.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:24
  * @route '/recipes'
  */
 index.url = (options?: RouteQueryOptions) => {
@@ -24,8 +22,7 @@ index.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:24
  * @route '/recipes'
  */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -33,8 +30,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:24
  * @route '/recipes'
  */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -43,8 +39,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:24
  * @route '/recipes'
  */
     const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -53,8 +48,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:24
  * @route '/recipes'
  */
         indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -62,8 +56,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:24
  * @route '/recipes'
  */
         indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -78,7 +71,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     index.form = indexForm
 /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:29
  * @route '/recipes/{recipe}'
  */
 export const show = (args: { recipe: string | number } | [recipe: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -92,7 +85,7 @@ show.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:29
  * @route '/recipes/{recipe}'
  */
 show.url = (args: { recipe: string | number } | [recipe: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -119,7 +112,7 @@ show.url = (args: { recipe: string | number } | [recipe: string | number ] | str
 }
 
 /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:29
  * @route '/recipes/{recipe}'
  */
 show.get = (args: { recipe: string | number } | [recipe: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -127,7 +120,7 @@ show.get = (args: { recipe: string | number } | [recipe: string | number ] | str
     method: 'get',
 })
 /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:29
  * @route '/recipes/{recipe}'
  */
 show.head = (args: { recipe: string | number } | [recipe: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -136,7 +129,7 @@ show.head = (args: { recipe: string | number } | [recipe: string | number ] | st
 })
 
     /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:29
  * @route '/recipes/{recipe}'
  */
     const showForm = (args: { recipe: string | number } | [recipe: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -145,7 +138,7 @@ show.head = (args: { recipe: string | number } | [recipe: string | number ] | st
     })
 
             /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:29
  * @route '/recipes/{recipe}'
  */
         showForm.get = (args: { recipe: string | number } | [recipe: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -153,7 +146,7 @@ show.head = (args: { recipe: string | number } | [recipe: string | number ] | st
             method: 'get',
         })
             /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:29
  * @route '/recipes/{recipe}'
  */
         showForm.head = (args: { recipe: string | number } | [recipe: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

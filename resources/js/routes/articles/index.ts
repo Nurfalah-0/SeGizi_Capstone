@@ -1,7 +1,6 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:33
  * @route '/articles'
  */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -15,8 +14,7 @@ index.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:33
  * @route '/articles'
  */
 index.url = (options?: RouteQueryOptions) => {
@@ -24,8 +22,7 @@ index.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:33
  * @route '/articles'
  */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -33,8 +30,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:33
  * @route '/articles'
  */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -43,8 +39,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:33
  * @route '/articles'
  */
     const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -53,8 +48,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:33
  * @route '/articles'
  */
         indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -62,8 +56,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
-* @see \Inertia\Controller::__invoke
- * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+ * @see routes/web.php:33
  * @route '/articles'
  */
         indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -78,7 +71,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     index.form = indexForm
 /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:38
  * @route '/articles/{article}'
  */
 export const show = (args: { article: string | number } | [article: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -92,7 +85,7 @@ show.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:38
  * @route '/articles/{article}'
  */
 show.url = (args: { article: string | number } | [article: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -119,7 +112,7 @@ show.url = (args: { article: string | number } | [article: string | number ] | s
 }
 
 /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:38
  * @route '/articles/{article}'
  */
 show.get = (args: { article: string | number } | [article: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -127,7 +120,7 @@ show.get = (args: { article: string | number } | [article: string | number ] | s
     method: 'get',
 })
 /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:38
  * @route '/articles/{article}'
  */
 show.head = (args: { article: string | number } | [article: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -136,7 +129,7 @@ show.head = (args: { article: string | number } | [article: string | number ] | 
 })
 
     /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:38
  * @route '/articles/{article}'
  */
     const showForm = (args: { article: string | number } | [article: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -145,7 +138,7 @@ show.head = (args: { article: string | number } | [article: string | number ] | 
     })
 
             /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:38
  * @route '/articles/{article}'
  */
         showForm.get = (args: { article: string | number } | [article: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -153,7 +146,7 @@ show.head = (args: { article: string | number } | [article: string | number ] | 
             method: 'get',
         })
             /**
- * @see [serialized-closure]:2
+ * @see routes/web.php:38
  * @route '/articles/{article}'
  */
         showForm.head = (args: { article: string | number } | [article: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

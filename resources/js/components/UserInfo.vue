@@ -10,12 +10,11 @@ type Props = {
 };
 
 const props = withDefaults(defineProps<Props>(), {
-    showEmail: false,
+    showEmail: true, // Default to true for better look in premium sidebar
 });
 
 const { getInitials } = useInitials();
 
-// Compute whether we should show the avatar image
 const showAvatar = computed(
     () => props.user?.avatar && props.user?.avatar !== '',
 );
@@ -23,16 +22,16 @@ const showAvatar = computed(
 
 <template>
     <template v-if="user">
-        <Avatar class="h-8 w-8 overflow-hidden rounded-lg">
+        <Avatar class="h-10 w-10 overflow-hidden rounded-xl shadow-sm border border-zinc-100">
             <AvatarImage v-if="showAvatar" :src="user.avatar!" :alt="user.name" />
-            <AvatarFallback class="rounded-lg text-black dark:text-white">
+            <AvatarFallback class="rounded-xl bg-[#36d362] text-white font-black text-xs">
                 {{ getInitials(user.name) }}
             </AvatarFallback>
         </Avatar>
 
-        <div class="grid flex-1 text-left text-sm leading-tight">
-            <span class="truncate font-medium">{{ user.name }}</span>
-            <span v-if="showEmail" class="truncate text-xs text-muted-foreground">{{
+        <div class="grid flex-1 text-left leading-tight ml-3">
+            <span class="truncate font-black text-sm text-zinc-900">{{ user.name }}</span>
+            <span v-if="showEmail" class="truncate text-[11px] font-bold text-zinc-400 tracking-tighter">{{
                 user.email
             }}</span>
         </div>
