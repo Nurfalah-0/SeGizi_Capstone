@@ -14,5 +14,11 @@ class Article extends Model
         'read_time',
         'image',
         'is_popular',
+        'content',
+    ];
+
+    protected $casts = [
+        'is_popular' => 'boolean',
+        'content' => 'array',
     ];
 }

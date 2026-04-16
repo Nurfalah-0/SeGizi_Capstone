@@ -1,0 +1,1 @@
+import{c as a}from"./createLucideIcon-efscoRMt.js";const o=a("ArrowLeftIcon",[["path",{d:"m12 19-7-7 7-7",key:"1l729n"}],["path",{d:"M19 12H5",key:"x3x0zl"}]]),r="/build/assets/hidrasi-o4Jj-ATl.jpg";export{o as A,r as h};

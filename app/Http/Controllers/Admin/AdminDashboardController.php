@@ -28,6 +28,8 @@ class AdminDashboardController extends Controller
             'author' => 'required|string',
             'read_time' => 'required|string',
             'image' => 'required|string',
+            'content' => 'nullable|string', // Pastikan dikirim sebagai string JSON dari frontend
+            'is_popular' => 'nullable|boolean',
         ]);
 
         Article::create($validated);
@@ -43,6 +45,8 @@ class AdminDashboardController extends Controller
             'author' => 'required|string',
             'read_time' => 'required|string',
             'image' => 'required|string',
+            'content' => 'nullable|string',
+            'is_popular' => 'nullable|boolean',
         ]);
 
         $article->update($validated);
@@ -73,6 +77,7 @@ class AdminDashboardController extends Controller
             'cook_time' => 'required|integer',
             'image' => 'required|string',
             'description' => 'required|string',
+            'is_popular' => 'nullable|boolean',
         ]);
 
         Recipe::create($validated);

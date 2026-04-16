@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Article;
+use App\Models\Recipe;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
@@ -9,8 +11,8 @@ use Laravel\Fortify\Features;
 Route::get('/', function () {
     return inertia('Welcome', [
         'canRegister' => Features::enabled(Features::registration()),
-        'popularArticles' => \App\Models\Article::where('is_popular', true)->take(3)->get(),
-        'popularRecipes' => \App\Models\Recipe::where('is_popular', true)->take(3)->get(),
+        'popularArticles' => Article::where('is_popular', true)->take(3)->get(),
+        'popularRecipes' => Recipe::where('is_popular', true)->take(3)->get(),
     ]);
 })->name('home');
 
@@ -23,19 +25,19 @@ Route::inertia('terms', 'Static/Terms')->name('terms');
 
 Route::get('recipes', function () {
     return inertia('Recipes/Index', [
-        'recipes' => \App\Models\Recipe::all(),
+        'recipes' => Recipe::all(),
     ]);
 })->name('recipes.index');
-Route::get('recipes/{recipe}', function ($recipe) {
+Route::get('recipes/{recipe}', function (Recipe $recipe) {
     return inertia('Recipes/Show', ['recipe' => $recipe]);
 })->name('recipes.show');
 
 Route::get('articles', function () {
     return inertia('Articles/Index', [
-        'articles' => \App\Models\Article::all(),
+        'articles' => Article::all(),
     ]);
 })->name('articles.index');
-Route::get('articles/{article}', function ($article) {
+Route::get('articles/{article}', function (Article $article) {
     return inertia('Articles/Show', ['article' => $article]);
 })->name('articles.show');
 
@@ -45,12 +47,17 @@ Route::get('recommendations', function () {
 
 // Protected routes - require login
 Route::middleware(['auth'])->group(function () {
-    Route::inertia('dashboard', 'Dashboard')->name('dashboard');
+    Route::get('dashboard', function () {
+        if (auth()->user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+        return inertia('Dashboard');
+    })->name('dashboard');
 
     // Admin routes
     Route::middleware(['admin'])->group(function () {
         Route::get('dashboardadmin', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])->name('admin.dashboard');
-        
+
         // CRUD Articles
         Route::post('admin/articles', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'storeArticle'])->name('admin.articles.store');
         Route::post('admin/articles/{article}', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'updateArticle'])->name('admin.articles.update');
@@ -66,5 +73,3 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__ . '/settings.php';
-
-

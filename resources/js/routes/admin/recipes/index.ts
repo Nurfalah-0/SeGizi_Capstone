@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::store
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:65
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:69
  * @route '/admin/recipes'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::store
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:65
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:69
  * @route '/admin/recipes'
  */
 store.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::store
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:65
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:69
  * @route '/admin/recipes'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -35,7 +35,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::store
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:65
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:69
  * @route '/admin/recipes'
  */
     const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -45,7 +45,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::store
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:65
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:69
  * @route '/admin/recipes'
  */
         storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -56,10 +56,10 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::update
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:82
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:87
  * @route '/admin/recipes/{recipe}'
  */
-export const update = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const update = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: update.url(args, options),
     method: 'post',
 })
@@ -71,10 +71,10 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::update
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:82
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:87
  * @route '/admin/recipes/{recipe}'
  */
-update.url = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+update.url = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { recipe: args }
     }
@@ -104,30 +104,30 @@ update.url = (args: { recipe: string | number | { id: string | number } } | [rec
 
 /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::update
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:82
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:87
  * @route '/admin/recipes/{recipe}'
  */
-update.post = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+update.post = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: update.url(args, options),
     method: 'post',
 })
 
     /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::update
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:82
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:87
  * @route '/admin/recipes/{recipe}'
  */
-    const updateForm = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const updateForm = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: update.url(args, options),
         method: 'post',
     })
 
             /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::update
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:82
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:87
  * @route '/admin/recipes/{recipe}'
  */
-        updateForm.post = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        updateForm.post = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: update.url(args, options),
             method: 'post',
         })
@@ -135,10 +135,10 @@ update.post = (args: { recipe: string | number | { id: string | number } } | [re
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::destroy
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:99
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:104
  * @route '/admin/recipes/{recipe}'
  */
-export const destroy = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -150,10 +150,10 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::destroy
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:99
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:104
  * @route '/admin/recipes/{recipe}'
  */
-destroy.url = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { recipe: args }
     }
@@ -183,20 +183,20 @@ destroy.url = (args: { recipe: string | number | { id: string | number } } | [re
 
 /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::destroy
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:99
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:104
  * @route '/admin/recipes/{recipe}'
  */
-destroy.delete = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
 
     /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::destroy
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:99
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:104
  * @route '/admin/recipes/{recipe}'
  */
-    const destroyForm = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const destroyForm = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: destroy.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'DELETE',
@@ -208,10 +208,10 @@ destroy.delete = (args: { recipe: string | number | { id: string | number } } | 
 
             /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::destroy
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:99
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:104
  * @route '/admin/recipes/{recipe}'
  */
-        destroyForm.delete = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        destroyForm.delete = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: destroy.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'DELETE',
@@ -224,10 +224,10 @@ destroy.delete = (args: { recipe: string | number | { id: string | number } } | 
     destroy.form = destroyForm
 /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::togglePopular
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:105
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:110
  * @route '/admin/recipes/{recipe}/toggle-popular'
  */
-export const togglePopular = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const togglePopular = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: togglePopular.url(args, options),
     method: 'patch',
 })
@@ -239,10 +239,10 @@ togglePopular.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::togglePopular
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:105
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:110
  * @route '/admin/recipes/{recipe}/toggle-popular'
  */
-togglePopular.url = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+togglePopular.url = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { recipe: args }
     }
@@ -272,20 +272,20 @@ togglePopular.url = (args: { recipe: string | number | { id: string | number } }
 
 /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::togglePopular
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:105
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:110
  * @route '/admin/recipes/{recipe}/toggle-popular'
  */
-togglePopular.patch = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+togglePopular.patch = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: togglePopular.url(args, options),
     method: 'patch',
 })
 
     /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::togglePopular
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:105
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:110
  * @route '/admin/recipes/{recipe}/toggle-popular'
  */
-    const togglePopularForm = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const togglePopularForm = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: togglePopular.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'PATCH',
@@ -297,10 +297,10 @@ togglePopular.patch = (args: { recipe: string | number | { id: string | number }
 
             /**
 * @see \App\Http\Controllers\Admin\AdminDashboardController::togglePopular
- * @see app/Http/Controllers/Admin/AdminDashboardController.php:105
+ * @see app/Http/Controllers/Admin/AdminDashboardController.php:110
  * @route '/admin/recipes/{recipe}/toggle-popular'
  */
-        togglePopularForm.patch = (args: { recipe: string | number | { id: string | number } } | [recipe: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        togglePopularForm.patch = (args: { recipe: number | { id: number } } | [recipe: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: togglePopular.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'PATCH',
