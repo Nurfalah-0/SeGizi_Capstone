@@ -228,102 +228,127 @@ const getFilteredData = () => {
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- SHARED MODAL COMPONENT (Consistent with App Design) -->
-        <div v-if="showModal" class="fixed inset-0 z-[100] flex items-center justify-center p-6">
-            <div class="absolute inset-0 bg-zinc-900/40 backdrop-blur-md animate-in fade-in duration-300" @click="showModal = false"></div>
-            <Card class="relative w-full max-w-2xl border-none shadow-2xl rounded-[48px] overflow-hidden bg-white animate-in zoom-in-95 duration-500">
-                <CardHeader class="p-12 pb-6 flex flex-row items-center justify-between border-b border-zinc-50">
+        </div>        <!-- PREMIUM MODAL COMPONENT (State of the Art) -->
+        <div v-if="showModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <div class="absolute inset-0 bg-zinc-950/60 backdrop-blur-xl animate-in fade-in duration-500" @click="showModal = false"></div>
+            <Card class="relative w-full max-w-2xl border-none shadow-[0_32px_64px_-12px_rgba(0,0,0,0.14)] rounded-[48px] overflow-hidden bg-white animate-in zoom-in-95 slide-in-from-bottom-10 duration-700">
+                <!-- Glossy Header -->
+                <CardHeader class="p-10 pb-6 flex flex-row items-center justify-between border-b border-zinc-100/50 bg-gradient-to-b from-zinc-50/50 to-white">
                     <div class="space-y-1">
-                        <div class="text-[#36d362] font-black text-[10px] uppercase tracking-widest">Editor Konten</div>
-                        <CardTitle class="text-3xl font-black text-zinc-900 tracking-tighter">
-                            {{ editingItem ? 'Update' : 'Tambah' }} {{ activeTab === 'articles' ? 'Artikel' : 'Resep' }}
+                        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-50 text-green-600 rounded-full font-black text-[9px] uppercase tracking-[0.2em]">
+                            <Zap class="w-3 h-3" />
+                            Creative Studio
+                        </div>
+                        <CardTitle class="text-4xl font-black text-zinc-900 tracking-tight leading-none mt-2">
+                            {{ editingItem ? 'Edit' : 'Create' }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-zinc-900 to-zinc-500">{{ activeTab === 'articles' ? 'Article' : 'Recipe' }}</span>
                         </CardTitle>
                     </div>
-                    <button @click="showModal = false" class="p-3 bg-zinc-50 hover:bg-zinc-100 rounded-full transition-all">
-                        <X class="w-6 h-6 text-zinc-400" />
+                    <button @click="showModal = false" class="group p-4 bg-zinc-50 hover:bg-zinc-900 rounded-full transition-all duration-300">
+                        <X class="w-6 h-6 text-zinc-400 group-hover:text-white transition-colors" />
                     </button>
                 </CardHeader>
-                <CardContent class="p-12 pt-8 max-h-[75vh] overflow-y-auto custom-scrollbar bg-zinc-50/20">
-                    <form @submit.prevent="submitForm" class="space-y-10">
+
+                <CardContent class="p-10 pt-8 max-h-[70vh] overflow-y-auto custom-scrollbar bg-white">
+                    <form @submit.prevent="submitForm" class="space-y-8">
                         <template v-if="activeTab === 'articles'">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                <div class="space-y-3">
-                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Judul Artikel</label>
-                                    <Input v-model="articleForm.title" placeholder="Judul artikel..." class="h-14 bg-white border-zinc-100 rounded-2xl font-bold" required />
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-2">
+                                <div class="group space-y-2.5">
+                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1 transition-colors group-focus-within:text-[#36d362]">Judul Artikel</label>
+                                    <div class="relative">
+                                        <Input v-model="articleForm.title" placeholder="Masukan judul menarik..." class="h-14 bg-zinc-50/50 border-zinc-100 rounded-2xl font-bold px-6 border-2 focus-visible:ring-0 focus-visible:border-[#36d362] transition-all placeholder:text-zinc-300" required />
+                                    </div>
                                 </div>
-                                <div class="space-y-3">
-                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Kategori</label>
-                                    <Input v-model="articleForm.category" placeholder="mis: Nutrisi" class="h-14 bg-white border-zinc-100 rounded-2xl font-bold" required />
-                                </div>
-                            </div>
-                            <!-- ... Other article fields ... -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                <div class="space-y-3">
-                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Penulis</label>
-                                    <Input v-model="articleForm.author" placeholder="Nama penulis..." class="h-14 bg-white border-zinc-100 rounded-2xl font-bold" required />
-                                </div>
-                                <div class="space-y-3">
-                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Waktu Baca</label>
-                                    <Input v-model="articleForm.read_time" placeholder="mis: 5 min baca" class="h-14 bg-white border-zinc-100 rounded-2xl font-bold" required />
+                                <div class="group space-y-2.5">
+                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1 transition-colors group-focus-within:text-[#36d362]">Kategori</label>
+                                    <Input v-model="articleForm.category" placeholder="mis: Nutrisi & Gizi" class="h-14 bg-zinc-50/50 border-zinc-100 rounded-2xl font-bold px-6 border-2 focus-visible:ring-0 focus-visible:border-[#36d362] transition-all placeholder:text-zinc-300" required />
                                 </div>
                             </div>
-                            <div class="space-y-3">
-                                <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">URL Gambar</label>
-                                <Input v-model="articleForm.image" placeholder="https://..." class="h-14 bg-white border-zinc-100 rounded-2xl font-bold" required />
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="group space-y-2.5">
+                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1 transition-colors group-focus-within:text-[#36d362]">Penulis</label>
+                                    <div class="relative">
+                                        <User class="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-300" />
+                                        <Input v-model="articleForm.author" placeholder="Nama penulis..." class="h-14 pl-12 bg-zinc-50/50 border-zinc-100 rounded-2xl font-bold px-6 border-2 focus-visible:ring-0 focus-visible:border-[#36d362] transition-all placeholder:text-zinc-300" required />
+                                    </div>
+                                </div>
+                                <div class="group space-y-2.5">
+                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1 transition-colors group-focus-within:text-[#36d362]">Waktu Baca</label>
+                                    <div class="relative">
+                                        <Clock class="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-300" />
+                                        <Input v-model="articleForm.read_time" placeholder="mis: 5 min baca" class="h-14 pl-12 bg-zinc-50/50 border-zinc-100 rounded-2xl font-bold px-6 border-2 focus-visible:ring-0 focus-visible:border-[#36d362] transition-all placeholder:text-zinc-300" required />
+                                    </div>
+                                </div>
                             </div>
-                            <div class="space-y-3">
-                                <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Ringkasan</label>
-                                <textarea v-model="articleForm.excerpt" rows="3" class="w-full bg-white border-zinc-100 rounded-2xl p-6 text-sm font-bold focus:ring-1 focus:ring-[#36d362] outline-none border" placeholder="Tulis ringkasan..."></textarea>
+
+                            <div class="group space-y-2.5">
+                                <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1 transition-colors group-focus-within:text-[#36d362]">Link Gambar Utama</label>
+                                <div class="relative">
+                                    <ImageIcon class="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-300" />
+                                    <Input v-model="articleForm.image" placeholder="/images/artikel.jpg atau https://..." class="h-14 pl-12 bg-zinc-50/50 border-zinc-100 rounded-2xl font-bold px-6 border-2 focus-visible:ring-0 focus-visible:border-[#36d362] transition-all placeholder:text-zinc-300" required />
+                                </div>
+                            </div>
+
+                            <div class="group space-y-2.5">
+                                <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1 transition-colors group-focus-within:text-[#36d362]">Ringkasan Pendek</label>
+                                <textarea v-model="articleForm.excerpt" rows="3" class="w-full bg-zinc-50/50 border-zinc-100 rounded-3xl p-6 text-sm font-bold focus:ring-0 focus:border-[#36d362] outline-none border-2 transition-all placeholder:text-zinc-300" placeholder="Tulis sedikit tentang artikel ini..."></textarea>
                             </div>
                         </template>
 
                         <template v-else>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                <div class="space-y-3">
-                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Nama Menu</label>
-                                    <Input v-model="recipeForm.title" placeholder="Nama resep..." class="h-14 bg-white border-zinc-100 rounded-2xl font-bold" required />
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-2">
+                                <div class="group space-y-2.5">
+                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1 transition-colors group-focus-within:text-[#36d362]">Nama Resep</label>
+                                    <Input v-model="recipeForm.title" placeholder="Nama masakan..." class="h-14 bg-zinc-50/50 border-zinc-100 rounded-2xl font-bold px-6 border-2 focus-visible:ring-0 focus-visible:border-[#36d362] transition-all placeholder:text-zinc-300" required />
                                 </div>
-                                <div class="space-y-3">
-                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Kategori</label>
-                                    <Input v-model="recipeForm.category" placeholder="mis: Sarapan" class="h-14 bg-white border-zinc-100 rounded-2xl font-bold" required />
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                <div class="space-y-3">
-                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Kalori</label>
-                                    <Input type="number" v-model="recipeForm.calories" class="h-14 bg-white border-zinc-100 rounded-2xl font-bold" required />
-                                </div>
-                                <div class="space-y-3">
-                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Protein</label>
-                                    <Input type="number" v-model="recipeForm.protein" class="h-14 bg-white border-zinc-100 rounded-2xl font-bold" required />
-                                </div>
-                                <div class="space-y-3">
-                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Masak (m)</label>
-                                    <Input type="number" v-model="recipeForm.cook_time" class="h-14 bg-white border-zinc-100 rounded-2xl font-bold" required />
+                                <div class="group space-y-2.5">
+                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1 transition-colors group-focus-within:text-[#36d362]">Kategori</label>
+                                    <Input v-model="recipeForm.category" placeholder="mis: Makan Siang" class="h-14 bg-zinc-50/50 border-zinc-100 rounded-2xl font-bold px-6 border-2 focus-visible:ring-0 focus-visible:border-[#36d362] transition-all placeholder:text-zinc-300" required />
                                 </div>
                             </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                                <div class="space-y-3">
-                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Target</label>
-                                    <Input v-model="recipeForm.goal" placeholder="Diet/Bulking" class="h-14 bg-white border-zinc-100 rounded-2xl font-bold" />
+
+                            <div class="flex flex-wrap gap-6 p-6 bg-zinc-50/80 rounded-[32px] border border-zinc-100/50">
+                                <div class="flex-1 min-w-[120px] group space-y-2.5">
+                                    <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest px-1">Kalori</label>
+                                    <Input type="number" v-model="recipeForm.calories" class="h-12 bg-white border-zinc-200 rounded-xl font-bold px-4 focus-visible:ring-0 focus-visible:border-[#36d362] transition-all" required />
                                 </div>
-                                <div class="space-y-3">
+                                <div class="flex-1 min-w-[120px] group space-y-2.5">
+                                    <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest px-1">Protein (g)</label>
+                                    <Input type="number" v-model="recipeForm.protein" class="h-12 bg-white border-zinc-200 rounded-xl font-bold px-4 focus-visible:ring-0 focus-visible:border-[#36d362] transition-all" required />
+                                </div>
+                                <div class="flex-1 min-w-[120px] group space-y-2.5">
+                                    <label class="text-[10px] font-black text-zinc-400 uppercase tracking-widest px-1">Waktu (m)</label>
+                                    <Input type="number" v-model="recipeForm.cook_time" class="h-12 bg-white border-zinc-200 rounded-xl font-bold px-4 focus-visible:ring-0 focus-visible:border-[#36d362] transition-all" required />
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="group space-y-2.5">
+                                    <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Target Menu</label>
+                                    <Input v-model="recipeForm.goal" placeholder="Diet / Bulking" class="h-14 bg-zinc-50/50 border-zinc-100 rounded-2xl font-bold px-6 border-2 focus-visible:ring-0 focus-visible:border-[#36d362] transition-all placeholder:text-zinc-300" required />
+                                </div>
+                                <div class="group space-y-2.5">
                                     <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">URL Gambar</label>
-                                    <Input v-model="recipeForm.image" placeholder="https://..." class="h-14 bg-white border-zinc-100 rounded-2xl font-bold" required />
+                                    <div class="relative">
+                                        <ImageIcon class="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-300" />
+                                        <Input v-model="recipeForm.image" placeholder="Link gambar..." class="h-14 pl-12 bg-zinc-50/50 border-zinc-100 rounded-2xl font-bold px-6 border-2 focus-visible:ring-0 focus-visible:border-[#36d362] transition-all placeholder:text-zinc-300" required />
+                                    </div>
                                 </div>
                             </div>
-                            <div class="space-y-3">
-                                <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1">Instruksi</label>
-                                <textarea v-model="recipeForm.description" rows="3" class="w-full bg-white border-zinc-100 rounded-2xl p-6 text-sm font-bold focus:ring-1 focus:ring-[#36d362] outline-none border" placeholder="Langkah-langkah..."></textarea>
+
+                            <div class="group space-y-2.5">
+                                <label class="text-[11px] font-black text-zinc-400 uppercase tracking-widest px-1 transition-colors group-focus-within:text-[#36d362]">Langkah Persiapan</label>
+                                <textarea v-model="recipeForm.description" rows="3" class="w-full bg-zinc-50/50 border-zinc-100 rounded-3xl p-6 text-sm font-bold focus:ring-0 focus:border-[#36d362] outline-none border-2 transition-all placeholder:text-zinc-300" placeholder="Jelaskan cara memasaknya..."></textarea>
                             </div>
                         </template>
 
-                        <div class="pt-6">
-                            <Button type="submit" class="w-full h-16 bg-zinc-900 hover:bg-zinc-800 text-white rounded-[24px] font-black text-lg transition-all active:scale-95 shadow-xl shadow-zinc-200" :disabled="articleForm.processing || recipeForm.processing">
-                                {{ editingItem ? 'Update Konten' : 'Terbitkan Konten' }}
-                                <ChevronRight class="w-5 h-5 ml-2" />
+                        <div class="pt-6 relative">
+                            <Button type="submit" class="w-full h-20 bg-zinc-900 hover:bg-zinc-800 text-white rounded-[32px] font-black text-xl transition-all active:scale-[0.98] shadow-[0_12px_24px_-8px_rgba(0,0,0,0.3)] flex items-center justify-center gap-4 overflow-hidden group" :disabled="articleForm.processing || recipeForm.processing">
+                                <span class="relative z-10 flex items-center gap-3">
+                                    {{ editingItem ? 'Save Changes' : 'Publish Content' }}
+                                    <ChevronRight class="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                                </span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-zinc-800 to-zinc-900 group-hover:scale-110 transition-transform"></div>
                             </Button>
                         </div>
                     </form>
