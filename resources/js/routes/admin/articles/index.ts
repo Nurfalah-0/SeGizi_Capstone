@@ -59,7 +59,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:37
  * @route '/admin/articles/{article}'
  */
-export const update = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const update = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: update.url(args, options),
     method: 'post',
 })
@@ -74,7 +74,7 @@ update.definition = {
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:37
  * @route '/admin/articles/{article}'
  */
-update.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+update.url = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { article: args }
     }
@@ -107,7 +107,7 @@ update.url = (args: { article: number | { id: number } } | [article: number | { 
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:37
  * @route '/admin/articles/{article}'
  */
-update.post = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+update.post = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: update.url(args, options),
     method: 'post',
 })
@@ -117,7 +117,7 @@ update.post = (args: { article: number | { id: number } } | [article: number | {
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:37
  * @route '/admin/articles/{article}'
  */
-    const updateForm = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const updateForm = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: update.url(args, options),
         method: 'post',
     })
@@ -127,7 +127,7 @@ update.post = (args: { article: number | { id: number } } | [article: number | {
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:37
  * @route '/admin/articles/{article}'
  */
-        updateForm.post = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        updateForm.post = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: update.url(args, options),
             method: 'post',
         })
@@ -138,7 +138,7 @@ update.post = (args: { article: number | { id: number } } | [article: number | {
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:52
  * @route '/admin/articles/{article}'
  */
-export const destroy = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -153,7 +153,7 @@ destroy.definition = {
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:52
  * @route '/admin/articles/{article}'
  */
-destroy.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { article: args }
     }
@@ -186,7 +186,7 @@ destroy.url = (args: { article: number | { id: number } } | [article: number | {
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:52
  * @route '/admin/articles/{article}'
  */
-destroy.delete = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -196,7 +196,7 @@ destroy.delete = (args: { article: number | { id: number } } | [article: number 
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:52
  * @route '/admin/articles/{article}'
  */
-    const destroyForm = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const destroyForm = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: destroy.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'DELETE',
@@ -211,7 +211,7 @@ destroy.delete = (args: { article: number | { id: number } } | [article: number 
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:52
  * @route '/admin/articles/{article}'
  */
-        destroyForm.delete = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        destroyForm.delete = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: destroy.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'DELETE',
@@ -227,7 +227,7 @@ destroy.delete = (args: { article: number | { id: number } } | [article: number 
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:58
  * @route '/admin/articles/{article}/toggle-popular'
  */
-export const togglePopular = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const togglePopular = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: togglePopular.url(args, options),
     method: 'patch',
 })
@@ -242,7 +242,7 @@ togglePopular.definition = {
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:58
  * @route '/admin/articles/{article}/toggle-popular'
  */
-togglePopular.url = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+togglePopular.url = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { article: args }
     }
@@ -275,7 +275,7 @@ togglePopular.url = (args: { article: number | { id: number } } | [article: numb
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:58
  * @route '/admin/articles/{article}/toggle-popular'
  */
-togglePopular.patch = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+togglePopular.patch = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: togglePopular.url(args, options),
     method: 'patch',
 })
@@ -285,7 +285,7 @@ togglePopular.patch = (args: { article: number | { id: number } } | [article: nu
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:58
  * @route '/admin/articles/{article}/toggle-popular'
  */
-    const togglePopularForm = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const togglePopularForm = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: togglePopular.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'PATCH',
@@ -300,7 +300,7 @@ togglePopular.patch = (args: { article: number | { id: number } } | [article: nu
  * @see app/Http/Controllers/Admin/AdminDashboardController.php:58
  * @route '/admin/articles/{article}/toggle-popular'
  */
-        togglePopularForm.patch = (args: { article: number | { id: number } } | [article: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        togglePopularForm.patch = (args: { article: string | number | { id: string | number } } | [article: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: togglePopular.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'PATCH',
