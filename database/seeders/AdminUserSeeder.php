@@ -14,10 +14,10 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         User::updateOrCreate(
-            ['email' => 'NutriFlow@gmail.com'],
+            ['email' => 'admin@nutriflow.id'],
             [
-                'name' => 'NutriFlow Master Admin',
-                'password' => Hash::make('admin123'),
+                'name' => 'NutriFlow Admin',
+                'password' => Hash::make('nutriflow123'),
                 'role' => 'admin',
                 'email_verified_at' => now(),
             ]

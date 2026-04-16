@@ -32,6 +32,8 @@
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_ROUTES_CACHE": "/tmp/routes.php",
         "SESSION_DRIVER": "cookie",
+        "SESSION_SECURE_COOKIE": "true",
+        "SESSION_SAME_SITE": "lax",
         "CACHE_STORE": "array",
         "DB_CONNECTION": "sqlite",
         "DB_DATABASE": ":memory:"
