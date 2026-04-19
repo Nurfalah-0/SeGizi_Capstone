@@ -22,7 +22,7 @@ const page = usePage();
              class="global-animate-progress">
         </div>
         <!-- Navbar -->
-        <nav class="flex items-center justify-between px-8 md:px-20 h-[80px] bg-white/95 backdrop-blur-md fixed w-full top-0 z-[100] shadow-sm">
+        <nav class="flex items-center justify-between px-8 lg:px-20 h-[80px] bg-white/95 backdrop-blur-md fixed w-full top-0 z-[100] shadow-sm">
             <!-- Left: Logo -->
             <Link href="/" class="flex items-center gap-1 shrink-0">
                 <AppLogoIcon class="h-16 w-auto" />
@@ -30,7 +30,7 @@ const page = usePage();
             </Link>
 
             <!-- Center: Nav Links (desktop) -->
-            <div class="hidden md:flex items-center gap-8 text-[15px] font-semibold text-zinc-500 absolute left-1/2 -translate-x-1/2">
+            <div class="hidden lg:flex items-center gap-8 text-[15px] font-semibold text-zinc-500 absolute left-1/2 -translate-x-1/2">
                 <Link href="/" class="relative py-1 transition-colors" :class="$page.url === '/' ? 'text-[#36d362] font-bold' : 'hover:text-zinc-900'">
                     Beranda
                     <span v-if="$page.url === '/'" class="absolute bottom-0 left-0 w-full h-0.5 bg-[#36d362] rounded-full"></span>
@@ -52,7 +52,7 @@ const page = usePage();
             <!-- Right: Mobile Menu only -->
             <div class="flex items-center gap-3 shrink-0">
                 <!-- Mobile Menu -->
-                <div class="md:hidden">
+                <div class="lg:hidden">
                     <Sheet>
                         <SheetTrigger as-child>
                             <button class="p-2 hover:bg-zinc-50 rounded-lg transition-colors">
