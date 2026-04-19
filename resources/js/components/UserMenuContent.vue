@@ -17,7 +17,8 @@ type Props = {
 };
 
 const handleLogout = () => {
-    router.flushAll();
+    // Clear any local storage or session-related state if needed
+    // router.post(logout().url); // Usually Link handles this, but if you want manual:
 };
 
 defineProps<Props>();
@@ -32,7 +33,7 @@ defineProps<Props>();
     <DropdownMenuSeparator />
     <DropdownMenuGroup>
         <DropdownMenuItem :as-child="true" class="p-3 focus:bg-zinc-50 rounded-xl transition-colors">
-            <Link class="flex items-center w-full cursor-pointer text-zinc-900 font-bold" :href="edit()" prefetch>
+            <Link class="flex items-center w-full cursor-pointer text-zinc-900 font-bold" :href="edit().url" prefetch>
                 <Settings class="mr-3 h-4 w-4 text-zinc-400 group-hover:text-zinc-900" />
                 Settings
             </Link>
@@ -42,7 +43,8 @@ defineProps<Props>();
     <DropdownMenuItem :as-child="true" class="p-3 focus:bg-red-50 rounded-xl transition-colors">
         <Link
             class="flex items-center w-full cursor-pointer text-red-500 font-bold"
-            :href="logout()"
+            :href="logout().url"
+            method="post"
             @click="handleLogout"
             as="button"
             data-test="logout-button"

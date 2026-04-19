@@ -32,7 +32,7 @@ class AdminDashboardController extends Controller
             'is_popular' => 'nullable|boolean',
         ]);
 
-        Article::create($validated);
+        Article::create($this->prepareArticleData($validated));
         return back()->with('success', 'Artikel berhasil ditambahkan.');
     }
 
@@ -49,8 +49,24 @@ class AdminDashboardController extends Controller
             'is_popular' => 'nullable|boolean',
         ]);
 
-        $article->update($validated);
+        $article->update($this->prepareArticleData($validated));
         return back()->with('success', 'Artikel berhasil diperbarui.');
+    }
+
+    private function prepareArticleData(array $data): array
+    {
+        if (isset($data['content']) && !empty($data['content'])) {
+            $decoded = json_decode($data['content'], true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                $data['content'] = $decoded;
+            } else {
+                // If not valid JSON, wrap it as a single paragraph for the renderer
+                $data['content'] = [
+                    ['type' => 'p', 'text' => $data['content']]
+                ];
+            }
+        }
+        return $data;
     }
 
     public function destroyArticle(Article $article)

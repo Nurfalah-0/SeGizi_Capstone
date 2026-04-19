@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { destroy } from '@/routes/profile';
 
 const passwordInput = useTemplateRef('passwordInput');
 
@@ -24,7 +25,7 @@ const form = useForm({
 });
 
 const deleteUser = () => {
-    form.delete(route('profile.destroy'), {
+    form.delete(destroy().url, {
         preserveScroll: true,
         onError: () => passwordInput.value?.$el.focus(),
         onFinish: () => form.reset(),
